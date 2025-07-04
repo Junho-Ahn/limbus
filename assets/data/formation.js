@@ -100,47 +100,32 @@ let formationData = null;
                 12: { grade: 3, name: "R사 제 4무리 순록팀" },
             },
             6: {
-                zayin: {
-                    1: { name: "시체자루" },
-                    5: { name: "홀리데이" }
-                },
-                teth: {
-                    0: { name: "없음" },
-                    3: { name: "AEDD" },
-                    7: { name: "흉탄" }
-                },
-                he: {
-                    0: { name: "없음" },
-                    2: { name: "전봇대" },
-                    4: { name: "공즉시색" },
-                    8: { name: "쏠린 관성" }
-                },
-                waw: {
-                    0: { name: "없음" },
-                    6: { name: "구속" }
-                }
+                1: { grade: 1, name: "LCB 수감자" },
+                2: { grade: 2, name: "남부 시 협회 5과" },
+                3: { grade: 3, name: "R사 제 4무리 토끼팀" },
+                4: { grade: 2, name: "N사 작은 망치" },
+                5: { grade: 3, name: "로보토미 E.G.O::여우비" },
+                6: { grade: 2, name: "남부 세븐 협회 4과" },
+                7: { grade: 3, name: "피쿼드호 작살잡이" },
+                8: { grade: 3, name: "남부 외우피 협회 3과" },
+                9: { grade: 2, name: "멀티크랙 사무소 해결사" },
+                10: { grade: 3, name: "와일드헌트" },
+                11: { grade: 3, name: "마침표 사무소" },
+                12: { grade: 3, name: "흑운회 와카슈" },
             },
             7: {
-                zayin: {
-                    1: { name: "작살박이" },
-                    9: { name: "즉저살" }
-                },
-                teth: {
-                    0: { name: "없음" },
-                    2: { name: "분홍욕망" },
-                    4: { name: "카포테" },
-                    7: { name: "지난 날" }
-                },
-                he: {
-                    0: { name: "없음" },
-                    3: { name: "홍염살" },
-                    6: { name: "날갯짓" },
-                    8: { name: "크리스마스 악몽" }
-                },
-                waw: {
-                    0: { name: "없음" },
-                    5: { name: "맹목" }
-                }
+                1: { grade: 1, name: "LCB 수감자" },
+                2: { grade: 3, name: "R사 제 4무리 순록팀" },
+                3: { grade: 2, name: "남부 시 협회 5과" },
+                4: { grade: 3, name: "남부 리우 협회 4과" },
+                5: { grade: 2, name: "LCCB 대리" },
+                6: { grade: 2, name: "로보토미 E.G.O::출렁임" },
+                7: { grade: 3, name: "어금니 보트 센터 해결사" },
+                8: { grade: 3, name: "피쿼드호 선장" },
+                9: { grade: 2, name: "에드가 가문 버틀러" },
+                10: { grade: 3, name: "서부 츠바이 협회 3과" },
+                11: { grade: 3, name: "흑운회 부조장" },
+                12: { grade: 3, name: "가주 후보" },
             },
             8: {
                 1: { grade: 1, name: "LCB 수감자" },
@@ -186,25 +171,18 @@ let formationData = null;
                 12: { grade: 3, name: "흑수-묘" },
             },
             11: {
-                zayin: {
-                    1: { name: "어느날 갑자기" },
-                    2: { name: "눈속임" }
-                },
-                teth: {
-                    0: { name: "없음" },
-                    3: { name: "초롱" },
-                    6: { name: "지난 날" }
-                },
-                he: {
-                    0: { name: "없음" },
-                    4: { name: "AEDD" },
-                    7: { name: "엄숙한 애도" },
-                    8: { name: "크리스마스 악몽" }
-                },
-                waw: {
-                    0: { name: "없음" },
-                    5: { name: "가시 화원" }
-                }
+                1: { grade: 1, name: "LCB 수감자" },
+                2: { grade: 2, name: "남부 리우 협회 6과" },
+                3: { grade: 3, name: "G사 일등대리" },
+                4: { grade: 2, name: "료.고.파. 조수" },
+                5: { grade: 2, name: "장미스패너 공방 해결사" },
+                6: { grade: 3, name: "남부 츠바이 협회 4과" },
+                7: { grade: 3, name: "쌍갈고리 해적단 부선장" },
+                8: { grade: 2, name: "흑운회 부조장" },
+                9: { grade: 3, name: "에드가 가문 승계자" },
+                10: { grade: 3, name: "라만차랜드 신부" },
+                11: { grade: 3, name: "불주먹 사무소 생존자" },
+                12: { grade: 3, name: "흑수-사" },
             }
         },
         egos: {
