@@ -3,6 +3,11 @@ let Header = null;
 	Header = Structure.write({
 		classList: ['header'],
 		children: {
+			logoImage: Structure.write({
+				tagName: 'img',
+				properties: { src: './assets/images/mephy.png' },
+				classList: ['header-logo_image']
+			}),
 			logo: Structure.write({
 				classList: ['header-logo'],
 				content: '메피'
