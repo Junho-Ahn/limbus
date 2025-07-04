@@ -428,7 +428,8 @@ let deck_code_generator_page = null;
                                     .join('') + '00000000';
 
                                 deckCode = encryptBits(bitStr);
-                                console.log(deckCode);
+                                
+                                clearTimeout(deckCodeAlertTimeout);
                                 
                                 event.currentTarget.closest(".deck_code_generator_page-code_area_group").querySelector(".deck_code_generator_page-code_area_text").innerHTML = deckCode;
                             }
