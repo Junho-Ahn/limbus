@@ -272,6 +272,10 @@ let deck_code_generator_page = null;
                     events: {
                         click: (e) => {
                             e.stopPropagation();
+                            // EGO UI 열 때 인격 UI도 모두 닫기
+                            document.querySelectorAll('.deck_code_generator_page-identity_selection--show').forEach(x => x.setModifierClass('show', false));
+                            isSinnerIdentitySelectionShow = false;
+                            shownSinner = null;
                             const target = document.getElementById(egoSelectionId);
                             const isOpen = target && target.classList.contains('deck_code_generator_page-ego_selection--show');
                             // 모든 선택창 닫기
@@ -306,6 +310,10 @@ let deck_code_generator_page = null;
                     },
                     events: {
                         click: event => {
+                            // 인격 UI 열 때 EGO UI도 모두 닫기
+                            document.querySelectorAll('.deck_code_generator_page-ego_selection--show').forEach(el => {
+                                el.setModifierClass('show', false);
+                            });
                             if(shownSinner !== null && shownSinner !== i) {
                                 document.querySelectorAll(".deck_code_generator_page-identity_selection--show").forEach(x => x.setModifierClass("show", false));
                                 isSinnerIdentitySelectionShow = false;
