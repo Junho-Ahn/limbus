@@ -131,3 +131,11 @@
     color: #23272f;
   }
   
+  .deck_code_generator_page-sinner_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.2rem;
+  }
+  

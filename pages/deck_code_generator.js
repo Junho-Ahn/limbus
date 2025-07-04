@@ -3,7 +3,6 @@ let deck_code_generator_page = null;
     const { sinners, identities, egos } = formationData;
 
     const sinnerCell = {};
-    const egoButtonCell = {};
     for (let i = 0; i < 12; i++) {
         // 기본값: 1번 인격
         const defaultIdentity = identities[i][1]?.name || "";
@@ -15,25 +14,30 @@ let deck_code_generator_page = null;
                 content: data.name
             })
         ]);
-        egoButtonCell[`ego_button${i + 1}`] = Structure.write({
-            tagName: "button",
-            classList: ["deck_code_generator_page-ego_button"],
-            content: "E.G.O"
-        });
-        sinnerCell[`cell${i + 1}`] = Structure.write({
-            classList: ["deck_code_generator_page-cell"],
+        sinnerCell[`sinner_wrapper${i + 1}`] = Structure.write({
+            classList: ["deck_code_generator_page-sinner_wrapper"],
             children: {
-                identity_display: Structure.write({
-                    classList: ["deck_code_generator_page-identity_display"],
-                    content: defaultIdentity
+                ego_button: Structure.write({
+                    tagName: "button",
+                    classList: ["deck_code_generator_page-ego_button"],
+                    content: "E.G.O"
                 }),
-                name_area: Structure.write({
-                    classList: ["deck_code_generator_page-name_area"],
-                    content: sinners[i].name
-                }),
-                identity_selection: Structure.write({
-                    classList: ["deck_code_generator_page-identity_selection"],
-                    children: Object.fromEntries(identityOptions)
+                cell: Structure.write({
+                    classList: ["deck_code_generator_page-cell"],
+                    children: {
+                        identity_display: Structure.write({
+                            classList: ["deck_code_generator_page-identity_display"],
+                            content: defaultIdentity
+                        }),
+                        name_area: Structure.write({
+                            classList: ["deck_code_generator_page-name_area"],
+                            content: sinners[i].name
+                        }),
+                        identity_selection: Structure.write({
+                            classList: ["deck_code_generator_page-identity_selection"],
+                            children: Object.fromEntries(identityOptions)
+                        })
+                    }
                 })
             }
         });
@@ -55,7 +59,6 @@ let deck_code_generator_page = null;
             grid: Structure.write({
                 classList: ["deck_code_generator_page-grid"],
                 children: {
-                    ...egoButtonCell,
                     ...sinnerCell
                 }
             })
