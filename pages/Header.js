@@ -39,7 +39,7 @@ let Header = null;
 								tagName: 'a',
 								properties: { href: '/deck-code-generator' },
 								dataset: { routerLink: '' },
-								content: 'Deck'
+								content: '덱 코드 생성기'
 							})
 						}
 					})
