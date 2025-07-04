@@ -10,17 +10,25 @@ let Header = null;
 			nav: Structure.write({
 				classList: ['header-nav'],
 				children: {
-					home: Structure.write({
+					main: Structure.write({
 						classList: ['header-nav_item'],
-						content: 'Home'
+						children: {
+							link: Structure.write({
+								tagName: 'a',
+								properties: { href: '/main', 'data-router-link': '' },
+								content: 'Main'
+							})
+						}
 					}),
-					about: Structure.write({
+					test: Structure.write({
 						classList: ['header-nav_item'],
-						content: 'About'
-					}),
-					contact: Structure.write({
-						classList: ['header-nav_item'],
-						content: 'Contact'
+						children: {
+							link: Structure.write({
+								tagName: 'a',
+								properties: { href: '/test', 'data-router-link': '' },
+								content: 'Test'
+							})
+						}
 					})
 				}
 			})
