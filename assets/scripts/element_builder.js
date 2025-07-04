@@ -221,7 +221,7 @@ class Structure {
 				break;
 				
 			case "children":
-                if(IsValid.Object(value) && Object.values(value).includes(null)) {
+                if(IsValid.object(value) && Object.values(value).includes(null)) {
                     this.#children = {};
                     for(const key in value) {
                         if(value[key] !== null) {
