@@ -1,12 +1,12 @@
 let routes = [
   {
     path: '/main',
-    render: () => mainPage,
+    render: () => main_page,
     layout: BasicLayout
   },
   {
     path: '/test',
-    render: () => testPage,
+    render: () => test_page,
     layout: BasicLayout
   },
   {
