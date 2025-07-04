@@ -15,7 +15,8 @@ let Header = null;
 						children: {
 							link: Structure.write({
 								tagName: 'a',
-								properties: { href: '/main', 'data-router-link': '' },
+								properties: { href: '/main' },
+								dataset: { routerLink: '' },
 								content: 'Main'
 							})
 						}
@@ -25,7 +26,8 @@ let Header = null;
 						children: {
 							link: Structure.write({
 								tagName: 'a',
-								properties: { href: '/test', 'data-router-link': '' },
+								properties: { href: '/test' },
+								dataset: { routerLink: '' },
 								content: 'Test'
 							})
 						}
