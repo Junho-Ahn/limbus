@@ -2,63 +2,68 @@ class IsValid {
     /**
      *
      * @param value
+     * @param {boolean} [checkLength=true] - 길이 검사 여부
      * @returns {boolean}
      */
-    static string(value) {
+    static string(value, checkLength = true) {
         return (
             typeof value === "string"
-            && value.length > 0
+            && (checkLength && (value.length > 0) || !checkLength)
         );
     }
     
     /**
      *
      * @param value
+     * @param {boolean} [checkLength=true]
      * @returns {boolean}
      */
-    static array(value) {
+    static array(value, checkLength = true) {
         return (
             Array.isArray(value)
-            && value.length > 0
+            && (checkLength && (value.length > 0) || !checkLength)
         );
     }
     
     /**
      *
      * @param value
+     * @param {boolean} [checkLength=true]
      * @returns {boolean}
      */
-    static stringArray(value) {
+    static stringArray(value, checkLength = true) {
         // boolean casting
         return !!(
-            IsValid.array(value)
-            && value.every(x => IsValid.string(x))
+            IsValid.array(value, checkLength)
+            && value.every(x => IsValid.string(x, checkLength))
         );
     }
     
     /**
      *
      * @param value
+     * @param {boolean} [checkLength=true]
      * @returns {boolean}
      */
-    static object(value) {
+    static object(value, checkLength = true) {
         return (
             value instanceof Object
             && !Array.isArray(value)
-            && Object.values(value).length > 0
+            && (checkLength && (Object.values(value).length > 0) || !checkLength)
         );
     }
     
     /**
      *
      * @param value
+     * @param {boolean} [checkLength=true]
      * @returns {boolean}
      */
-    static stringObject(value) {
+    static stringObject(value, checkLength = true) {
         // boolean casting
         return !!(
-            IsValid.object(value)
-            && Object.values(value).every(x => IsValid.string(x))
+            IsValid.object(value, checkLength)
+            && Object.values(value).every(x => IsValid.string(x, checkLength))
         );
     }
     

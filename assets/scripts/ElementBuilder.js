@@ -203,8 +203,8 @@ class Structure {
 				break;
 			
 			case "dataset":
-				if(!IsValid.stringObject(value)) {
-					throw new Error("Structure :: invalid tagName");
+				if(!IsValid.stringObject(value, false)) {
+					throw new Error("Structure :: invalid dataset");
 				}
 				
 				this.#dataset = value;
@@ -252,8 +252,8 @@ class Structure {
 				break;
 			
 			case "dataset":
-				if(!IsValid.stringObject(value)) {
-					throw new Error("Structure :: invalid tagName");
+				if(!IsValid.stringObject(value, false)) {
+					throw new Error("Structure :: invalid dataset");
 				}
 				
 				this.#dataset = {...this.#dataset, ...value};
