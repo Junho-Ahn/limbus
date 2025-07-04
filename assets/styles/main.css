@@ -88,6 +88,7 @@
 }
 
 .deck_code_generator_page-selector_test {
+  display: none;
   margin-top: 0.2rem;
   background: #181a20;
   color: #fff;
@@ -153,4 +154,8 @@
   background: #ffd700;
   color: #23272f;
   border: 1px solid #ffd700;
+}
+
+.deck_code_generator_page-selector_test--show {
+  display: grid;
 }
