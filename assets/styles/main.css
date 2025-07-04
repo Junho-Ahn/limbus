@@ -42,3 +42,33 @@
   box-sizing: border-box;
   border-radius: 0 0 1rem 1rem;
 }
+
+.deck_code_generator_page {
+  padding: 2rem;
+  min-height: 60vh;
+  box-sizing: border-box;
+}
+
+.deck_code_generator_page-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(2, 80px);
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.deck_code_generator_page-cell {
+  background: #2c313a;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: background 0.2s;
+}
+
+.deck_code_generator_page-cell:hover {
+  background: #3a4050;
+}

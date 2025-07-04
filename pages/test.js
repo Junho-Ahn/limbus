@@ -1,6 +1,6 @@
-let testPage = null;
+let test_page = null;
 (() => {
-	testPage = Structure.write({
+	test_page = Structure.write({
 		classList: ["test_page"],
 		content: "Test Route!"
 	});

@@ -1,6 +1,6 @@
-let mainPage = null;
+let main_page = null;
 (() => {
-	mainPage = Structure.write({
+	main_page = Structure.write({
 		classList: ["main_page"],
 		content: "Hello World!"
 	});
