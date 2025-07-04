@@ -71,13 +71,13 @@ class Structure {
 			elem.classList.add(...this.#classList);
 		}
 		
-		if(IsValid.stringObject(this.#properties)) {
+		if(IsValid.stringObject(this.#properties, false)) {
 			for(const property of Object.entries(this.#properties)) {
 				elem.setAttribute(...property);
 			}
 		}
 		
-		if(IsValid.stringObject(this.#dataset)) {
+		if(IsValid.stringObject(this.#dataset, false)) {
 			for(const key in this.#dataset) {
 				const value = this.#dataset[key];
 				elem.dataset[key] = value;
@@ -195,7 +195,7 @@ class Structure {
 				break;
 			
 			case "properties":
-				if(!IsValid.stringObject(value)) {
+				if(!IsValid.stringObject(value, false)) {
 					throw new Error("Structure :: invalid properties");
 				}
 				
@@ -244,7 +244,7 @@ class Structure {
 				break;
 			
 			case "properties":
-				if(!IsValid.stringObject(value)) {
+				if(!IsValid.stringObject(value, false)) {
 					throw new Error("Structure :: invalid properties");
 				}
 				
