@@ -221,10 +221,17 @@ class Structure {
 				break;
 				
 			case "children":
-				if(!IsValid.StructureObject(value)) {
-					throw new Error("Structure :: a child is not Structure");
+				// value가 객체일 때만 검사
+				if (value !== null) {
+					if (!IsValid.StructureObject(filtered)) {
+						throw new Error("Structure :: a child is not Structure");
+					}
+
+					const filtered = Object.fromEntries(
+						Object.entries(value).filter(([k, v]) => v !== null)
+					);
+					this.#children = filtered;
 				}
-				this.#children = value;
 				break;
 			
 			default:
@@ -260,10 +267,16 @@ class Structure {
 				break;
 			
 			case "children":
-				if(!IsValid.StructureObject(value)) {
-					throw new Error("Structure :: a child is not Structure");
+				// value가 객체일 때만 검사
+				if (value && typeof value === "object") {
+					const filtered = Object.fromEntries(
+						Object.entries(value).filter(([k, v]) => v !== null)
+					);
+					if (!IsValid.StructureObject(filtered)) {
+						throw new Error("Structure :: a child is not Structure");
+					}
+					this.#children = { ...this.#children, ...filtered };
 				}
-				this.#children = {...this.#children, ...value};
 				break;
 			
 			default:

@@ -27,8 +27,6 @@ let deck_code_generator_page = null;
             }
         });
     }
-
-    console.log(gridChildren);
     
     deck_code_generator_page = Structure.write({
         classList: ["deck_code_generator_page"],
