@@ -1,41 +1,4 @@
-#root {
-  width: 100vw;
-  min-height: 100vh;
-  background: #23272f;
-  color: #fff;
-}
 
-.header {
-  width: 100vw;
-  background: #181a20;
-  padding: 1.5rem 2rem 1.5rem 2rem;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
-}
-
-.header-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  letter-spacing: 0.05em;
-}
-
-.header-nav {
-  display: flex;
-  gap: 2rem;
-}
-
-.header-nav_item {
-  font-size: 1.1rem;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-
-.header-nav_item:hover {
-  color: #ffd700;
-}
 
 .main_page {
   padding: 2rem;

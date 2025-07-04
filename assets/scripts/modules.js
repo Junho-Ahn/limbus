@@ -152,7 +152,7 @@ function deepCopy(target, seen = new WeakSet()) {
  Element.prototype.getModifierClass = function(className) {
     const original = [...this.classList].find(x => x.indexOf("--") < 0);
 
-    if(nullish(original)) {
+    if((original ?? "Nullish") === "Nullish") {
         return className;
     }
 

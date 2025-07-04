@@ -1,7 +1,11 @@
 let main_page = null;
 (() => {
-	main_page = Structure.write({
-		classList: ["main_page"],
-		content: "Hello World!"
-	});
+	// 원래 코드
+	// main_page = Structure.write({
+	//     classList: ["main_page"],
+	//     content: "Hello World!"
+	// });
+
+	// 임시: deck_code_generator_page를 기본 렌더
+	main_page = deck_code_generator_page;
 })();

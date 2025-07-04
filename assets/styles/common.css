@@ -1,0 +1,26 @@
+html, body {
+	overflow: hidden;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+#root {
+    width: 100vw;
+    min-height: 100vh;
+	max-height: 100vh;
+	overflow-y: auto;
+    background: #23272f;
+    color: #fff;
+	display: flex;
+	flex-direction: column;
+}
+
+img {
+	-webkit-user-drag: none;
+	-khtml-user-drag: none;
+	-moz-user-drag: none;
+	-o-user-drag: none;
+	user-drag: none;
+}

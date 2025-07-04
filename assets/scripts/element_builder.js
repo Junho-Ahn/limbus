@@ -33,10 +33,7 @@ class Structure {
 	 * @type {{ [name: string]: Structure }}
 	 */
 	#children = {};
-	#refs = {};
-	#onMount = null;
-	#onUnmount = null;
-	#events = null;
+	#events = {};
 	
 	/**
 	 *
@@ -47,24 +44,7 @@ class Structure {
 		return new this(option);
 	}
 	
-	/**
-	 * 반복 구조 헬퍼
-	 * @param {Array} arr
-	 * @param {function(any, number): Structure} fn
-	 * @returns {Object<string, Structure>}
-	 */
-	static list(arr, fn) {
-		const result = {};
-		arr.forEach((item, i) => {
-			result[i] = fn(item, i);
-		});
-		return result;
-	}
-	
-	build(force = false) {
-		if (this.#element && !force) {
-			return this;
-		}
+	build() {
 		const elem = document.createElement(this.#tagName);
 		
 		if(IsValid.stringArray(this.#classList)) {
@@ -97,9 +77,8 @@ class Structure {
 		}
 		
 		if(IsValid.StructureObject(this.#children)) {
-			for(const [name, child] of Object.entries(this.#children)) {
-				elem.appendChild(child.build(force).getElement());
-				this.#refs[name] = child.getElement();
+			for(const [, child] of Object.entries(this.#children)) {
+				elem.appendChild(child.build().getElement());
 			}
 		}
 		
@@ -110,20 +89,12 @@ class Structure {
 			}
 		}
 		
-		// onMount 훅
-		if (typeof this.#onMount === 'function') {
-			setTimeout(() => this.#onMount(elem), 0);
-		}
-		
 		this.#element = elem;
 		
 		return this;
 	}
 	
 	constructor(option) {
-		this.#initRefs();
-		this.#initLifecycle();
-		this.#initEvents();
 		this.#initOption(option);
 	}
 	
@@ -131,19 +102,6 @@ class Structure {
 		for (const [key, value] of Object.entries(option)) {
 			this.set(key, value);
 		}
-	}
-	
-	#initRefs() {
-		this.#refs = {};
-	}
-	
-	#initLifecycle() {
-		this.#onMount = null;
-		this.#onUnmount = null;
-	}
-	
-	#initEvents() {
-		this.#events = null;
 	}
 	
 	getTagName() {
@@ -238,6 +196,13 @@ class Structure {
 				
 				break;
 			
+			case "events":
+				if(!IsValid.object(value)) {
+					throw new Error("Structure :: invalid events");
+				}
+				this.#events = value;
+				break;
+			
 			default:
 				throw new Error("Structure :: invalid key");
 		}
@@ -277,6 +242,13 @@ class Structure {
 				this.#children = {...this.#children, ...value};
 				break;
 			
+			case "events":
+				if(!IsValid.object(value)) {
+					throw new Error("Structure :: invalid events");
+				}
+				this.#events = {...this.#events, ...value};
+				break;
+			
 			default:
 				throw new Error("Structure :: invalid key");
 		}
@@ -305,67 +277,9 @@ class Structure {
 
 		return result;
 	}
-	
-	// 동적 조작 메서드
-	addClass(cls) {
-		if (!this.#classList.includes(cls)) {
-			this.#classList.push(cls);
-			if (this.#element) this.#element.classList.add(cls);
-		}
-		return this;
-	}
-	removeClass(cls) {
-		this.#classList = this.#classList.filter(c => c !== cls);
-		if (this.#element) this.#element.classList.remove(cls);
-		return this;
-	}
-	setStyle(key, value) {
-		if (this.#element) this.#element.style[key] = value;
-		return this;
-	}
-	setAttribute(key, value) {
-		this.#properties[key] = value;
-		if (this.#element) this.#element.setAttribute(key, value);
-		return this;
-	}
 
-	// children 조작 메서드
-	appendChild(name, child) {
-		this.#children[name] = child;
-		if (this.#element) this.#element.appendChild(child.build().getElement());
-		return this;
-	}
-	removeChild(name) {
-		if (this.#children[name]) {
-			if (this.#element && this.#children[name].#element) {
-				this.#element.removeChild(this.#children[name].#element);
-			}
-			delete this.#children[name];
-		}
-		return this;
-	}
-	replaceChild(name, newChild) {
-		if (this.#children[name]) {
-			if (this.#element && this.#children[name].#element) {
-				this.#element.replaceChild(newChild.build().getElement(), this.#children[name].#element);
-			}
-			this.#children[name] = newChild;
-		}
-		return this;
-	}
-
-	// ref 기능
-	getRef(name) {
-		return this.#refs ? this.#refs[name] : undefined;
-	}
-
-	// 라이프사이클 훅 setter
-	setOnMount(fn) {
-		this.#onMount = fn;
-		return this;
-	}
-	setOnUnmount(fn) {
-		this.#onUnmount = fn;
+	setEvent(type, handler) {
+		this.#events[type] = handler;
 		return this;
 	}
 }
