@@ -38,7 +38,18 @@
   }
   
   .deck_code_generator_page-name_area {
-    /* 기존 .deck_code_generator_page-cell-name 스타일이 여기에 들어갑니다 */
+    background: #23272f;
+    color: #fff;
+    font-size: 1.13rem;
+    font-weight: 600;
+    padding: 0.45rem 0.2rem;
+    border-radius: 0.4rem;
+    min-width: 120px;
+    text-align: center;
+    margin: 0.1rem 0 0.2rem 0;
+    box-sizing: border-box;
+    width: 100%;
+    letter-spacing: 0.01em;
   }
   
   /* deck_code_generator_page identity_selection styles */
@@ -112,13 +123,14 @@
   
   .deck_code_generator_page-ego_button {
     display: block;
-    margin: 0 auto 0.3rem auto;
-    padding: 0.18rem 0.9rem;
+    width: 100%;
+    margin: 0 0 0.3rem 0;
+    padding: 0.18rem 0;
     font-size: 0.92rem;
     font-weight: 600;
     background: #23272f;
-    color: #ffd700;
-    border: 1.5px solid #ffd700;
+    color: #fff;
+    border: none;
     border-radius: 0.5rem;
     cursor: pointer;
     transition: background 0.15s, color 0.15s;
