@@ -10,7 +10,7 @@ let deck_code_generator_page = null;
         const identityOptions = Object.entries(identities[i]).map(([id, data]) => [
             `option_${id}`,
             Structure.write({
-                classList: ["deck_code_generator_page-selector_test_option"],
+                classList: ["deck_code_generator_page-identity_selection_option"],
                 content: data.name
             })
         ]);
@@ -25,14 +25,13 @@ let deck_code_generator_page = null;
                     classList: ["deck_code_generator_page-name_area"],
                     content: sinners[i].name
                 }),
-                selector_test: Structure.write({
-                    classList: ["deck_code_generator_page-selector_test"],
+                identity_selection: Structure.write({
+                    classList: ["deck_code_generator_page-identity_selection"],
                     children: Object.fromEntries(identityOptions)
                 })
             }
         });
     }
-    
     deck_code_generator_page = Structure.write({
         classList: ["deck_code_generator_page"],
         children: {
