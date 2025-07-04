@@ -21,7 +21,15 @@ let deck_code_generator_page = null;
                 selector_test: openSelector[i]
                     ? Structure.write({
                         classList: ["deck_code_generator_page-selector_test"],
-                        content: "선택 UI 테스트"
+                        children: Object.fromEntries(
+                            Array.from({length: 12}, (_, j) => [
+                                `option_${j+1}`,
+                                Structure.write({
+                                    classList: ["deck_code_generator_page-selector_test_option"],
+                                    content: `옵션${j+1}`
+                                })
+                            ])
+                        )
                     })
                     : null
             }

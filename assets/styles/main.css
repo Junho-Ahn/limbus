@@ -96,4 +96,23 @@
   font-size: 0.95rem;
   text-align: center;
   z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.deck_code_generator_page-selector_test_option {
+  background: #23272f;
+  border-radius: 0.3rem;
+  padding: 0.4rem 0.2rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.15s, border 0.15s;
+  user-select: none;
+}
+
+.deck_code_generator_page-selector_test_option:hover {
+  background: #ffd700;
+  color: #23272f;
+  border: 1px solid #ffd700;
 }
