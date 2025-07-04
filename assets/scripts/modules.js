@@ -143,3 +143,36 @@ function deepCopy(target, seen = new WeakSet()) {
     seen.delete(target);
     return result;
 }
+
+ /**
+     * 기존 className에 인자를 modifier 형식으로 추가해 반환
+     * @param {string} className
+     * @return {string}
+     */
+ Element.prototype.getModifierClass = function(className) {
+    const original = [...this.classList].find(x => x.indexOf("--") < 0);
+
+    if(nullish(original)) {
+        return className;
+    }
+
+    return `${original}--${className}`;
+}
+
+/**
+ * modifier 클래스 추가/삭제
+ * @param {string} className
+ * @param {boolean} set
+ * @return {boolean}
+ */
+Element.prototype.setModifierClass = function(className, set) {
+    const modifierClassName = this.getModifierClass(className);
+
+    if(modifierClassName === className) {
+        return false;
+    }
+
+    // 클래스 지정
+    this.classList[set ? "add" : "remove"](modifierClassName);
+    return true;
+}

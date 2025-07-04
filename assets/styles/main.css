@@ -62,6 +62,7 @@
   background: #2c313a;
   border-radius: 0.5rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
@@ -74,9 +75,25 @@
   background: #3a4050;
 }
 
-.deck_code_generator_page-identity-display {
+.deck_code_generator_page-identity_display {
   margin-top: 0.5rem;
   font-size: 1rem;
   color: #ffd700;
   text-align: center;
+}
+
+.deck_code_generator_page-name_area {
+  /* 기존 .deck_code_generator_page-cell-name 스타일이 여기에 들어갑니다 */
+}
+
+.deck_code_generator_page-selector_test {
+  margin-top: 0.5rem;
+  background: #181a20;
+  color: #fff;
+  border: 1px solid #ffd700;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  text-align: center;
+  z-index: 1;
 }

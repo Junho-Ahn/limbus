@@ -1,20 +1,29 @@
 let deck_code_generator_page = null;
 (() => {
     const { sinners } = formationData;
-    // 12개 셀 children 객체 생성
+    // 테스트용: 각 셀의 선택 UI 오픈 여부 (임시로 12개 중 첫 번째만 true)
+    const openSelector = Array(12).fill(false);
+    openSelector[0] = true; // 첫 번째 셀만 열려있게 테스트
+
     const gridChildren = {};
     for (let i = 0; i < 12; i++) {
         gridChildren[`cell${i + 1}`] = Structure.write({
             classList: ["deck_code_generator_page-cell"],
             children: {
-                name: Structure.write({
-                    classList: ["deck_code_generator_page-cell-name"],
+                identity_display: Structure.write({
+                    classList: ["deck_code_generator_page-identity_display"],
+                    content: "테스트"
+                }),
+                name_area: Structure.write({
+                    classList: ["deck_code_generator_page-name_area"],
                     content: sinners[i].name
                 }),
-                identityDisplay: Structure.write({
-                    classList: ["deck_code_generator_page-identity-display"],
-                    content: "테스트"
-                })
+                selector_test: openSelector[i]
+                    ? Structure.write({
+                        classList: ["deck_code_generator_page-selector_test"],
+                        content: "선택 UI 테스트"
+                    })
+                    : null
             }
         });
     }
