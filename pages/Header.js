@@ -3,14 +3,19 @@ let Header = null;
 	Header = Structure.write({
 		classList: ['header'],
 		children: {
-			logoImage: Structure.write({
-				tagName: 'img',
-				properties: { src: './assets/images/mephy.png' },
-				classList: ['header-logo_image']
-			}),
-			logo: Structure.write({
-				classList: ['header-logo'],
-				content: '메피'
+			logoWrapper: Structure.write({
+				classList: ['header-logo_wrapper'],
+				children: {
+					logoImage: Structure.write({
+						tagName: 'img',
+						properties: {src: './assets/images/mephy.webp'},
+						classList: ['header-logo_image']
+					}),
+					logo: Structure.write({
+						classList: ['header-logo'],
+						content: '메피'
+					})
+				}
 			}),
 			nav: Structure.write({
 				classList: ['header-nav'],
