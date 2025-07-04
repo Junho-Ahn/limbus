@@ -1,0 +1,44 @@
+#root {
+  width: 100vw;
+  min-height: 100vh;
+  background: #23272f;
+  color: #fff;
+}
+
+.header {
+  width: 100vw;
+  background: #181a20;
+  padding: 1.5rem 2rem 1.5rem 2rem;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+
+.header-nav {
+  display: flex;
+  gap: 2rem;
+}
+
+.header-nav_item {
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.header-nav_item:hover {
+  color: #ffd700;
+}
+
+.main_page {
+  padding: 2rem;
+  min-height: 60vh;
+  box-sizing: border-box;
+  border-radius: 0 0 1rem 1rem;
+}

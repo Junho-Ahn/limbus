@@ -1,14 +1,8 @@
 window.addEventListener("DOMContentLoaded", () => {
-    const ROOT = document.getElementById("root");
-    
-    /**
-     *
-     * @param {Structure} page
-     */
-    function renderPage(page) {
-        ROOT.innerHTML = "";
-        ROOT.appendChild(page.build().getElement());
+    // 모든 라우트 등록
+    for (const route of routes) {
+        PageRouter.i.register(route.path, route.render, { layout: route.layout });
     }
-    
-    renderPage(mainPage);
+    // SPA 라우터 시작
+    PageRouter.i.start();
 }, {once: true});

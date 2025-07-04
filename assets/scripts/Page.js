@@ -55,13 +55,20 @@ class PageRouter {
 			const structure = route.renderFn({ params, query });
 			let toRender = structure;
 			if (route.layout) {
-				const layout = deepCopy(route.layout);
-				const children = layout.getChildren ? layout.getChildren() : {};
-				layout.set('children', { ...children, main: structure });
-				toRender = layout;
+				// layout 함수에 mainContent(Structure) 전달 → Structure list 반환
+				const structureList = typeof route.layout === 'function' ? route.layout(structure) : [structure];
+				const fragment = document.createDocumentFragment();
+				for (const s of structureList) {
+					if (s instanceof Structure) {
+						fragment.appendChild(s.build(true).getElement());
+					}
+				}
+				toRender = fragment;
 			}
-			if (toRender && typeof toRender.build === 'function') {
-				this.root.innerHTML = '';
+			this.root.innerHTML = '';
+			if (toRender instanceof DocumentFragment) {
+				this.root.appendChild(toRender);
+			} else if (toRender && typeof toRender.build === 'function') {
 				this.root.appendChild(toRender.build(true).getElement());
 			}
 		} else {
@@ -70,13 +77,19 @@ class PageRouter {
 				const structure = mainRoute.renderFn({ params: {}, query: {} });
 				let toRender = structure;
 				if (mainRoute.layout) {
-					const layout = deepCopy(mainRoute.layout);
-					const children = layout.getChildren ? layout.getChildren() : {};
-					layout.set('children', { ...children, main: structure });
-					toRender = layout;
+					const structureList = typeof mainRoute.layout === 'function' ? mainRoute.layout(structure) : [structure];
+					const fragment = document.createDocumentFragment();
+					for (const s of structureList) {
+						if (s instanceof Structure) {
+							fragment.appendChild(s.build(true).getElement());
+						}
+					}
+					toRender = fragment;
 				}
-				if (toRender && typeof toRender.build === 'function') {
-					this.root.innerHTML = '';
+				this.root.innerHTML = '';
+				if (toRender instanceof DocumentFragment) {
+					this.root.appendChild(toRender);
+				} else if (toRender && typeof toRender.build === 'function') {
 					this.root.appendChild(toRender.build(true).getElement());
 				}
 			} else if (typeof NotFoundPage !== 'undefined' && NotFoundPage) {
