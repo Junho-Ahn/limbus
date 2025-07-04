@@ -22,11 +22,11 @@ let deck_code_generator_page = null;
             children: {
                 identity_display: Structure.write({
                     classList: ["deck_code_generator_page-identity_display"],
-                    content: "테스트"
+                    content: defaultIdentity
                 }),
                 name_area: Structure.write({
                     classList: ["deck_code_generator_page-name_area"],
-                    content: defaultIdentity
+                    content: sinners[i].name
                 }),
                 selector_test: openSelector[i]
                     ? Structure.write({
