@@ -13,7 +13,12 @@ let deck_code_generator_page = null;
         children: {
             grid: Structure.write({
                 classList: ["deck_code_generator_page-grid"],
-                children: gridItems
+                children: Object.fromEntries(
+                    gridItems.map((item, i) => [
+                        `cell${i + 1}`,
+                        item
+                    ])
+                )
             })
         }
     });
