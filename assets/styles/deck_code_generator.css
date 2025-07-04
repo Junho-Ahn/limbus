@@ -1,0 +1,121 @@
+
+.deck_code_generator_page {
+    padding: 2rem;
+    min-height: 60vh;
+    box-sizing: border-box;
+  }
+  
+  .deck_code_generator_page-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(2, 80px);
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  
+  .deck_code_generator_page-cell {
+    background: #2c313a;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: background 0.2s;
+    position: relative;
+  }
+  
+  .deck_code_generator_page-cell:hover {
+    background: #3a4050;
+  }
+  
+  .deck_code_generator_page-identity_display {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #ffd700;
+    text-align: center;
+  }
+  
+  .deck_code_generator_page-name_area {
+    /* 기존 .deck_code_generator_page-cell-name 스타일이 여기에 들어갑니다 */
+  }
+  
+  .deck_code_generator_page-selector_test {
+    display: none;
+    margin-top: 0.2rem;
+    background: #181a20;
+    color: #fff;
+    border: 1px solid #ffd700;
+    border-radius: 0.4rem;
+    padding: 1rem 1.5rem;
+    font-size: 1.05rem;
+    text-align: center;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.7rem;
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    transform: translateX(-50%);
+    width: 250%;
+    max-width: 100vw;
+    min-width: 240px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    opacity: 0;
+    transition: opacity 200ms;
+    pointer-events: none;
+  }
+  
+  .deck_code_generator_page-cell:nth-child(1) .deck_code_generator_page-selector_test,
+  .deck_code_generator_page-cell:nth-child(7) .deck_code_generator_page-selector_test {
+    left: 0;
+    right: auto;
+    transform: none;
+  }
+  
+  .deck_code_generator_page-cell:nth-child(6) .deck_code_generator_page-selector_test,
+  .deck_code_generator_page-cell:nth-child(12) .deck_code_generator_page-selector_test {
+    right: 0;
+    left: auto;
+    transform: none;
+  }
+  
+  @media (max-width: 800px) {
+    .deck_code_generator_page-selector_test {
+      width: 98vw;
+      min-width: 0;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  
+  .deck_code_generator_page-selector_test_option {
+    background: #23272f;
+    border-radius: 0.3rem;
+    padding: 0.7rem 0.3rem;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background 0.15s, border 0.15s;
+    user-select: none;
+    word-break: keep-all;
+    font-size: 1.05rem;
+    min-height: 2.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .deck_code_generator_page-selector_test_option:hover {
+    background: #ffd700;
+    color: #23272f;
+    border: 1px solid #ffd700;
+  }
+  
+  .deck_code_generator_page-selector_test--show {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
