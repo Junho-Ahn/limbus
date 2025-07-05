@@ -31,74 +31,6 @@
     cursor: pointer;
   }
   
-  /* PC 환경에서만 호버 효과와 위치 조정 적용 */
-  @media (min-width: 768.01px) {
-    .deck_code_generator_page-cell:hover {
-      background: #3a4050;
-    }
-    
-    .deck_code_generator_page-identity_selection_option:hover {
-      background: #ffd700;
-      color: #23272f;
-      border-color: #ffd700;
-    }
-    
-    .deck_code_generator_page-ego_button:hover {
-      background: #3a4050;
-    }
-    
-    .deck_code_generator_page-ego_selection_option:hover {
-      background: #ffd700;
-      color: #23272f;
-      border-color: #ffd700;
-    }
-    
-    .deck_code_generator_page-code_area:hover .deck_code_generator_page-code_copy::before {
-      border-color: #ffd700;
-    }
-    
-    .deck_code_generator_page-code_area:hover .deck_code_generator_page-code_copy::after {
-      border-color: #ffd700;
-    }
-    
-    .deck_code_generator_page-code_generate:hover {
-      background: #769dff;
-    }
-    
-    .deck_code_generator_page-organize_button:hover {
-      background: #3a4050;
-    }
-    
-    /* PC 환경에서만 nth-child 위치 조정 적용 */
-    .deck_code_generator_page-sinner_wrapper:nth-child(1) .deck_code_generator_page-identity_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(7) .deck_code_generator_page-identity_selection {
-      left: 0;
-      right: auto;
-      transform: none;
-    }
-    
-    .deck_code_generator_page-sinner_wrapper:nth-child(6) .deck_code_generator_page-identity_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(12) .deck_code_generator_page-identity_selection {
-      right: 0;
-      left: auto;
-      transform: none;
-    }
-    
-    .deck_code_generator_page-sinner_wrapper:nth-child(1) .deck_code_generator_page-ego_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(7) .deck_code_generator_page-ego_selection {
-      left: 0;
-      right: auto;
-      transform: none;
-    }
-    
-    .deck_code_generator_page-sinner_wrapper:nth-child(6) .deck_code_generator_page-ego_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(12) .deck_code_generator_page-ego_selection {
-      right: 0;
-      left: auto;
-      transform: none;
-    }
-  }
-  
   .deck_code_generator_page-identity_display {
     font-size: 1.2rem;
     color: #ffd700;
@@ -120,7 +52,6 @@
     width: 50%;
   }
   
-  /* deck_code_generator_page identity_selection styles */
   .deck_code_generator_page-identity_selection {
     margin-top: 0.5rem;
     background: #181a20;
@@ -153,44 +84,6 @@
     pointer-events: auto;
   }
   
-
-  
-  /* 태블릿에서 첫 번째와 마지막 열 조정 */
-  @media (max-width: 768px) {
-    .deck_code_generator_page-sinner_wrapper:nth-child(1) .deck_code_generator_page-identity_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(4) .deck_code_generator_page-identity_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(7) .deck_code_generator_page-identity_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(10) .deck_code_generator_page-identity_selection {
-      left: 0;
-      right: auto;
-      transform: none;
-    }
-    
-    .deck_code_generator_page-sinner_wrapper:nth-child(3) .deck_code_generator_page-identity_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(6) .deck_code_generator_page-identity_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(9) .deck_code_generator_page-identity_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(12) .deck_code_generator_page-identity_selection {
-      right: 0;
-      left: auto;
-      transform: none;
-    }
-  }
-  
-  /* 모바일에서 첫 번째와 마지막 열 조정 */
-  @media (max-width: 480px) {
-    .deck_code_generator_page-sinner_wrapper:nth-child(odd) .deck_code_generator_page-identity_selection {
-      left: 0;
-      right: auto;
-      transform: none;
-    }
-    
-    .deck_code_generator_page-sinner_wrapper:nth-child(even) .deck_code_generator_page-identity_selection {
-      right: 0;
-      left: auto;
-      transform: none;
-    }
-  }
-  
   .deck_code_generator_page-identity_selection_group {
     display: flex;
     flex-direction: column;
@@ -207,6 +100,28 @@
     padding-bottom: 0.1rem;
     display: block;
     color: #ffd700;
+  }
+  
+  .deck_code_generator_page-identity_selection_label_row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.1rem;
+  }
+  
+  .deck_code_generator_page-identity_selection_grade_icons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.08rem;
+  }
+  
+  .deck_code_generator_page-identity_selection_grade_icon {
+    height: 1.1em;
+    object-fit: contain;
+    vertical-align: middle;
+    filter: drop-shadow(0 0 2px #0008);
   }
   
   .deck_code_generator_page-identity_selection_row {
@@ -231,8 +146,6 @@
     align-items: center;
     justify-content: center;
   }
-  
-
   
   .deck_code_generator_page-identity_selection_option--selected {
     border: 2px solid #ffd700;
@@ -259,8 +172,6 @@
     position: relative;
     text-align: center;
   }
-  
-
   
   .deck_code_generator_page-sinner_wrapper {
     display: flex;
@@ -323,51 +234,11 @@
     justify-content: center;
   }
   
-
-  
   .deck_code_generator_page-ego_selection_option--selected {
     border: 2px solid #ffd700;
     background: #23272f;
     color: #ffd700;
     box-shadow: 0 0 0 2px #ffd70033;
-  }
-  
-
-  
-  /* 태블릿에서 EGO 선택 첫 번째와 마지막 열 조정 */
-  @media (max-width: 768px) {
-    .deck_code_generator_page-sinner_wrapper:nth-child(1) .deck_code_generator_page-ego_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(4) .deck_code_generator_page-ego_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(7) .deck_code_generator_page-ego_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(10) .deck_code_generator_page-ego_selection {
-      left: 0;
-      right: auto;
-      transform: none;
-    }
-    
-    .deck_code_generator_page-sinner_wrapper:nth-child(3) .deck_code_generator_page-ego_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(6) .deck_code_generator_page-ego_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(9) .deck_code_generator_page-ego_selection,
-    .deck_code_generator_page-sinner_wrapper:nth-child(12) .deck_code_generator_page-ego_selection {
-      right: 0;
-      left: auto;
-      transform: none;
-    }
-  }
-  
-  /* 모바일에서 EGO 선택 첫 번째와 마지막 열 조정 */
-  @media (max-width: 480px) {
-    .deck_code_generator_page-sinner_wrapper:nth-child(odd) .deck_code_generator_page-ego_selection {
-      left: 0;
-      right: auto;
-      transform: none;
-    }
-    
-    .deck_code_generator_page-sinner_wrapper:nth-child(even) .deck_code_generator_page-ego_selection {
-      right: 0;
-      left: auto;
-      transform: none;
-    }
   }
   
   .deck_code_generator_page-ego_selection_label {
@@ -379,39 +250,21 @@
     padding-bottom: 0.1rem;
     display: block;
   }
+  
   .deck_code_generator_page-ego_selection_group:nth-child(1) .deck_code_generator_page-ego_selection_label {
     color: #67ff55;
   }
+  
   .deck_code_generator_page-ego_selection_group:nth-child(2) .deck_code_generator_page-ego_selection_label {
     color: #7ff0ff;
   }
+  
   .deck_code_generator_page-ego_selection_group:nth-child(3) .deck_code_generator_page-ego_selection_label {
     color: #ffff64;
   }
+  
   .deck_code_generator_page-ego_selection_group:nth-child(4) .deck_code_generator_page-ego_selection_label {
     color: #eb6fff;
-  }
-  
-  .deck_code_generator_page-identity_selection_label_row {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.4rem;
-    margin-bottom: 0.1rem;
-  }
-  
-  .deck_code_generator_page-identity_selection_grade_icons {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.08rem;
-  }
-  
-  .deck_code_generator_page-identity_selection_grade_icon {
-    height: 1.1em;
-    object-fit: contain;
-    vertical-align: middle;
-    filter: drop-shadow(0 0 2px #0008);
   }
   
   .deck_code_generator_page-code_area_group {
@@ -493,8 +346,6 @@
     z-index: 0;
   }
   
-
-
   .deck_code_generator_page-code_generate {
     position: relative;
     width: 2.2em;
@@ -517,8 +368,6 @@
     min-height: 2.7rem;
   }
 
-
-
   .deck_code_generator_page-organize_button {
     display: block;
     width: 100%;
@@ -536,8 +385,6 @@
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
     text-align: center;
   }
-
-
 
   .deck_code_generator_page-organize_button--selected {
     border-color: #ffe066;
@@ -560,7 +407,73 @@
     user-select: none;
   }
 
-  /* 반응형 스타일 */
+  /* PC 환경에서만 호버 효과와 위치 조정 적용 */
+  @media (min-width: 768.01px) {
+    .deck_code_generator_page-cell:hover {
+      background: #3a4050;
+    }
+    
+    .deck_code_generator_page-identity_selection_option:hover {
+      background: #ffd700;
+      color: #23272f;
+      border-color: #ffd700;
+    }
+    
+    .deck_code_generator_page-ego_button:hover {
+      background: #3a4050;
+    }
+    
+    .deck_code_generator_page-ego_selection_option:hover {
+      background: #ffd700;
+      color: #23272f;
+      border-color: #ffd700;
+    }
+    
+    .deck_code_generator_page-code_area:hover .deck_code_generator_page-code_copy::before {
+      border-color: #ffd700;
+    }
+    
+    .deck_code_generator_page-code_area:hover .deck_code_generator_page-code_copy::after {
+      border-color: #ffd700;
+    }
+    
+    .deck_code_generator_page-code_generate:hover {
+      background: #769dff;
+    }
+    
+    .deck_code_generator_page-organize_button:hover {
+      background: #3a4050;
+    }
+    
+    /* PC 환경에서만 nth-child 위치 조정 적용 */
+    .deck_code_generator_page-sinner_wrapper:nth-child(1) .deck_code_generator_page-identity_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(7) .deck_code_generator_page-identity_selection {
+      left: 0;
+      right: auto;
+      transform: none;
+    }
+    
+    .deck_code_generator_page-sinner_wrapper:nth-child(6) .deck_code_generator_page-identity_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(12) .deck_code_generator_page-identity_selection {
+      right: 0;
+      left: auto;
+      transform: none;
+    }
+    
+    .deck_code_generator_page-sinner_wrapper:nth-child(1) .deck_code_generator_page-ego_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(7) .deck_code_generator_page-ego_selection {
+      left: 0;
+      right: auto;
+      transform: none;
+    }
+    
+    .deck_code_generator_page-sinner_wrapper:nth-child(6) .deck_code_generator_page-ego_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(12) .deck_code_generator_page-ego_selection {
+      right: 0;
+      left: auto;
+      transform: none;
+    }
+  }
   
   /* 태블릿 (768px 이하) */
   @media (max-width: 768px) {
@@ -645,6 +558,44 @@
     .deck_code_generator_page-organize_button {
       font-size: 0.95rem;
       padding: 0.4rem 0.15rem;
+    }
+    
+    /* 태블릿에서 첫 번째와 마지막 열 조정 */
+    .deck_code_generator_page-sinner_wrapper:nth-child(1) .deck_code_generator_page-identity_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(4) .deck_code_generator_page-identity_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(7) .deck_code_generator_page-identity_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(10) .deck_code_generator_page-identity_selection {
+      left: 0;
+      right: auto;
+      transform: none;
+    }
+    
+    .deck_code_generator_page-sinner_wrapper:nth-child(3) .deck_code_generator_page-identity_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(6) .deck_code_generator_page-identity_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(9) .deck_code_generator_page-identity_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(12) .deck_code_generator_page-identity_selection {
+      right: 0;
+      left: auto;
+      transform: none;
+    }
+    
+    /* 태블릿에서 EGO 선택 첫 번째와 마지막 열 조정 */
+    .deck_code_generator_page-sinner_wrapper:nth-child(1) .deck_code_generator_page-ego_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(4) .deck_code_generator_page-ego_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(7) .deck_code_generator_page-ego_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(10) .deck_code_generator_page-ego_selection {
+      left: 0;
+      right: auto;
+      transform: none;
+    }
+    
+    .deck_code_generator_page-sinner_wrapper:nth-child(3) .deck_code_generator_page-ego_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(6) .deck_code_generator_page-ego_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(9) .deck_code_generator_page-ego_selection,
+    .deck_code_generator_page-sinner_wrapper:nth-child(12) .deck_code_generator_page-ego_selection {
+      right: 0;
+      left: auto;
+      transform: none;
     }
   }
   
@@ -745,6 +696,32 @@
     
     .deck_code_generator_page-ego_selection_label {
       font-size: 0.9rem;
+    }
+    
+    /* 모바일에서 첫 번째와 마지막 열 조정 */
+    .deck_code_generator_page-sinner_wrapper:nth-child(odd) .deck_code_generator_page-identity_selection {
+      left: 0;
+      right: auto;
+      transform: none;
+    }
+    
+    .deck_code_generator_page-sinner_wrapper:nth-child(even) .deck_code_generator_page-identity_selection {
+      right: 0;
+      left: auto;
+      transform: none;
+    }
+    
+    /* 모바일에서 EGO 선택 첫 번째와 마지막 열 조정 */
+    .deck_code_generator_page-sinner_wrapper:nth-child(odd) .deck_code_generator_page-ego_selection {
+      left: 0;
+      right: auto;
+      transform: none;
+    }
+    
+    .deck_code_generator_page-sinner_wrapper:nth-child(even) .deck_code_generator_page-ego_selection {
+      right: 0;
+      left: auto;
+      transform: none;
     }
   }
   
