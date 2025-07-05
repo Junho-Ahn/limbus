@@ -155,23 +155,25 @@
   }
   
   .deck_code_generator_page-ego_button {
-    display: block;
-    width: 100%;
-    margin: 0 auto 0.3rem auto;
-    padding: 0.5rem 0.18rem;
-    font-size: 1.05rem;
-    font-weight: 600;
-    background: #2c313a;
-    color: #fff;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background 0.15s, color 0.15s;
-    outline: none;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.10);
-    position: relative;
-    text-align: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto 0.3rem auto;
+  padding: 0.5rem 0.18rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  background: #2c313a;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.10);
+  position: relative;
+  text-align: center;
+}
   
   .deck_code_generator_page-sinner_wrapper {
     display: flex;
@@ -369,22 +371,24 @@
   }
 
   .deck_code_generator_page-organize_button {
-    display: block;
-    width: 100%;
-    margin: 0.3rem auto 0 auto;
-    padding: 0.5rem 0.18rem;
-    font-size: 1.05rem;
-    font-weight: 600;
-    background: #2c313a;
-    color: #fff;
-    border: 1.5px solid transparent;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background 0.15s, color 0.15s, border-color 0.15s;
-    outline: none;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
-    text-align: center;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0.3rem auto 0 auto;
+  padding: 0.5rem 0.18rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  background: #2c313a;
+  color: #fff;
+  border: 1.5px solid transparent;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+  outline: none;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.10);
+  text-align: center;
+}
 
   .deck_code_generator_page-organize_button--selected {
     border-color: #ffe066;
