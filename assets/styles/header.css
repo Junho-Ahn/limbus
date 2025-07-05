@@ -9,6 +9,12 @@
     box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
   }
 
+  .header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
   .header-logo_wrapper {
     display: flex;
     align-items: center;
@@ -24,6 +30,24 @@
     font-size: 1.5rem;
     font-weight: bold;
     letter-spacing: 0.05em;
+  }
+  
+  .header-contact {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+  }
+  
+  .header-contact_email {
+    font-size: 0.9rem;
+    color: #a0a0a0;
+    font-family: 'Segoe UI', 'Roboto', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  
+  .header-contact_email:hover {
+    color: #ffd700;
   }
   
   .header-nav {

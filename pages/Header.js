@@ -3,17 +3,31 @@ let Header = null;
 	Header = Structure.write({
 		classList: ['header'],
 		children: {
-			logoWrapper: Structure.write({
-				classList: ['header-logo_wrapper'],
+			left: Structure.write({
+				classList: ['header-left'],
 				children: {
-					logoImage: Structure.write({
-						tagName: 'img',
-						properties: {src: './assets/images/mephy.webp'},
-						classList: ['header-logo_image']
-					}),
-					logo: Structure.write({
-						classList: ['header-logo'],
-						content: '메피'
+					logoWrapper: Structure.write({
+						classList: ['header-logo_wrapper'],
+						children: {
+							logoImage: Structure.write({
+								tagName: 'img',
+								properties: {src: './assets/images/mephy.webp'},
+								classList: ['header-logo_image']
+							}),
+							logo: Structure.write({
+								classList: ['header-logo'],
+								content: '메피'
+							}),
+							contact: Structure.write({
+								classList: ['header-contact'],
+								children: {
+									email: Structure.write({
+										classList: ['header-contact_email'],
+										content: '건의 및 제보 : mephy.contact@gmail.com'
+									})
+								}
+							})
+						}
 					})
 				}
 			}),
