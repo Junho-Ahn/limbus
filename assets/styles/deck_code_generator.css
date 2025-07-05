@@ -625,9 +625,9 @@
       font-size: 0.9rem;
     }
     
-    .deck_code_generator_page-profile_image {
-      width: 60%;
-    }
+      .deck_code_generator_page-profile_image {
+    width: 45%;
+  }
     
     .deck_code_generator_page-identity_selection {
       width: 320%;
@@ -680,15 +680,17 @@
       font-size: 0.9rem;
     }
     
-    .deck_code_generator_page-ego_button {
-      font-size: 0.9rem;
-      padding: 0.35rem 0.12rem;
-    }
+      .deck_code_generator_page-ego_button {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.12rem;
+    min-height: 2.8rem;
+  }
     
-    .deck_code_generator_page-organize_button {
-      font-size: 0.9rem;
-      padding: 0.35rem 0.12rem;
-    }
+      .deck_code_generator_page-organize_button {
+    font-size: 0.9rem;
+    padding: 0.5rem 0.12rem;
+    min-height: 2.8rem;
+  }
     
     .deck_code_generator_page-identity_selection_label {
       font-size: 0.9rem;
@@ -788,11 +790,13 @@
     
     .deck_code_generator_page-ego_button {
       font-size: 0.85rem;
-      padding: 0.3rem 0.1rem;
+      padding: 0.4rem 0.1rem;
+      min-height: 2.6rem;
     }
     
     .deck_code_generator_page-organize_button {
       font-size: 0.85rem;
-      padding: 0.3rem 0.1rem;
+      padding: 0.4rem 0.1rem;
+      min-height: 2.6rem;
     }
   }
