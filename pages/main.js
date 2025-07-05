@@ -7,5 +7,6 @@ let main_page = null;
 	// });
 
 	// 임시: deck_code_generator_page를 기본 렌더
+	// main_page = deck_code_generator_page;
 	PageRouter.i.replace("/deck-code-generator");
 })();
