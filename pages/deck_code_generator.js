@@ -142,26 +142,35 @@ let deck_code_generator_page = null;
 
         egoButtonClick(event, sinnerIndex) {
             event.stopPropagation();
-            UIManager.closeAllDropdowns();
-            
             const target = document.getElementById(`ego_selection_${sinnerIndex}`);
             const isOpen = target && target.classList.contains('deck_code_generator_page-ego_selection--show');
-            
-            if (target && !isOpen) target.setModifierClass('show', true);
+            // 이미 열려 있으면 닫기, 아니면 열기
+            if (target) {
+                if (isOpen) {
+                    target.setModifierClass('show', false);
+                } else {
+                    UIManager.closeAllDropdowns();
+                    target.setModifierClass('show', true);
+                }
+            }
         },
 
         identityCellClick(event, sinnerIndex) {
-            UIManager.closeAllDropdowns();
-            
-            if (State.shownSinner !== null && State.shownSinner !== sinnerIndex) {
-                State.isSinnerIdentitySelectionShow = false;
-                State.shownSinner = null;
+            const selection = event.currentTarget.querySelector('.deck_code_generator_page-identity_selection');
+            const isOpen = selection && selection.classList.contains('deck_code_generator_page-identity_selection--show');
+            // 이미 열려 있으면 닫기, 아니면 열기
+            if (selection) {
+                if (isOpen) {
+                    selection.setModifierClass('show', false);
+                    State.isSinnerIdentitySelectionShow = false;
+                    State.shownSinner = null;
+                } else {
+                    UIManager.closeAllDropdowns();
+                    selection.setModifierClass('show', true);
+                    State.isSinnerIdentitySelectionShow = true;
+                    State.shownSinner = sinnerIndex;
+                }
             }
-
-            State.isSinnerIdentitySelectionShow = !State.isSinnerIdentitySelectionShow;
-            State.shownSinner = State.isSinnerIdentitySelectionShow ? sinnerIndex : null;
-            event.currentTarget.querySelector(".deck_code_generator_page-identity_selection")
-                .setModifierClass("show", State.isSinnerIdentitySelectionShow);
         },
 
         organizeButtonClick(event, sinnerIndex) {
