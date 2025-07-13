@@ -117,7 +117,7 @@ let formationData = null;
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 3, name: "R사 제 4무리 순록팀" },
                 3: { grade: 2, name: "남부 시 협회 5과" },
-                4: { grade: 3, name: "LCCB 대리" },
+                4: { grade: 2, name: "LCCB 대리" },
                 5: { grade: 2, name: "로보토미 E.G.O::출렁임" },
                 6: { grade: 2, name: "남부 리우 협회 4과" },
                 7: { grade: 3, name: "어금니 보트 센터 해결사" },
