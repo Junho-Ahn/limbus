@@ -143,7 +143,7 @@ let formationData = null;
             },
             9: {
                 1: { grade: 1, name: "LCB 수감자" },
-                2: { grade: 3, name: "검계 살수" },
+                2: { grade: 2, name: "검계 살수" },
                 3: { grade: 2, name: "남부 츠바이 협회 6과" },
                 4: { grade: 2, name: "마리아치 보스" },
                 5: { grade: 3, name: "쥐어들 자" },
