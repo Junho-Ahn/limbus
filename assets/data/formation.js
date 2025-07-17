@@ -16,6 +16,7 @@ let formationData = null;
             11: { name: "그레고르" }
         },
         identities: {
+            // 이상
             0: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 2, name: "남부 세븐 협회 6과" },
@@ -31,6 +32,7 @@ let formationData = null;
                 12: { grade: 3, name: "남부 리우 협회 3과" },
                 13: { grade: 3, name: "N사 E.G.O::흉탄" }
             },
+            // 파우스트
             1: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 2, name: "W사 2등급 정리 요원" },
@@ -45,6 +47,7 @@ let formationData = null;
                 11: { grade: 3, name: "LCE EGO::홍염살" },
                 12: { grade: 3, name: "흑수-묘 필두" },
             },
+            // 돈키호테
             2: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 3, name: "W사 3등급 정리 요원" },
@@ -57,7 +60,9 @@ let formationData = null;
                 9: { grade: 3, name: "T사 3등급 징수직 직원" },
                 10: { grade: 3, name: "라만차랜드 실장" },
                 11: { grade: 3, name: "동부 섕크 협회 3과" },
+                12: { grade: 3, name: "로보토미 E.G.O::사랑과 증오의 이름으로" },
             },
+            // 료슈
             3: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 2, name: "남부 세븐 협회 6과" },
@@ -71,6 +76,7 @@ let formationData = null;
                 10: { grade: 3, name: "로보토미 E.G.O::적안·참회" },
                 11: { grade: 3, name: "흑수-묘" },
             },
+            // 뫼르소
             4: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 2, name: "남부 리우 협회 6과" },
@@ -85,6 +91,7 @@ let formationData = null;
                 11: { grade: 3, name: "서부 섕크 협회 3과" },
                 12: { grade: 3, name: "동부 엄지 카포 IIII" },
             },
+            // 홍루
             5: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 2, name: "흑운회 와카슈" },
@@ -99,6 +106,7 @@ let formationData = null;
                 11: { grade: 3, name: "마침표 사무소 대표" },
                 12: { grade: 3, name: "R사 제 4무리 순록팀" },
             },
+            // 히스클리프
             6: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 2, name: "남부 시 협회 5과" },
@@ -113,6 +121,7 @@ let formationData = null;
                 11: { grade: 3, name: "마침표 사무소" },
                 12: { grade: 3, name: "흑운회 와카슈" },
             },
+            // 이스마엘
             7: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 3, name: "R사 제 4무리 순록팀" },
@@ -127,6 +136,7 @@ let formationData = null;
                 11: { grade: 3, name: "흑운회 부조장" },
                 12: { grade: 3, name: "가주 후보" },
             },
+            // 로쟈
             8: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 3, name: "흑운회 와카슈" },
@@ -140,7 +150,9 @@ let formationData = null;
                 10: { grade: 3, name: "북부 제뱌찌 협회 3과" },
                 11: { grade: 3, name: "라만차랜드 공주" },
                 12: { grade: 3, name: "흑수-사" },
+                13: { grade: 3, name: "로보토미 E.G.O::눈물로 벼려낸 검" },
             },
+            // 싱클레어
             9: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 2, name: "검계 살수" },
@@ -156,6 +168,7 @@ let formationData = null;
                 12: { grade: 3, name: "중지 작은 아우" },
                 13: { grade: 3, name: "동부 엄지 솔다토 II" },
             },
+            // 오티스
             10: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 3, name: "검계 살수" },
@@ -170,6 +183,7 @@ let formationData = null;
                 11: { grade: 3, name: "라만차랜드 이발사" },
                 12: { grade: 3, name: "흑수-묘" },
             },
+            // 그레고르
             11: {
                 1: { grade: 1, name: "LCB 수감자" },
                 2: { grade: 2, name: "남부 리우 협회 6과" },
@@ -186,6 +200,7 @@ let formationData = null;
             }
         },
         egos: {
+            // 이상
             0: {
                 zayin: {
                     1: { name: "오감도" },
@@ -206,6 +221,7 @@ let formationData = null;
                     5: { name: "여우비" }
                 }
             },
+            // 파우스트
             1: {
                 zayin: {
                     1: { name: "표상 방출기" }
@@ -227,6 +243,7 @@ let formationData = null;
                     6: { name: "영속" }
                 }
             },
+            // 돈키호테
             2: {
                 zayin: {
                     1: { name: "라 샹그레 데 산쵸" }
@@ -245,9 +262,11 @@ let formationData = null;
                 },
                 waw: {
                     0: { name: "없음" },
-                    7: { name: "갈망 - 미르칼라" }
+                    7: { name: "갈망 - 미르칼라" },
+                    9: { name: "사랑과 증오의 이름으로" }
                 }
             },
+            // 료슈
             3: {
                 zayin: {
                     1: { name: "삼라염상" },
@@ -269,6 +288,7 @@ let formationData = null;
                     7: { name: "경멸, 경외" }
                 }
             },
+            // 뫼르소
             4: {
                 zayin: {
                     1: { name: "타인의 사슬" }
@@ -289,6 +309,7 @@ let formationData = null;
                     7: { name: "갈망 - 미르칼라" }
                 }
             },
+            // 홍루
             5: {
                 zayin: {
                     1: { name: "허환경" }
@@ -310,6 +331,7 @@ let formationData = null;
                     8: { name: "오혈읍루" }
                 }
             },
+            // 히스클리프
             6: {
                 zayin: {
                     1: { name: "시체자루" },
@@ -331,6 +353,7 @@ let formationData = null;
                     6: { name: "구속" }
                 }
             },
+            // 이스마엘
             7: {
                 zayin: {
                     1: { name: "작살박이" },
@@ -353,6 +376,7 @@ let formationData = null;
                     5: { name: "맹목" }
                 }
             },
+            // 로쟈
             8: {
                 zayin: {
                     1: { name: "던져지는 것" }
@@ -374,6 +398,7 @@ let formationData = null;
                     8: { name: "지정 재판" }
                 }
             },
+            // 싱클레어
             9: {
                 zayin: {
                     1: { name: "지식나무의 가지" },
@@ -395,6 +420,7 @@ let formationData = null;
                     8: { name: "오혈읍루" }
                 }
             },
+            // 오티스
             10: {
                 zayin: {
                     1: { name: "토 파토스 마토스" }
@@ -416,6 +442,7 @@ let formationData = null;
                     6: { name: "구속" }
                 }
             },
+            // 그레고르
             11: {
                 zayin: {
                     1: { name: "어느날 갑자기" },
