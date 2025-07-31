@@ -182,6 +182,7 @@ let formationData = null;
                 10: { grade: 3, name: "W사 3등급 정리 요원 팀장" },
                 11: { grade: 3, name: "라만차랜드 이발사" },
                 12: { grade: 3, name: "흑수-묘" },
+                13: { grade: 3, name: "T사 3등급 강력징수직 직원" },
             },
             // 그레고르
             11: {
@@ -306,7 +307,8 @@ let formationData = null;
                 },
                 waw: {
                     0: { name: "없음" },
-                    7: { name: "갈망 - 미르칼라" }
+                    7: { name: "갈망 - 미르칼라" },
+                    8: { name: "분쇄될 과거" }
                 }
             },
             // 홍루
