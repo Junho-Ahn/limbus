@@ -128,7 +128,7 @@ let formationData = null;
                 3: { grade: 2, name: "남부 시 협회 5과" },
                 4: { grade: 2, name: "LCCB 대리" },
                 5: { grade: 2, name: "로보토미 E.G.O::출렁임" },
-                6: { grade: 2, name: "남부 리우 협회 4과" },
+                6: { grade: 3, name: "남부 리우 협회 4과" },
                 7: { grade: 3, name: "어금니 보트 센터 해결사" },
                 8: { grade: 3, name: "피쿼드호 선장" },
                 9: { grade: 2, name: "에드가 가문 버틀러" },
@@ -155,7 +155,7 @@ let formationData = null;
             // 싱클레어
             9: {
                 1: { grade: 1, name: "LCB 수감자" },
-                2: { grade: 2, name: "검계 살수" },
+                2: { grade: 3, name: "검계 살수" },
                 3: { grade: 2, name: "남부 츠바이 협회 6과" },
                 4: { grade: 2, name: "마리아치 보스" },
                 5: { grade: 3, name: "쥐어들 자" },
