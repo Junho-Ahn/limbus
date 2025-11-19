@@ -188,6 +188,7 @@ class Structure {
                     }
                 }else {
                     if(!IsValid.StructureObject(value)) {
+						console.log(value);
                         throw new Error("Structure :: a child is not Structure");
                     }
                     
