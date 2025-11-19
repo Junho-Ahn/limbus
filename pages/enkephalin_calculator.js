@@ -74,7 +74,9 @@ let enkephalin_calculator_page = null;
 				};
 			}
 			
-			return obj;
+			return Structure.write({
+				children: obj
+			});
 		})(),
 		expResult: (() => {
 			const obj = {
@@ -101,7 +103,9 @@ let enkephalin_calculator_page = null;
 				};
 			}
 			
-			return obj;
+			return Structure.write({
+				children: obj
+			});
 		})()
 	};
 	
