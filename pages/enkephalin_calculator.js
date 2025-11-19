@@ -64,17 +64,17 @@ let enkephalin_calculator_page = null;
 			const obj = {};
 			
 			for(let i = 1; i <= 10; i++) {
-				obj[i] = {
-					lunacyCost: Structure.write({
-					}),
-					result: Structure.write({
-					}),
-					perLunacy: Structure.write({
-					})
-				};
+				obj[i] = Structure.write({
+					children: {
+						lunacyCost: Structure.write({
+						}),
+						result: Structure.write({
+						}),
+						perLunacy: Structure.write({
+						})
+					}
+				});
 			}
-			
-			console.log(obj);
 			
 			return Structure.write({
 				children: obj
@@ -95,14 +95,16 @@ let enkephalin_calculator_page = null;
 			};
 			
 			for(let i = 1; i <= 10; i++) {
-				obj[i] = {
-					costAsLunacy: Structure.write({
-					}),
-					resultExp: Structure.write({
-					}),
-					expPerLunacy: Structure.write({
-					})
-				};
+				obj[i] = Structure.write({
+					children: {
+						costAsLunacy: Structure.write({
+						}),
+						resultExp: Structure.write({
+						}),
+						expPerLunacy: Structure.write({
+						})
+					}
+				});
 			}
 			
 			return Structure.write({
