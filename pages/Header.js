@@ -99,6 +99,17 @@ let Header = null;
 								content: '덱 코드 생성기'
 							})
 						}
+					}),
+					calc: Structure.write({
+						classList: ['header-nav_item'],
+						children: {
+							link: Structure.write({
+								tagName: 'a',
+								properties: { href: '/enkephalin-calculator' },
+								dataset: { routerLink: '' },
+								content: '엔케팔린 계산기'
+							})
+						}
 					})
 				}
 			})
