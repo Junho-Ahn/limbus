@@ -527,6 +527,8 @@
         overflow-x: visible;
         -webkit-overflow-scrolling: touch;
         display: block;
+        background: #2c313a;
+        margin-bottom: 4rem;
     }
     
     .enkephalin_calculator_page-table_header,
@@ -538,6 +540,7 @@
         padding: 0.5rem 0.6rem;
         min-width: 100%;
         display: grid;
+        background: #2c313a;
     }
     
     /* 주간 엔케팔린 패키지 테이블 모바일 */
