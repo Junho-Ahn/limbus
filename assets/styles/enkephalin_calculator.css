@@ -363,18 +363,38 @@
     
     .enkephalin_calculator_page-table {
         border-radius: 0.5rem 0.5rem 0 0;
-        overflow-x: auto;
+        overflow-x: visible;
         -webkit-overflow-scrolling: touch;
+        display: block;
     }
     
     .enkephalin_calculator_page-table_header,
     .enkephalin_calculator_page-table_row,
     .enkephalin_calculator_page-charge_row,
     .enkephalin_calculator_page-exp_row {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
         gap: 0.3rem;
         padding: 0.6rem 0.8rem;
         min-width: 100%;
+        display: grid;
+    }
+    
+    /* 주간 엔케팔린 패키지 테이블 모바일 */
+    .enkephalin_calculator_page-weekly_enke .enkephalin_calculator_page-table_header,
+    .enkephalin_calculator_page-weekly_enke .enkephalin_calculator_page-table_row {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* 충전 효율 테이블 모바일 */
+    .enkephalin_calculator_page-charge_efficiency .enkephalin_calculator_page-table_header,
+    .enkephalin_calculator_page-charge_efficiency .enkephalin_calculator_page-charge_row {
+        grid-template-columns: 1fr !important;
+    }
+    
+    /* 경험치 효율 테이블 모바일 */
+    .enkephalin_calculator_page-exp_efficiency .enkephalin_calculator_page-table_header,
+    .enkephalin_calculator_page-exp_efficiency .enkephalin_calculator_page-exp_row {
+        grid-template-columns: 1fr !important;
     }
     
     .enkephalin_calculator_page-table_cell {
@@ -382,8 +402,15 @@
         border-bottom: 1px solid #3a4050;
         text-align: left;
         justify-content: flex-start;
+        align-items: flex-start;
         min-height: auto;
         font-size: 0.9rem;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    .enkephalin_calculator_page-table_cell:not(:last-child) {
+        border-bottom: 1px solid #3a4050;
     }
     
     .enkephalin_calculator_page-table_cell:before {
@@ -393,14 +420,22 @@
         margin-right: 0.5rem;
         min-width: 120px;
         display: inline-block;
+        flex-shrink: 0;
     }
     
     .enkephalin_calculator_page-table_header {
-        display: none;
+        display: none !important;
     }
     
     .enkephalin_calculator_page-table_header .enkephalin_calculator_page-table_cell:before {
         display: none;
+    }
+    
+    /* 마지막 셀의 border 제거 */
+    .enkephalin_calculator_page-table_row:last-child .enkephalin_calculator_page-table_cell:last-child,
+    .enkephalin_calculator_page-charge_row:last-child .enkephalin_calculator_page-table_cell:last-child,
+    .enkephalin_calculator_page-exp_row:last-child .enkephalin_calculator_page-table_cell:last-child {
+        border-bottom: none;
     }
     
     .enkephalin_calculator_page-note {
