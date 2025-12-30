@@ -14,8 +14,10 @@ let enkephalin_calculator_page = null;
 				const data = {
 					maxEnke: State.maxEnke,
 					standardChargeCount: State.standardChargeCount,
-					standardLunacyItem: State.standardLunacyItem,
-					standardExpDungeon: State.standardExpDungeon
+					standardLunacyItemName: State.standardLunacyItemName,
+					isFirstTime: State.isFirstTime,
+					expDungeonNumber: State.expDungeonNumber,
+					isSkip: State.isSkip
 				};
 				localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
 			} catch (e) {
@@ -35,19 +37,20 @@ let enkephalin_calculator_page = null;
 					if (typeof data.standardChargeCount === 'number' && data.standardChargeCount >= 0 && data.standardChargeCount <= 10) {
 						State.standardChargeCount = data.standardChargeCount;
 					}
-					if (typeof data.standardLunacyItem === 'string' && data.standardLunacyItem.length > 0) {
-						// 참조 데이터에 존재하는지 확인
-						const exists = REFERENCE_DATA.lunacyItems.some(item => item.name === data.standardLunacyItem);
+					if (typeof data.standardLunacyItemName === 'string' && data.standardLunacyItemName.length > 0) {
+						const exists = REFERENCE_DATA.lunacyItems.some(item => item.name === data.standardLunacyItemName);
 						if (exists) {
-							State.standardLunacyItem = data.standardLunacyItem;
+							State.standardLunacyItemName = data.standardLunacyItemName;
 						}
 					}
-					if (typeof data.standardExpDungeon === 'string' && data.standardExpDungeon.length > 0) {
-						// 참조 데이터에 존재하는지 확인
-						const exists = REFERENCE_DATA.expDungeons.some(dungeon => dungeon.name === data.standardExpDungeon);
-						if (exists) {
-							State.standardExpDungeon = data.standardExpDungeon;
-						}
+					if (typeof data.isFirstTime === 'boolean') {
+						State.isFirstTime = data.isFirstTime;
+					}
+					if (typeof data.expDungeonNumber === 'number' && data.expDungeonNumber >= 1 && data.expDungeonNumber <= 8) {
+						State.expDungeonNumber = data.expDungeonNumber;
+					}
+					if (typeof data.isSkip === 'boolean') {
+						State.isSkip = data.isSkip;
 					}
 				}
 			} catch (e) {
@@ -60,8 +63,10 @@ let enkephalin_calculator_page = null;
 	const State = {
 		maxEnke: 140,
 		standardChargeCount: 2,
-		standardLunacyItem: "초회 다발 1.7만",
-		standardExpDungeon: "8 - 수동"
+		standardLunacyItemName: "다발 1.7만",
+		isFirstTime: true,
+		expDungeonNumber: 8,
+		isSkip: false
 	};
 	
 	// 초기화 시 저장된 값 불러오기
@@ -76,8 +81,12 @@ let enkephalin_calculator_page = null;
 		
 		// 기준 효율 계산
 		getStandardEfficiency() {
-			const item = REFERENCE_DATA.lunacyItems.find(i => i.name === State.standardLunacyItem);
-			return item ? this.getLunacyPerPrice(item) : 0.1192941176;
+			const item = REFERENCE_DATA.lunacyItems.find(i => i.name === State.standardLunacyItemName);
+			if (!item) return 0.1192941176;
+			
+			// 초회 여부에 따라 amount 선택
+			const amount = item.isMonthly ? item.amount : (State.isFirstTime ? item.firstTimeAmount : item.amount);
+			return amount / item.price;
 		},
 		
 		// 충전 횟수별 광기 절대 소모량
@@ -138,14 +147,16 @@ let enkephalin_calculator_page = null;
 			}, 0);
 		},
 		
-		// 경험치 던전 데이터 찾기
-		findExpDungeon(name) {
-			return REFERENCE_DATA.expDungeons.find(d => d.name === name);
-		},
-		
 		// 기준 경험치 던전 데이터
 		getStandardExpDungeon() {
-			return this.findExpDungeon(State.standardExpDungeon);
+			const dungeonData = REFERENCE_DATA.expDungeons[State.expDungeonNumber];
+			if (!dungeonData) return REFERENCE_DATA.expDungeons[8].manual;
+			
+			const mode = State.isSkip ? dungeonData.skip : dungeonData.manual;
+			return {
+				tickets: mode.tickets,
+				enke: mode.enke
+			};
 		},
 		
 		// 경험치 수급 효율 계산
@@ -236,6 +247,7 @@ let enkephalin_calculator_page = null;
 		updateChargeEfficiency() {
 			const weeklyEnkeEfficiency = Calculator.calculateWeeklyEnkeEfficiency();
 			const weeklyEnkePerLunacy = weeklyEnkeEfficiency.enkePerLunacy;
+			const isMobile = window.innerWidth <= 768;
 			
 			for (let i = 1; i <= 10; i++) {
 				const result = Calculator.calculateChargeEfficiency(i);
@@ -252,6 +264,17 @@ let enkephalin_calculator_page = null;
 					// 비활성화 효과 (소모량, 수급량이 0인 경우)
 					const isDisabled = result.lunacyConsumption === 0 && result.enkeSupply === 0;
 					row.setModifierClass('disabled', isDisabled);
+					
+					// 모바일에서 비활성화 셀은 충전 횟수만 표시하고 나머지 숨기기
+					if (isMobile && isDisabled) {
+						if (lunacyCell) lunacyCell.style.display = 'none';
+						if (enkeCell) enkeCell.style.display = 'none';
+						if (efficiencyCell) efficiencyCell.style.display = 'none';
+					} else {
+						if (lunacyCell) lunacyCell.style.display = '';
+						if (enkeCell) enkeCell.style.display = '';
+						if (efficiencyCell) efficiencyCell.style.display = '';
+					}
 					
 					// 긍정/부정 효과 (주간 엔케팔린 패키지 효율과 비교)
 					if (!isDisabled && result.enkePerLunacy > 0) {
@@ -278,6 +301,7 @@ let enkephalin_calculator_page = null;
 			// 엔케 패키지 경던의 효율을 기준으로 사용
 			const enkePackageResult = results.find(r => r.method === "엔케 패키지 경던");
 			const standardExpPerLunacy = enkePackageResult ? enkePackageResult.expPerLunacy : 0;
+			const isMobile = window.innerWidth <= 768;
 			
 			// 타이틀의 info 부분 업데이트
 			const titleInfo = document.querySelector('.enkephalin_calculator_page-exp_title_info');
@@ -320,6 +344,17 @@ let enkephalin_calculator_page = null;
 						// 비활성화 효과 (상대 광기 소모량이 0인 경우)
 						const isDisabled = result.lunacyWorth === 0;
 						row.setModifierClass('disabled', isDisabled);
+						
+						// 모바일에서 비활성화 셀은 n충 경던만 표시하고 나머지 숨기기
+						if (isMobile && isDisabled) {
+							if (lunacyCell) lunacyCell.style.display = 'none';
+							if (expCell) expCell.style.display = 'none';
+							if (efficiencyCell) efficiencyCell.style.display = 'none';
+						} else {
+							if (lunacyCell) lunacyCell.style.display = '';
+							if (expCell) expCell.style.display = '';
+							if (efficiencyCell) efficiencyCell.style.display = '';
+						}
 						
 						// 긍정/부정 효과 (엔케 패키지 경던 효율과 비교)
 						if (!isDisabled && result.expPerLunacy > 0) {
@@ -370,14 +405,50 @@ let enkephalin_calculator_page = null;
 			UIManager.updateAll();
 		},
 		
-		onStandardLunacyItemChange(event) {
-			State.standardLunacyItem = event.target.value;
+		onFirstTimeChange(event) {
+			const selectedItem = REFERENCE_DATA.lunacyItems.find(item => item.name === State.standardLunacyItemName);
+			if (selectedItem && selectedItem.isMonthly) {
+				// 월정액은 초회 체크박스 비활성화 및 해제
+				event.target.checked = false;
+				State.isFirstTime = false;
+			} else {
+				State.isFirstTime = event.target.checked;
+			}
 			Storage.save();
 			UIManager.updateAll();
 		},
 		
-		onStandardExpDungeonChange(event) {
-			State.standardExpDungeon = event.target.value;
+		onStandardLunacyItemChange(event) {
+			const selectedItem = REFERENCE_DATA.lunacyItems.find(item => item.name === event.target.value);
+			State.standardLunacyItemName = event.target.value;
+			
+			// 월정액 선택 시 초회 체크박스 비활성화 및 해제
+			if (selectedItem && selectedItem.isMonthly) {
+				State.isFirstTime = false;
+				const checkbox = document.getElementById('lunacy_first_time_checkbox');
+				if (checkbox) {
+					checkbox.checked = false;
+					checkbox.disabled = true;
+				}
+			} else {
+				const checkbox = document.getElementById('lunacy_first_time_checkbox');
+				if (checkbox) {
+					checkbox.disabled = false;
+				}
+			}
+			
+			Storage.save();
+			UIManager.updateAll();
+		},
+		
+		onExpDungeonNumberChange(event) {
+			State.expDungeonNumber = parseInt(event.target.value) || 8;
+			Storage.save();
+			UIManager.updateAll();
+		},
+		
+		onExpDungeonModeChange(event) {
+			State.isSkip = event.target.value === 'skip';
 			Storage.save();
 			UIManager.updateAll();
 		}
@@ -453,25 +524,48 @@ let enkephalin_calculator_page = null;
 										properties: { for: "lunacy_item_select" },
 										content: "기준 광기 상품"
 									}),
-									select: Structure.write({
-										tagName: "select",
-										classList: ["enkephalin_calculator_page-settings_select"],
-										properties: { id: "lunacy_item_select" },
-										children: Object.fromEntries(
-											REFERENCE_DATA.lunacyItems.map((item, index) => [
-												`option_${index}`,
-												Structure.write({
-													tagName: "option",
-													properties: { 
-														value: item.name,
-														...(item.name === State.standardLunacyItem ? { selected: "selected" } : {})
-													},
-													content: item.name
-												})
-											])
-										),
-										events: {
-											change: EventHandlers.onStandardLunacyItemChange
+									controls: Structure.write({
+										classList: ["enkephalin_calculator_page-settings_controls"],
+										children: {
+											checkbox: Structure.write({
+												tagName: "input",
+												classList: ["enkephalin_calculator_page-settings_checkbox"],
+												properties: {
+													type: "checkbox",
+													id: "lunacy_first_time_checkbox",
+													checked: State.isFirstTime ? "checked" : undefined
+												},
+												events: {
+													change: EventHandlers.onFirstTimeChange
+												}
+											}),
+											checkbox_label: Structure.write({
+												tagName: "label",
+												classList: ["enkephalin_calculator_page-settings_checkbox_label"],
+												properties: { for: "lunacy_first_time_checkbox" },
+												content: "초회"
+											}),
+											select: Structure.write({
+												tagName: "select",
+												classList: ["enkephalin_calculator_page-settings_select"],
+												properties: { id: "lunacy_item_select" },
+												children: Object.fromEntries(
+													REFERENCE_DATA.lunacyItems.map((item, index) => [
+														`option_${index}`,
+														Structure.write({
+															tagName: "option",
+															properties: { 
+																value: item.name,
+																...(item.name === State.standardLunacyItemName ? { selected: "selected" } : {})
+															},
+															content: item.name
+														})
+													])
+												),
+												events: {
+													change: EventHandlers.onStandardLunacyItemChange
+												}
+											})
 										}
 									})
 								}
@@ -482,28 +576,86 @@ let enkephalin_calculator_page = null;
 									label: Structure.write({
 										tagName: "label",
 										classList: ["enkephalin_calculator_page-settings_label"],
-										properties: { for: "exp_dungeon_select" },
+										properties: { for: "exp_dungeon_number_select" },
 										content: "기준 경험치 던전"
 									}),
-									select: Structure.write({
-										tagName: "select",
-										classList: ["enkephalin_calculator_page-settings_select"],
-										properties: { id: "exp_dungeon_select" },
-										children: Object.fromEntries(
-											REFERENCE_DATA.expDungeons.map((dungeon, index) => [
-												`option_${index}`,
-												Structure.write({
-													tagName: "option",
-													properties: { 
-														value: dungeon.name,
-														...(dungeon.name === State.standardExpDungeon ? { selected: "selected" } : {})
-													},
-													content: dungeon.name
-												})
-											])
-										),
-										events: {
-											change: EventHandlers.onStandardExpDungeonChange
+									controls: Structure.write({
+										classList: ["enkephalin_calculator_page-settings_controls"],
+										children: {
+											select: Structure.write({
+												tagName: "select",
+												classList: ["enkephalin_calculator_page-settings_select"],
+												properties: { id: "exp_dungeon_number_select" },
+												children: Object.fromEntries(
+													[1, 2, 3, 4, 5, 6, 7, 8].map(num => [
+														`option_${num}`,
+														Structure.write({
+															tagName: "option",
+															properties: { 
+																value: String(num),
+																...(num === State.expDungeonNumber ? { selected: "selected" } : {})
+															},
+															content: `${num}번`
+														})
+													])
+												),
+												events: {
+													change: EventHandlers.onExpDungeonNumberChange
+												}
+											}),
+											radio_group: Structure.write({
+												classList: ["enkephalin_calculator_page-settings_radio_group"],
+												children: {
+													manual_label: Structure.write({
+														tagName: "label",
+														classList: ["enkephalin_calculator_page-settings_radio_label"],
+														children: {
+															radio: Structure.write({
+																tagName: "input",
+																classList: ["enkephalin_calculator_page-settings_radio"],
+																properties: {
+																	type: "radio",
+																	name: "exp_dungeon_mode",
+																	id: "exp_dungeon_manual",
+																	value: "manual",
+																	checked: !State.isSkip ? "checked" : undefined
+																},
+																events: {
+																	change: EventHandlers.onExpDungeonModeChange
+																}
+															}),
+															text: Structure.write({
+																tagName: "span",
+																content: "수동"
+															})
+														}
+													}),
+													skip_label: Structure.write({
+														tagName: "label",
+														classList: ["enkephalin_calculator_page-settings_radio_label"],
+														children: {
+															radio: Structure.write({
+																tagName: "input",
+																classList: ["enkephalin_calculator_page-settings_radio"],
+																properties: {
+																	type: "radio",
+																	name: "exp_dungeon_mode",
+																	id: "exp_dungeon_skip",
+																	value: "skip",
+																	checked: State.isSkip ? "checked" : undefined
+																},
+																events: {
+																	change: EventHandlers.onExpDungeonModeChange
+																}
+															}),
+															text: Structure.write({
+																tagName: "span",
+																content: "스킵"
+															})
+														}
+													})
+												}
+											})
 										}
 									})
 								}
@@ -860,6 +1012,9 @@ let enkephalin_calculator_page = null;
 					document.querySelectorAll('.enkephalin_calculator_page-exp_title_info').forEach(info => {
 						info.style.display = isMobile ? 'none' : 'block';
 					});
+					
+					// 모바일/데스크톱 전환 시 비활성화 셀 표시/숨김 업데이트
+					UIManager.updateAll();
 				}, 100);
 			});
 		}
@@ -871,6 +1026,16 @@ let enkephalin_calculator_page = null;
 		const checkAndUpdate = () => {
 			const settings = document.querySelector('.enkephalin_calculator_page-settings');
 			if (settings) {
+				// 월정액 선택 시 체크박스 비활성화
+				const selectedItem = REFERENCE_DATA.lunacyItems.find(item => item.name === State.standardLunacyItemName);
+				if (selectedItem && selectedItem.isMonthly) {
+					const checkbox = document.getElementById('lunacy_first_time_checkbox');
+					if (checkbox) {
+						checkbox.checked = false;
+						checkbox.disabled = true;
+					}
+				}
+				
 				UIManager.updateAll();
 				CollapsibleManager.init();
 			} else {
@@ -889,4 +1054,5 @@ let enkephalin_calculator_page = null;
 		}
 	}
 })();
+
 
