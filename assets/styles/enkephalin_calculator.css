@@ -539,13 +539,14 @@
         padding: 0.5rem 0.6rem;
         min-width: 100%;
         display: grid;
-        background: #2c313a;
     }
     
     /* 주간 엔케팔린 패키지 테이블 모바일 */
     .enkephalin_calculator_page-weekly_enke .enkephalin_calculator_page-table_header,
     .enkephalin_calculator_page-weekly_enke .enkephalin_calculator_page-table_row {
         grid-template-columns: 1fr !important;
+        border-radius: 0;
+        border: 1px solid #3a4050;
     }
     
     /* 충전 효율 테이블 모바일 */
