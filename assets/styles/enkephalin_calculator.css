@@ -81,7 +81,7 @@
 }
 
 .enkephalin_calculator_page-exp_title_info {
-    color: #ffd700;
+    color: #fff;
     font-size: 1rem;
     font-weight: 500;
     font-style: normal;
@@ -97,7 +97,7 @@
     width: 100%;
     border-collapse: collapse;
     background: #2c313a;
-    border-radius: 0.5rem;
+    border-radius: 0.5rem 0.5rem 0 0;
     overflow: hidden;
 }
 
@@ -132,7 +132,16 @@
     align-items: center;
     justify-content: center;
     min-height: 2.5rem;
-    line-height: 1.5;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.enkephalin_calculator_page-table_cell > * {
+    margin: 0;
+    padding: 0;
+    line-height: 1;
 }
 
 .enkephalin_calculator_page-note {
@@ -141,6 +150,7 @@
     font-size: 0.9rem;
     font-style: italic;
     background: #181a20;
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 
 /* 주간 엔케팔린 패키지 테이블 */
