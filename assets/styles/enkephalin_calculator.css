@@ -136,12 +136,14 @@
     margin: 0;
     padding: 0;
     vertical-align: middle;
+    word-break: keep-all;
 }
 
 .enkephalin_calculator_page-table_cell > * {
     margin: 0;
     padding: 0;
     line-height: 1;
+    word-break: keep-all;
 }
 
 .enkephalin_calculator_page-note {
@@ -203,7 +205,7 @@
 .enkephalin_calculator_page-charge_row--positive {
     background: rgba(76, 175, 80, 0.15) !important;
     border-left: 3px solid #4CAF50;
-    border-bottom: 2px solid rgba(76, 175, 80, 0.3) !important;
+    border-bottom: 2px solid rgba(76, 175, 80, 0.6) !important;
     position: relative;
 }
 
@@ -215,7 +217,7 @@
 .enkephalin_calculator_page-charge_row--negative {
     background: rgba(244, 67, 54, 0.15) !important;
     border-left: 3px solid #F44336;
-    border-bottom: 2px solid rgba(244, 67, 54, 0.3) !important;
+    border-bottom: 2px solid rgba(244, 67, 54, 0.6) !important;
     position: relative;
 }
 
@@ -234,16 +236,19 @@
     flex-direction: column;
     align-items: center;
     gap: 0.2rem;
+    word-break: keep-all;
 }
 
 .enkephalin_calculator_page-exp_method_name {
     color: inherit;
+    word-break: keep-all;
 }
 
 .enkephalin_calculator_page-exp_method_note {
     color: #a0a0a0;
     font-size: 0.85rem;
     font-style: italic;
+    word-break: keep-all;
 }
 
 /* 경험치 효율 행 효과 */
@@ -284,7 +289,7 @@
 .enkephalin_calculator_page-exp_row--positive {
     background: rgba(76, 175, 80, 0.15) !important;
     border-left: 3px solid #4CAF50;
-    border-bottom: 2px solid rgba(76, 175, 80, 0.3) !important;
+    border-bottom: 2px solid rgba(76, 175, 80, 0.6) !important;
     position: relative;
 }
 
@@ -296,7 +301,7 @@
 .enkephalin_calculator_page-exp_row--negative {
     background: rgba(244, 67, 54, 0.15) !important;
     border-left: 3px solid #F44336;
-    border-bottom: 2px solid rgba(244, 67, 54, 0.3) !important;
+    border-bottom: 2px solid rgba(244, 67, 54, 0.6) !important;
     position: relative;
 }
 
@@ -358,7 +363,7 @@
     .enkephalin_calculator_page-weekly_enke,
     .enkephalin_calculator_page-charge_efficiency,
     .enkephalin_calculator_page-exp_efficiency {
-        margin-bottom: 1rem;
+        margin-bottom: 0.8rem;
     }
     
     /* 모바일에서 로우 간격 제거 */
@@ -442,32 +447,40 @@
     
     /* 경험치 수급 효율 표 셀 정렬 개선 */
     .enkephalin_calculator_page-exp_efficiency .enkephalin_calculator_page-table_cell {
-        align-items: flex-start;
-        padding-top: 0.4rem;
-        padding-bottom: 0.4rem;
+        align-items: center;
+        padding-top: 0.35rem;
+        padding-bottom: 0.35rem;
     }
     
     .enkephalin_calculator_page-exp_efficiency .enkephalin_calculator_page-table_cell:before {
         min-width: 100px;
         max-width: 100px;
-        padding-top: 0.05rem;
     }
     
     .enkephalin_calculator_page-exp_method {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.15rem;
-        padding-top: 0.4rem;
-        padding-bottom: 0.4rem;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.3rem;
+        flex-wrap: wrap;
     }
     
     .enkephalin_calculator_page-exp_method_name {
-        width: 100%;
+        word-break: keep-all;
+        white-space: nowrap;
     }
     
     .enkephalin_calculator_page-exp_method_note {
-        width: 100%;
-        margin-top: 0.1rem;
+        word-break: keep-all;
+        white-space: nowrap;
+    }
+    
+    /* 모든 셀에 word-break 적용 */
+    .enkephalin_calculator_page-table_cell {
+        word-break: keep-all;
+    }
+    
+    .enkephalin_calculator_page-table_cell:before {
+        word-break: keep-all;
     }
     
     .enkephalin_calculator_page-table_header {
@@ -536,7 +549,7 @@
     .enkephalin_calculator_page-weekly_enke,
     .enkephalin_calculator_page-charge_efficiency,
     .enkephalin_calculator_page-exp_efficiency {
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.6rem;
     }
     
     .enkephalin_calculator_page-table_header,
