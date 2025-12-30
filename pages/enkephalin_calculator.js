@@ -533,7 +533,7 @@ let enkephalin_calculator_page = null;
 												properties: {
 													type: "checkbox",
 													id: "lunacy_first_time_checkbox",
-													checked: State.isFirstTime ? "checked" : undefined
+													...(State.isFirstTime ? { checked: "checked" } : {})
 												},
 												events: {
 													change: EventHandlers.onFirstTimeChange
@@ -618,7 +618,7 @@ let enkephalin_calculator_page = null;
 																	name: "exp_dungeon_mode",
 																	id: "exp_dungeon_manual",
 																	value: "manual",
-																	checked: !State.isSkip ? "checked" : undefined
+																	...(!State.isSkip ? { checked: "checked" } : {})
 																},
 																events: {
 																	change: EventHandlers.onExpDungeonModeChange
@@ -642,7 +642,7 @@ let enkephalin_calculator_page = null;
 																	name: "exp_dungeon_mode",
 																	id: "exp_dungeon_skip",
 																	value: "skip",
-																	checked: State.isSkip ? "checked" : undefined
+																	...(State.isSkip ? { checked: "checked" } : {})
 																},
 																events: {
 																	change: EventHandlers.onExpDungeonModeChange
