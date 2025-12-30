@@ -15,35 +15,35 @@ let enkephalinData = null;
         expDungeons: {
             1: {
                 manual: { tickets: [6, 7, 0, 0], enke: 40 },
-                skip: {}
+                skip: { tickets: [9, 11, 0, 0], enke: 80 }
             },
             2: {
                 manual: { tickets: [0, 3, 3, 0], enke: 40 },
-                skip: {}
+                skip: { tickets: [0, 5, 5, 0], enke: 80 }
             },
             3: {
                 manual: { tickets: [0, 4, 4, 0], enke: 40 },
-                skip: {}
+                skip: { tickets: [0, 6, 6, 0], enke: 80 }
             },
             4: {
                 manual: { tickets: [0, 0, 3, 2], enke: 60 },
-                skip: {}
+                skip: { tickets: [0, 0, 5, 3], enke: 120 }
             },
             5: {
                 manual: { tickets: [0, 4, 4, 2], enke: 60 },
-                skip: {}
+                skip: { tickets: [0, 6, 6, 3], enke: 120 }
             },
             6: {
                 manual: { tickets: [0, 2, 2, 4], enke: 60 },
-                skip: {}
+                skip: { tickets: [0, 3, 3, 6], enke: 120 }
             },
             7: {
                 manual: { tickets: [0, 4, 4, 4], enke: 60 },
-                skip: {}
+                skip: { tickets: [0, 6, 6, 6], enke: 120 }
             },
             8: {
                 manual: { tickets: [0, 4, 2, 6], enke: 60 },
-                skip: {}
+                skip: { tickets: [0, 6, 3, 9], enke: 120 }
             }
         },
         
@@ -67,12 +67,5 @@ let enkephalinData = null;
             price: 9900
         }
     };
-
-    for(const dungeon of enkephalinData.expDungeons) {
-        dungeon.skip = {
-            tickets: deepCopy(dungeon.manual.tickets).map(ticket => Math.round(ticket * 1.5)),
-            enke: dungeon.manual.enke * 2
-        };
-    }
 })();
 
