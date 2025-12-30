@@ -239,10 +239,6 @@
     min-height: auto;
 }
 
-.enkephalin_calculator_page-charge_row--disabled .enkephalin_calculator_page-table_cell {
-    min-height: 1.25rem;
-}
-
 .enkephalin_calculator_page-charge_row--disabled::before {
     content: '';
     position: absolute;
@@ -260,8 +256,10 @@
     pointer-events: none;
 }
 
-.enkephalin_calculator_page-charge_row--disabled .enkephalin_calculator_page-table_cell {
+.enkephalin_calculator_page-charge_row--disabled > .enkephalin_calculator_page-table_cell {
+    min-height: 1.25rem;
     color: #666 !important;
+    border-bottom: none !important;
 }
 
 .enkephalin_calculator_page-charge_row--positive {
