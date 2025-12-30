@@ -1,20 +1,25 @@
 html, body {
 	overflow: hidden;
+	overflow-x: hidden;
 	user-select: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+	width: 100%;
+	max-width: 100%;
 }
 
 #root {
-    width: 100vw;
+    width: 100%;
     min-height: 100vh;
 	max-height: 100vh;
 	overflow-y: auto;
+	overflow-x: hidden;
     background: #23272f;
     color: #fff;
 	display: flex;
 	flex-direction: column;
+	box-sizing: border-box;
 }
 
 img {
