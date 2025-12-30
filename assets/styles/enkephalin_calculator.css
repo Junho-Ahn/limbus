@@ -87,6 +87,9 @@
 .enkephalin_calculator_page-settings_controls .enkephalin_calculator_page-settings_select {
     flex: 1;
     min-width: 150px;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .enkephalin_calculator_page-settings_radio_group {
@@ -468,13 +471,6 @@
     .enkephalin_calculator_page-settings_select {
         font-size: 0.9rem;
         padding: 0.4rem;
-    }
-    
-    .enkephalin_calculator_page-settings_controls {
-        flex-direction: row;
-        align-items: center;
-        gap: 0.5rem;
-        flex-wrap: wrap;
     }
     
     .enkephalin_calculator_page-settings_controls .enkephalin_calculator_page-settings_select {
