@@ -449,7 +449,7 @@
     
     .enkephalin_calculator_page-settings {
         padding: 0.8rem;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
     }
     
     .enkephalin_calculator_page-settings_title {
@@ -528,7 +528,7 @@
         -webkit-overflow-scrolling: touch;
         display: block;
         background: #2c313a;
-        margin-bottom: 4rem;
+        margin-bottom: 3rem;
     }
     
     .enkephalin_calculator_page-table_header,
@@ -674,12 +674,10 @@
     
     .enkephalin_calculator_page-settings {
         padding: 0.6rem;
-        margin-bottom: 0.8rem;
     }
     
     .enkephalin_calculator_page-settings_title {
         font-size: 0.9rem;
-        margin-bottom: 0.5rem;
     }
     
     .enkephalin_calculator_page-settings_inputs {
