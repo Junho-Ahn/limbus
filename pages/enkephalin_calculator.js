@@ -582,27 +582,6 @@ let enkephalin_calculator_page = null;
 									controls: Structure.write({
 										classList: ["enkephalin_calculator_page-settings_controls"],
 										children: {
-											select: Structure.write({
-												tagName: "select",
-												classList: ["enkephalin_calculator_page-settings_select"],
-												properties: { id: "exp_dungeon_number_select" },
-												children: Object.fromEntries(
-													[1, 2, 3, 4, 5, 6, 7, 8].map(num => [
-														`option_${num}`,
-														Structure.write({
-															tagName: "option",
-															properties: { 
-																value: String(num),
-																...(num === State.expDungeonNumber ? { selected: "selected" } : {})
-															},
-															content: `${num}번`
-														})
-													])
-												),
-												events: {
-													change: EventHandlers.onExpDungeonNumberChange
-												}
-											}),
 											radio_group: Structure.write({
 												classList: ["enkephalin_calculator_page-settings_radio_group"],
 												children: {
@@ -654,6 +633,27 @@ let enkephalin_calculator_page = null;
 															})
 														}
 													})
+												}
+											}),
+											select: Structure.write({
+												tagName: "select",
+												classList: ["enkephalin_calculator_page-settings_select"],
+												properties: { id: "exp_dungeon_number_select" },
+												children: Object.fromEntries(
+													[1, 2, 3, 4, 5, 6, 7, 8].map(num => [
+														`option_${num}`,
+														Structure.write({
+															tagName: "option",
+															properties: { 
+																value: String(num),
+																...(num === State.expDungeonNumber ? { selected: "selected" } : {})
+															},
+															content: `${num}번`
+														})
+													])
+												),
+												events: {
+													change: EventHandlers.onExpDungeonNumberChange
 												}
 											})
 										}
