@@ -4,6 +4,58 @@ let enkephalin_calculator_page = null;
 	// 참조 데이터 (별도 파일에서 로드)
 	const REFERENCE_DATA = enkephalinData;
 	
+	// 로컬스토리지 키
+	const STORAGE_KEY = 'enkephalin_calculator_settings';
+	
+	// 로컬스토리지 관리
+	const Storage = {
+		save() {
+			try {
+				const data = {
+					maxEnke: State.maxEnke,
+					standardChargeCount: State.standardChargeCount,
+					standardLunacyItem: State.standardLunacyItem,
+					standardExpDungeon: State.standardExpDungeon
+				};
+				localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+			} catch (e) {
+				console.warn('로컬스토리지 저장 실패:', e);
+			}
+		},
+		
+		load() {
+			try {
+				const saved = localStorage.getItem(STORAGE_KEY);
+				if (saved) {
+					const data = JSON.parse(saved);
+					// 유효성 검사
+					if (typeof data.maxEnke === 'number' && data.maxEnke > 0) {
+						State.maxEnke = data.maxEnke;
+					}
+					if (typeof data.standardChargeCount === 'number' && data.standardChargeCount >= 0 && data.standardChargeCount <= 10) {
+						State.standardChargeCount = data.standardChargeCount;
+					}
+					if (typeof data.standardLunacyItem === 'string' && data.standardLunacyItem.length > 0) {
+						// 참조 데이터에 존재하는지 확인
+						const exists = REFERENCE_DATA.lunacyItems.some(item => item.name === data.standardLunacyItem);
+						if (exists) {
+							State.standardLunacyItem = data.standardLunacyItem;
+						}
+					}
+					if (typeof data.standardExpDungeon === 'string' && data.standardExpDungeon.length > 0) {
+						// 참조 데이터에 존재하는지 확인
+						const exists = REFERENCE_DATA.expDungeons.some(dungeon => dungeon.name === data.standardExpDungeon);
+						if (exists) {
+							State.standardExpDungeon = data.standardExpDungeon;
+						}
+					}
+				}
+			} catch (e) {
+				console.warn('로컬스토리지 불러오기 실패:', e);
+			}
+		}
+	};
+	
 	// 상태 관리
 	const State = {
 		maxEnke: 140,
@@ -11,6 +63,9 @@ let enkephalin_calculator_page = null;
 		standardLunacyItem: "초회 다발 1.7만",
 		standardExpDungeon: "8 - 수동"
 	};
+	
+	// 초기화 시 저장된 값 불러오기
+	Storage.load();
 	
 	// 계산 함수들
 	const Calculator = {
@@ -304,22 +359,26 @@ let enkephalin_calculator_page = null;
 		onMaxEnkeChange(event) {
 			const value = parseInt(event.target.value) || 140;
 			State.maxEnke = value;
+			Storage.save();
 			UIManager.updateAll();
 		},
 		
 		onStandardChargeCountChange(event) {
 			const value = parseInt(event.target.value) || 0;
 			State.standardChargeCount = Math.max(0, Math.min(10, value));
+			Storage.save();
 			UIManager.updateAll();
 		},
 		
 		onStandardLunacyItemChange(event) {
 			State.standardLunacyItem = event.target.value;
+			Storage.save();
 			UIManager.updateAll();
 		},
 		
 		onStandardExpDungeonChange(event) {
 			State.standardExpDungeon = event.target.value;
+			Storage.save();
 			UIManager.updateAll();
 		}
 	};
