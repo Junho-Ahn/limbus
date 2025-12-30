@@ -3,12 +3,12 @@ let enkephalinData = null;
     enkephalinData = {
         // 광기 상품 데이터
         lunacyItems: [
-            { name: "광기 0.11만", firstTimeAmount: 140, amount: 70, price: 1100, isMonthly: false },
-            { name: "묶음 0.51만", firstTimeAmount: 588, amount: 325, price: 5100, isMonthly: false },
-            { name: "다발 1.7만", firstTimeAmount: 2028, amount: 1170, price: 17000, isMonthly: false },
-            { name: "상자 3.3만", firstTimeAmount: 4294, amount: 2470, price: 33000, isMonthly: false },
-            { name: "더미 5.5만", firstTimeAmount: 8206, amount: 4745, price: 55000, isMonthly: false },
-            { name: "모음 11만", firstTimeAmount: 16672, amount: 9685, price: 110000, isMonthly: false },
+            { name: "광기 1,100원", firstTimeAmount: 140, amount: 70, price: 1100, isMonthly: false },
+            { name: "묶음 5,100원", firstTimeAmount: 588, amount: 325, price: 5100, isMonthly: false },
+            { name: "다발 17,000원", firstTimeAmount: 2028, amount: 1170, price: 17000, isMonthly: false },
+            { name: "상자 33,000원", firstTimeAmount: 4294, amount: 2470, price: 33000, isMonthly: false },
+            { name: "더미 55,000원", firstTimeAmount: 8206, amount: 4745, price: 55000, isMonthly: false },
+            { name: "모음 110,000원", firstTimeAmount: 16672, amount: 9685, price: 110000, isMonthly: false },
             { name: "월정액", amount: 2600, price: 9900, isMonthly: true },
             { name: "월정액 소형", amount: 1300, price: 4400, isMonthly: true },
             { name: "월정액 2종", amount: 3900, price: 14300, isMonthly: true }

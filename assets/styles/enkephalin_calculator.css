@@ -205,8 +205,8 @@
     color: #a0a0a0;
     font-size: 0.9rem;
     font-style: italic;
-    background: transparent;
-    border-radius: 0;
+    background: #181a20;
+    border-radius: 0 0 0.5rem 0.5rem;
 }
 
 /* 주간 엔케팔린 패키지 테이블 */
@@ -363,10 +363,8 @@
     color: #E57373 !important;
 }
 
-/* 접기/펼치기 스타일 */
+/* 접기/펼치기 스타일 - PC에서는 기본 스타일 */
 .enkephalin_calculator_page-collapsible_title {
-    cursor: pointer;
-    user-select: none;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -377,10 +375,9 @@
     flex: 1;
 }
 
+/* PC에서 삼각형 숨기기 */
 .enkephalin_calculator_page-collapsible_toggle {
-    color: #ffd700;
-    font-size: 0.9rem;
-    transition: transform 0.2s;
+    display: none;
 }
 
 .enkephalin_calculator_page-collapsible_content {
@@ -396,6 +393,22 @@
 
 /* 반응형 */
 @media (max-width: 768px) {
+    /* 모바일에서 접기/펼치기 활성화 */
+    .enkephalin_calculator_page-collapsible_title {
+        cursor: pointer;
+        user-select: none;
+        flex-wrap: nowrap;
+    }
+    
+    .enkephalin_calculator_page-collapsible_toggle {
+        display: block;
+        color: #ffd700;
+        font-size: 0.9rem;
+        transition: transform 0.2s;
+        flex-shrink: 0;
+        margin-left: auto;
+    }
+    
     /* 모바일에서 기본적으로 접혀있음 */
     .enkephalin_calculator_page-collapsible_content {
         max-height: 0;
@@ -414,15 +427,6 @@
         align-items: center;
         width: 100%;
         flex-wrap: nowrap;
-    }
-    
-    .enkephalin_calculator_page-collapsible_title {
-        flex-wrap: nowrap;
-    }
-    
-    .enkephalin_calculator_page-collapsible_toggle {
-        flex-shrink: 0;
-        margin-left: auto;
     }
     
     .enkephalin_calculator_page-exp_title_info {
