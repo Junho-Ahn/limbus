@@ -8,7 +8,7 @@ class IsValid {
     static string(value, checkLength = true) {
         return (
             typeof value === "string"
-            && (checkLength && (value.length > 0) || !checkLength)
+            && (!checkLength || value.length > 0)
         );
     }
     
@@ -21,7 +21,7 @@ class IsValid {
     static array(value, checkLength = true) {
         return (
             Array.isArray(value)
-            && (checkLength && (value.length > 0) || !checkLength)
+            && (!checkLength || value.length > 0)
         );
     }
     
@@ -47,9 +47,11 @@ class IsValid {
      */
     static object(value, checkLength = true) {
         return (
-            value instanceof Object
+            value !== null
+            && value !== undefined
+            && value instanceof Object
             && !Array.isArray(value)
-            && (checkLength && (Object.values(value).length > 0) || !checkLength)
+            && (!checkLength || Object.values(value).length > 0)
         );
     }
     
