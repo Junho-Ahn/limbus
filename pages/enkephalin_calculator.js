@@ -44,7 +44,8 @@ let enkephalin_calculator_page = null;
 	const ES = {
 		userInput: {
 			maxEnke: Structure.write({
-				tagName: "input"
+				tagName: "input",
+				content: "asdf"
 			}),
 			lunacyToEnkeCount: Structure.write({
 				tagName: "input"

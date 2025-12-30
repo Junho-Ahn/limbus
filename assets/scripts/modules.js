@@ -120,7 +120,6 @@ class IsValid {
     }
     
     static StructureObject(value) {
-        console.log(Object.values(value));
         return (
             IsValid.object(value)
             && Object.values(value).every(x => x instanceof Structure)
