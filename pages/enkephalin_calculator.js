@@ -724,8 +724,7 @@ let enkephalin_calculator_page = null;
 						}
 					}),
 					note: Structure.write({
-						classList: ["enkephalin_calculator_page-note"],
-						content: ""
+						classList: ["enkephalin_calculator_page-note"]
 					})
 				}
 			});
