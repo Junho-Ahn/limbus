@@ -318,7 +318,7 @@ let enkephalin_calculator_page = null;
 							max_enke_input: Structure.write({
 								tagName: "input",
 								classList: ["enkephalin_calculator_page-settings_input"],
-								properties: { type: "number", value: State.maxEnke },
+								properties: { type: "number", value: String(State.maxEnke) },
 								events: {
 									input: EventHandlers.onMaxEnkeChange
 								}
@@ -330,7 +330,7 @@ let enkephalin_calculator_page = null;
 							charge_count_input: Structure.write({
 								tagName: "input",
 								classList: ["enkephalin_calculator_page-settings_input"],
-								properties: { type: "number", min: 0, max: 10, value: State.standardChargeCount },
+								properties: { type: "number", min: "0", max: "10", value: String(State.standardChargeCount) },
 								events: {
 									input: EventHandlers.onStandardChargeCountChange
 								}
@@ -342,7 +342,6 @@ let enkephalin_calculator_page = null;
 							lunacy_item_select: Structure.write({
 								tagName: "select",
 								classList: ["enkephalin_calculator_page-settings_select"],
-								properties: { value: State.standardLunacyItem },
 								children: Object.fromEntries(
 									REFERENCE_DATA.lunacyItems.map((item, index) => [
 										`option_${index}`,
@@ -350,7 +349,7 @@ let enkephalin_calculator_page = null;
 											tagName: "option",
 											properties: { 
 												value: item.name,
-												selected: item.name === State.standardLunacyItem ? true : undefined
+												...(item.name === State.standardLunacyItem ? { selected: "selected" } : {})
 											},
 											content: item.name
 										})
@@ -367,7 +366,6 @@ let enkephalin_calculator_page = null;
 							exp_dungeon_select: Structure.write({
 								tagName: "select",
 								classList: ["enkephalin_calculator_page-settings_select"],
-								properties: { value: State.standardExpDungeon },
 								children: Object.fromEntries(
 									REFERENCE_DATA.expDungeons.map((dungeon, index) => [
 										`option_${index}`,
@@ -375,7 +373,7 @@ let enkephalin_calculator_page = null;
 											tagName: "option",
 											properties: { 
 												value: dungeon.name,
-												selected: dungeon.name === State.standardExpDungeon ? true : undefined
+												...(dungeon.name === State.standardExpDungeon ? { selected: "selected" } : {})
 											},
 											content: dungeon.name
 										})
@@ -443,7 +441,7 @@ let enkephalin_calculator_page = null;
 			for (let i = 1; i <= 10; i++) {
 				rows[`row_${i}`] = Structure.write({
 					classList: ["enkephalin_calculator_page-charge_row"],
-					properties: { "data-charge": i },
+					dataset: { charge: String(i) },
 					children: {
 						charge: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell"],
@@ -514,7 +512,7 @@ let enkephalin_calculator_page = null;
 			results.forEach((result, index) => {
 				rows[`row_${index}`] = Structure.write({
 					classList: ["enkephalin_calculator_page-exp_row"],
-					properties: { "data-index": index },
+					dataset: { index: String(index) },
 					children: {
 						method: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell"],
