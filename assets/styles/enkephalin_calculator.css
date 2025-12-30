@@ -309,8 +309,66 @@
     color: #E57373 !important;
 }
 
+/* 접기/펼치기 스타일 */
+.enkephalin_calculator_page-collapsible_title {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.enkephalin_calculator_page-collapsible_title_text {
+    flex: 1;
+}
+
+.enkephalin_calculator_page-collapsible_toggle {
+    color: #ffd700;
+    font-size: 0.9rem;
+    transition: transform 0.2s;
+}
+
+.enkephalin_calculator_page-collapsible_content {
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+/* 데스크톱에서는 항상 표시 */
+.enkephalin_calculator_page-collapsible_content {
+    max-height: none;
+    opacity: 1;
+}
+
 /* 반응형 */
 @media (max-width: 768px) {
+    /* 모바일에서 기본적으로 접혀있음 */
+    .enkephalin_calculator_page-collapsible_content {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+    }
+    
+    .enkephalin_calculator_page-collapsible_content--expanded {
+        max-height: 5000px;
+        opacity: 1;
+    }
+    
+    .enkephalin_calculator_page-exp_title {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    .enkephalin_calculator_page-exp_title_info {
+        display: none;
+        width: 100%;
+        margin-top: 0.5rem;
+        font-size: 0.85rem;
+        order: 3;
+    }
     .enkephalin_calculator_page {
         padding: 0.8rem;
         max-width: 100%;
@@ -427,6 +485,17 @@
         display: flex;
         flex-wrap: nowrap;
         gap: 0.4rem;
+    }
+    
+    /* 긍정/부정 로우 내부 셀 구분선 색상 강화 (모바일) */
+    .enkephalin_calculator_page-charge_row--positive .enkephalin_calculator_page-table_cell,
+    .enkephalin_calculator_page-exp_row--positive .enkephalin_calculator_page-table_cell {
+        border-bottom: 1px solid rgba(76, 175, 80, 0.5) !important;
+    }
+    
+    .enkephalin_calculator_page-charge_row--negative .enkephalin_calculator_page-table_cell,
+    .enkephalin_calculator_page-exp_row--negative .enkephalin_calculator_page-table_cell {
+        border-bottom: 1px solid rgba(244, 67, 54, 0.5) !important;
     }
     
     .enkephalin_calculator_page-table_cell:last-child {

@@ -598,39 +598,55 @@ let enkephalin_calculator_page = null;
 				classList: ["enkephalin_calculator_page-charge_efficiency"],
 				children: {
 					title: Structure.write({
-						classList: ["enkephalin_calculator_page-section_title"],
-						content: "엔케팔린 충전 효율"
-					}),
-					table: Structure.write({
-						classList: ["enkephalin_calculator_page-table"],
+						classList: ["enkephalin_calculator_page-section_title", "enkephalin_calculator_page-collapsible_title"],
+						dataset: { target: "charge_efficiency" },
 						children: {
-							header: Structure.write({
-								classList: ["enkephalin_calculator_page-table_header"],
-								children: {
-									charge: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"],
-										content: "충전 횟수"
-									}),
-									lunacy: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"],
-										content: "광기 소모량"
-									}),
-									enke: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"],
-										content: "엔케 수급량"
-									}),
-									efficiency: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"],
-										content: "광기당 엔케"
-									})
-								}
+							text: Structure.write({
+								classList: ["enkephalin_calculator_page-collapsible_title_text"],
+								content: "엔케팔린 충전 효율"
 							}),
-							...rows
+							toggle: Structure.write({
+								classList: ["enkephalin_calculator_page-collapsible_toggle"],
+								content: "▼"
+							})
 						}
 					}),
-					note: Structure.write({
-						classList: ["enkephalin_calculator_page-note"],
-						content: "* 주간 광기 수급량 : 거던보너스 750, 점검 300+α, 소월정액 273, 대월정액 455"
+					content: Structure.write({
+						classList: ["enkephalin_calculator_page-collapsible_content", "enkephalin_calculator_page-charge_efficiency_content"],
+						dataset: { target: "charge_efficiency" },
+						children: {
+							table: Structure.write({
+								classList: ["enkephalin_calculator_page-table"],
+								children: {
+									header: Structure.write({
+										classList: ["enkephalin_calculator_page-table_header"],
+										children: {
+											charge: Structure.write({
+												classList: ["enkephalin_calculator_page-table_cell"],
+												content: "충전 횟수"
+											}),
+											lunacy: Structure.write({
+												classList: ["enkephalin_calculator_page-table_cell"],
+												content: "광기 소모량"
+											}),
+											enke: Structure.write({
+												classList: ["enkephalin_calculator_page-table_cell"],
+												content: "엔케 수급량"
+											}),
+											efficiency: Structure.write({
+												classList: ["enkephalin_calculator_page-table_cell"],
+												content: "광기당 엔케"
+											})
+										}
+									}),
+									...rows
+								}
+							}),
+							note: Structure.write({
+								classList: ["enkephalin_calculator_page-note"],
+								content: "* 주간 광기 수급량 : 거던보너스 750, 점검 300+α, 소월정액 273, 대월정액 455"
+							})
+						}
 					})
 				}
 			});
@@ -684,47 +700,58 @@ let enkephalin_calculator_page = null;
 				classList: ["enkephalin_calculator_page-exp_efficiency"],
 				children: {
 					title: Structure.write({
-						classList: ["enkephalin_calculator_page-section_title", "enkephalin_calculator_page-exp_title"],
+						classList: ["enkephalin_calculator_page-section_title", "enkephalin_calculator_page-exp_title", "enkephalin_calculator_page-collapsible_title"],
+						dataset: { target: "exp_efficiency" },
 						children: {
 							text: Structure.write({
-								classList: ["enkephalin_calculator_page-exp_title_text"],
+								classList: ["enkephalin_calculator_page-exp_title_text", "enkephalin_calculator_page-collapsible_title_text"],
 								content: "경험치 수급 효율"
 							}),
 							info: Structure.write({
 								classList: ["enkephalin_calculator_page-exp_title_info"],
 								content: `경던 1회당 수급량 = ${Calculator.calculateExpTotal(Calculator.getStandardExpDungeon().tickets).toLocaleString()}`
+							}),
+							toggle: Structure.write({
+								classList: ["enkephalin_calculator_page-collapsible_toggle"],
+								content: "▼"
 							})
 						}
 					}),
-					table: Structure.write({
-						classList: ["enkephalin_calculator_page-table"],
+					content: Structure.write({
+						classList: ["enkephalin_calculator_page-collapsible_content", "enkephalin_calculator_page-exp_efficiency_content"],
+						dataset: { target: "exp_efficiency" },
 						children: {
-							header: Structure.write({
-								classList: ["enkephalin_calculator_page-table_header"],
+							table: Structure.write({
+								classList: ["enkephalin_calculator_page-table"],
 								children: {
-									method: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"],
-										content: "방식"
+									header: Structure.write({
+										classList: ["enkephalin_calculator_page-table_header"],
+										children: {
+											method: Structure.write({
+												classList: ["enkephalin_calculator_page-table_cell"],
+												content: "방식"
+											}),
+											lunacy: Structure.write({
+												classList: ["enkephalin_calculator_page-table_cell"],
+												content: "[현금/엔케 → 광기] 환산"
+											}),
+											exp: Structure.write({
+												classList: ["enkephalin_calculator_page-table_cell"],
+												content: "경험치 수급량"
+											}),
+											efficiency: Structure.write({
+												classList: ["enkephalin_calculator_page-table_cell"],
+												content: "광기당 경험치"
+											})
+										}
 									}),
-									lunacy: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"],
-										content: "[현금/엔케 → 광기] 환산"
-									}),
-									exp: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"],
-										content: "경험치 수급량"
-									}),
-									efficiency: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"],
-										content: "광기당 경험치"
-									})
+									...rows
 								}
 							}),
-							...rows
+							note: Structure.write({
+								classList: ["enkephalin_calculator_page-note"]
+							})
 						}
-					}),
-					note: Structure.write({
-						classList: ["enkephalin_calculator_page-note"]
 					})
 				}
 			});
@@ -747,6 +774,97 @@ let enkephalin_calculator_page = null;
 	// 초기화
 	enkephalin_calculator_page = createMainPage();
 	
+	// 접기/펼치기 기능
+	const CollapsibleManager = {
+		init() {
+			const setupCollapsible = () => {
+				const isMobile = window.innerWidth <= 768;
+				
+				// 초기 상태 설정
+				document.querySelectorAll('.enkephalin_calculator_page-collapsible_content').forEach(content => {
+					if (isMobile) {
+						content.classList.remove('enkephalin_calculator_page-collapsible_content--expanded');
+					} else {
+						content.classList.add('enkephalin_calculator_page-collapsible_content--expanded');
+					}
+				});
+				
+				document.querySelectorAll('.enkephalin_calculator_page-collapsible_toggle').forEach(toggle => {
+					toggle.textContent = isMobile ? '▼' : '▲';
+				});
+				
+				// 경험치 타이틀 info 초기 상태
+				document.querySelectorAll('.enkephalin_calculator_page-exp_title_info').forEach(info => {
+					info.style.display = isMobile ? 'none' : 'block';
+				});
+				
+				const titles = document.querySelectorAll('.enkephalin_calculator_page-collapsible_title');
+				titles.forEach(title => {
+					// 기존 이벤트 리스너 제거를 위해 클론
+					const newTitle = title.cloneNode(true);
+					title.parentNode.replaceChild(newTitle, title);
+					
+					newTitle.addEventListener('click', (e) => {
+						// 모바일에서만 동작
+						if (window.innerWidth > 768) return;
+						
+						const target = newTitle.dataset.target;
+						const content = document.querySelector(`.enkephalin_calculator_page-collapsible_content[data-target="${target}"]`);
+						const toggle = newTitle.querySelector('.enkephalin_calculator_page-collapsible_toggle');
+						const info = newTitle.querySelector('.enkephalin_calculator_page-exp_title_info');
+						
+						if (content) {
+							const isExpanded = content.classList.contains('enkephalin_calculator_page-collapsible_content--expanded');
+							content.classList.toggle('enkephalin_calculator_page-collapsible_content--expanded');
+							
+							if (toggle) {
+								toggle.textContent = !isExpanded ? '▲' : '▼';
+							}
+							
+							// 경험치 타이틀 info 표시/숨김
+							if (info) {
+								if (!isExpanded) {
+									info.style.display = 'block';
+								} else {
+									info.style.display = 'none';
+								}
+							}
+						}
+					});
+				});
+			};
+			
+			setupCollapsible();
+			
+			// 리사이즈 이벤트 처리
+			let resizeTimer;
+			window.addEventListener('resize', () => {
+				clearTimeout(resizeTimer);
+				resizeTimer = setTimeout(() => {
+					const isMobile = window.innerWidth <= 768;
+					
+					// 데스크톱으로 변경되면 모든 컨텐츠 펼치기
+					document.querySelectorAll('.enkephalin_calculator_page-collapsible_content').forEach(content => {
+						if (isMobile) {
+							content.classList.remove('enkephalin_calculator_page-collapsible_content--expanded');
+						} else {
+							content.classList.add('enkephalin_calculator_page-collapsible_content--expanded');
+						}
+					});
+					
+					document.querySelectorAll('.enkephalin_calculator_page-collapsible_toggle').forEach(toggle => {
+						toggle.textContent = isMobile ? '▼' : '▲';
+					});
+					
+					// 경험치 타이틀 info 표시/숨김
+					document.querySelectorAll('.enkephalin_calculator_page-exp_title_info').forEach(info => {
+						info.style.display = isMobile ? 'none' : 'block';
+					});
+				}, 100);
+			});
+		}
+	};
+	
 	// 페이지가 렌더링된 후 초기 업데이트를 위한 함수
 	const initializePage = () => {
 		// DOM이 준비되면 초기 업데이트
@@ -754,6 +872,7 @@ let enkephalin_calculator_page = null;
 			const settings = document.querySelector('.enkephalin_calculator_page-settings');
 			if (settings) {
 				UIManager.updateAll();
+				CollapsibleManager.init();
 			} else {
 				setTimeout(checkAndUpdate, 50);
 			}
