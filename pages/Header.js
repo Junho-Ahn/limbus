@@ -89,17 +89,17 @@ let Header = null;
 					// 		})
 					// 	}
 					// }),
-					deck: Structure.write({
-						classList: ['header-nav_item'],
-						children: {
-							link: Structure.write({
-								tagName: 'a',
-								properties: { href: '/deck-code-generator' },
-								dataset: { routerLink: '' },
-								content: '덱 코드 생성기'
-							})
-						}
-					}),
+					// deck: Structure.write({
+					// 	classList: ['header-nav_item'],
+					// 	children: {
+					// 		link: Structure.write({
+					// 			tagName: 'a',
+					// 			properties: { href: '/deck-code-generator' },
+					// 			dataset: { routerLink: '' },
+					// 			content: '덱 코드 생성기'
+					// 		})
+					// 	}
+					// }),
 					calc: Structure.write({
 						classList: ['header-nav_item'],
 						children: {
