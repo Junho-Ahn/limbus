@@ -85,12 +85,8 @@
 }
 
 .enkephalin_calculator_page-settings_controls .enkephalin_calculator_page-settings_select {
-    display: flex;
     flex: 1;
     min-width: 120px;
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
 }
 
 .enkephalin_calculator_page-settings_radio_group {
@@ -128,7 +124,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
     gap: 1rem;
 }
 
@@ -323,6 +318,7 @@
 
 .enkephalin_calculator_page-exp_row--disabled .enkephalin_calculator_page-table_cell {
     min-height: 1.25rem;
+    color: #666 !important;
 }
 
 .enkephalin_calculator_page-exp_row--disabled::before {
@@ -340,10 +336,6 @@
         rgba(0, 0, 0, 0.1) 20px
     );
     pointer-events: none;
-}
-
-.enkephalin_calculator_page-exp_row--disabled .enkephalin_calculator_page-table_cell {
-    color: #666 !important;
 }
 
 .enkephalin_calculator_page-exp_row--positive {
@@ -375,10 +367,12 @@
     justify-content: space-between;
     align-items: center;
     gap: 0.5rem;
+    flex-wrap: nowrap;
 }
 
 .enkephalin_calculator_page-collapsible_title_text {
-    flex: 1;
+    flex: 0 1 auto;
+    min-width: 0;
 }
 
 /* PC에서 삼각형 숨기기 */
@@ -386,13 +380,10 @@
     display: none;
 }
 
+/* 데스크톱에서는 항상 표시 */
 .enkephalin_calculator_page-collapsible_content {
     overflow: hidden;
     transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
-}
-
-/* 데스크톱에서는 항상 표시 */
-.enkephalin_calculator_page-collapsible_content {
     max-height: none;
     opacity: 1;
 }
@@ -413,6 +404,7 @@
         transition: transform 0.2s;
         flex-shrink: 0;
         margin-left: auto;
+        white-space: nowrap;
     }
     
     /* 모바일에서 기본적으로 접혀있음 */
@@ -428,19 +420,17 @@
     }
     
     .enkephalin_calculator_page-exp_title {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
         flex-wrap: nowrap;
+    }
+    
+    .enkephalin_calculator_page-exp_title_text {
+        flex: 0 1 auto;
+        min-width: 0;
+        white-space: nowrap;
     }
     
     .enkephalin_calculator_page-exp_title_info {
         display: none;
-        width: 100%;
-        margin-top: 0.5rem;
-        font-size: 0.85rem;
-        order: 3;
     }
     .enkephalin_calculator_page {
         padding: 0.8rem;
@@ -489,17 +479,7 @@
     .enkephalin_calculator_page-section_title {
         font-size: 1rem;
         margin-bottom: 0.6rem;
-        margin-top: 3.5rem;
-    }
-    
-    .enkephalin_calculator_page-exp_title {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.4rem;
-    }
-    
-    .enkephalin_calculator_page-exp_title_info {
-        font-size: 0.85rem;
+        margin-top: 1.5rem;
     }
     
     .enkephalin_calculator_page-weekly_enke,
@@ -523,7 +503,7 @@
     }
     
     .enkephalin_calculator_page-table {
-        border-radius: 0.5rem 0.5rem 0 0;
+        border-radius: 0;
         overflow-x: visible;
         -webkit-overflow-scrolling: touch;
         display: block;
@@ -545,7 +525,6 @@
     .enkephalin_calculator_page-weekly_enke .enkephalin_calculator_page-table_header,
     .enkephalin_calculator_page-weekly_enke .enkephalin_calculator_page-table_row {
         grid-template-columns: 1fr !important;
-        border-radius: 0;
         border: 1px solid #3a4050;
     }
     
@@ -703,9 +682,6 @@
         margin-bottom: 0.5rem;
     }
     
-    .enkephalin_calculator_page-exp_title_info {
-        font-size: 0.8rem;
-    }
     
     .enkephalin_calculator_page-weekly_enke,
     .enkephalin_calculator_page-charge_efficiency,
