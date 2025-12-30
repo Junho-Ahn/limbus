@@ -484,10 +484,12 @@ let enkephalin_calculator_page = null;
 								children: {
 									lunacy: Structure.write({
 										classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-weekly_lunacy_worth"],
+										dataset: { label: "9,900원어치 광기" },
 										content: "0.00"
 									}),
 									enke: Structure.write({
 										classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-weekly_enke_per_lunacy"],
+										dataset: { label: "광기당 엔케" },
 										content: "0.00"
 									})
 								}
@@ -511,18 +513,22 @@ let enkephalin_calculator_page = null;
 					children: {
 						charge: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell"],
+							dataset: { label: "충전 횟수" },
 							content: i.toString()
 						}),
 						lunacy: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-charge_lunacy"],
+							dataset: { label: "광기 소모량" },
 							content: "0"
 						}),
 						enke: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-charge_enke"],
+							dataset: { label: "엔케 수급량" },
 							content: "0"
 						}),
 						efficiency: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-charge_efficiency"],
+							dataset: { label: "광기당 엔케" },
 							content: "0.00"
 						})
 					}
@@ -582,6 +588,7 @@ let enkephalin_calculator_page = null;
 					children: {
 						method: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_method"],
+							dataset: { label: "방식" },
 							children: {
 								name: Structure.write({
 									classList: ["enkephalin_calculator_page-exp_method_name"],
@@ -597,14 +604,17 @@ let enkephalin_calculator_page = null;
 						}),
 						lunacy: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_lunacy"],
+							dataset: { label: "[현금/엔케 → 광기] 환산" },
 							content: result.lunacyWorth.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 						}),
 						exp: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_supply"],
+							dataset: { label: "경험치 수급량" },
 							content: result.expSupply.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 						}),
 						efficiency: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_efficiency"],
+							dataset: { label: "광기당 경험치" },
 							content: result.expPerLunacy.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 						})
 					}
@@ -653,6 +663,10 @@ let enkephalin_calculator_page = null;
 							}),
 							...rows
 						}
+					}),
+					note: Structure.write({
+						classList: ["enkephalin_calculator_page-note"],
+						content: ""
 					})
 				}
 			});
