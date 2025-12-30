@@ -190,8 +190,8 @@ let enkephalin_calculator_page = null;
 					const enkeCell = row.querySelector('.enkephalin_calculator_page-charge_enke');
 					const efficiencyCell = row.querySelector('.enkephalin_calculator_page-charge_efficiency');
 					
-					if (lunacyCell) lunacyCell.textContent = result.lunacyConsumption.toLocaleString();
-					if (enkeCell) enkeCell.textContent = result.enkeSupply.toLocaleString();
+					if (lunacyCell) lunacyCell.textContent = result.lunacyConsumption.toFixed(2);
+					if (enkeCell) enkeCell.textContent = result.enkeSupply.toFixed(2);
 					if (efficiencyCell) efficiencyCell.textContent = result.enkePerLunacy.toFixed(2);
 					
 					// 비활성화 효과 (소모량, 수급량이 0인 경우)
@@ -227,15 +227,30 @@ let enkephalin_calculator_page = null;
 			results.forEach((result, index) => {
 				const row = document.querySelector(`.enkephalin_calculator_page-exp_row[data-index="${index}"]`);
 				if (row) {
+					const methodCell = row.querySelector('.enkephalin_calculator_page-exp_method');
+					const methodName = methodCell ? methodCell.querySelector('.enkephalin_calculator_page-exp_method_name') : null;
+					const methodNote = methodCell ? methodCell.querySelector('.enkephalin_calculator_page-exp_method_note') : null;
 					const lunacyCell = row.querySelector('.enkephalin_calculator_page-exp_lunacy');
 					const expCell = row.querySelector('.enkephalin_calculator_page-exp_supply');
 					const efficiencyCell = row.querySelector('.enkephalin_calculator_page-exp_efficiency');
-					const noteCell = row.querySelector('.enkephalin_calculator_page-exp_note');
 					
+					if (methodName) methodName.textContent = result.method;
+					if (result.note) {
+						if (methodNote) {
+							methodNote.textContent = result.note;
+						} else if (methodCell) {
+							// note가 없으면 동적으로 생성
+							const noteElement = document.createElement('div');
+							noteElement.className = 'enkephalin_calculator_page-exp_method_note';
+							noteElement.textContent = result.note;
+							methodCell.appendChild(noteElement);
+						}
+					} else if (methodNote) {
+						methodNote.remove();
+					}
 					if (lunacyCell) lunacyCell.textContent = result.lunacyWorth.toFixed(2);
-					if (expCell) expCell.textContent = result.expSupply.toLocaleString();
+					if (expCell) expCell.textContent = result.expSupply.toFixed(2);
 					if (efficiencyCell) efficiencyCell.textContent = result.expPerLunacy.toFixed(2);
-					if (noteCell && result.note) noteCell.textContent = result.note;
 					
 					// n충 경던 행에만 비활성화/긍정/부정 효과 적용
 					if (result.method && result.method.includes("충 경던")) {
@@ -558,8 +573,19 @@ let enkephalin_calculator_page = null;
 					dataset: { index: String(index) },
 					children: {
 						method: Structure.write({
-							classList: ["enkephalin_calculator_page-table_cell"],
-							content: result.method
+							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_method"],
+							children: {
+								name: Structure.write({
+									classList: ["enkephalin_calculator_page-exp_method_name"],
+									content: result.method
+								}),
+								...(result.note ? {
+									note: Structure.write({
+										classList: ["enkephalin_calculator_page-exp_method_note"],
+										content: result.note
+									})
+								} : {})
+							}
 						}),
 						lunacy: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_lunacy"],
@@ -567,15 +593,11 @@ let enkephalin_calculator_page = null;
 						}),
 						exp: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_supply"],
-							content: result.expSupply.toLocaleString()
+							content: result.expSupply.toFixed(2)
 						}),
 						efficiency: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_efficiency"],
 							content: result.expPerLunacy.toFixed(2)
-						}),
-						note: Structure.write({
-							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_note"],
-							...(result.note ? { content: result.note } : {})
 						})
 					}
 				});
@@ -609,9 +631,6 @@ let enkephalin_calculator_page = null;
 									efficiency: Structure.write({
 										classList: ["enkephalin_calculator_page-table_cell"],
 										content: "광기당 경험치"
-									}),
-									note: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"]
 									})
 								}
 							}),

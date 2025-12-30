@@ -205,7 +205,24 @@
 /* 경험치 효율 테이블 */
 .enkephalin_calculator_page-exp_efficiency .enkephalin_calculator_page-table_header,
 .enkephalin_calculator_page-exp_efficiency .enkephalin_calculator_page-exp_row {
-    grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr 1fr;
+    grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr;
+}
+
+/* 경험치 효율 방식 셀 스타일 */
+.enkephalin_calculator_page-exp_method {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2rem;
+}
+
+.enkephalin_calculator_page-exp_method_name {
+    color: inherit;
+}
+
+.enkephalin_calculator_page-exp_method_note {
+    color: #a0a0a0;
+    font-size: 0.85rem;
+    font-style: italic;
 }
 
 /* 경험치 효율 행 효과 */
