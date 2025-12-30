@@ -532,7 +532,7 @@ let enkephalin_calculator_page = null;
 						}),
 						note: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_note"],
-							content: result.note || ""
+							...(result.note ? { content: result.note } : {})
 						})
 					}
 				});
@@ -568,8 +568,7 @@ let enkephalin_calculator_page = null;
 										content: "광기당 경험치"
 									}),
 									note: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"],
-										content: ""
+										classList: ["enkephalin_calculator_page-table_cell"]
 									})
 								}
 							}),

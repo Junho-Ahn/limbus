@@ -1,7 +1,12 @@
 let routes = [
   {
+    path: '/',
+    render: () => enkephalin_calculator_page,
+    layout: BasicLayout
+  },
+  {
     path: '/main',
-    render: () => main_page,
+    render: () => enkephalin_calculator_page,
     layout: BasicLayout
   },
   {
