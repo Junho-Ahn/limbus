@@ -197,6 +197,10 @@
     word-break: keep-all;
 }
 
+.enkephalin_calculator_page-table_header > .enkephalin_calculator_page-table_cell {
+    min-height: 1.5rem;
+}
+
 .enkephalin_calculator_page-table_cell > * {
     margin: 0;
     padding: 0;
