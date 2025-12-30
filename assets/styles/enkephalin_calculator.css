@@ -471,19 +471,21 @@
     }
     
     .enkephalin_calculator_page-settings_controls {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.4rem;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
     }
     
     .enkephalin_calculator_page-settings_controls .enkephalin_calculator_page-settings_select {
-        width: 100%;
-        min-width: auto;
+        flex: 1;
+        min-width: 120px;
     }
     
     .enkephalin_calculator_page-settings_radio_group {
-        margin-left: 0;
-        width: 100%;
+        margin-left: 0.5rem;
+        display: flex;
+        gap: 1rem;
     }
     
     .enkephalin_calculator_page-section_title {
