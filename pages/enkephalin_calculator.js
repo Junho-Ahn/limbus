@@ -220,6 +220,10 @@ let enkephalin_calculator_page = null;
 		
 		updateExpEfficiency() {
 			const results = Calculator.calculateExpEfficiency();
+			// 엔케 패키지 경던의 효율을 기준으로 사용
+			const enkePackageResult = results.find(r => r.method === "엔케 패키지 경던");
+			const standardExpPerLunacy = enkePackageResult ? enkePackageResult.expPerLunacy : 0;
+			
 			results.forEach((result, index) => {
 				const row = document.querySelector(`.enkephalin_calculator_page-exp_row[data-index="${index}"]`);
 				if (row) {
@@ -232,6 +236,35 @@ let enkephalin_calculator_page = null;
 					if (expCell) expCell.textContent = result.expSupply.toLocaleString();
 					if (efficiencyCell) efficiencyCell.textContent = result.expPerLunacy.toFixed(2);
 					if (noteCell && result.note) noteCell.textContent = result.note;
+					
+					// n충 경던 행에만 비활성화/긍정/부정 효과 적용
+					if (result.method && result.method.includes("충 경던")) {
+						// 비활성화 효과 (상대 광기 소모량이 0인 경우)
+						const isDisabled = result.lunacyWorth === 0;
+						row.setModifierClass('disabled', isDisabled);
+						
+						// 긍정/부정 효과 (엔케 패키지 경던 효율과 비교)
+						if (!isDisabled && result.expPerLunacy > 0) {
+							if (result.expPerLunacy > standardExpPerLunacy) {
+								row.setModifierClass('positive', true);
+								row.setModifierClass('negative', false);
+							} else if (result.expPerLunacy < standardExpPerLunacy) {
+								row.setModifierClass('positive', false);
+								row.setModifierClass('negative', true);
+							} else {
+								row.setModifierClass('positive', false);
+								row.setModifierClass('negative', false);
+							}
+						} else {
+							row.setModifierClass('positive', false);
+							row.setModifierClass('negative', false);
+						}
+					} else {
+						// n충 경던이 아닌 행은 효과 제거
+						row.setModifierClass('disabled', false);
+						row.setModifierClass('positive', false);
+						row.setModifierClass('negative', false);
+					}
 				}
 			});
 		},
