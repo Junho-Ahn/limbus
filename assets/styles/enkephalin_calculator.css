@@ -320,6 +320,7 @@
 .enkephalin_calculator_page-exp_row--disabled .enkephalin_calculator_page-table_cell {
     min-height: 1.25rem;
     color: #666 !important;
+    border-bottom: none !important;
 }
 
 .enkephalin_calculator_page-exp_row--disabled::before {
