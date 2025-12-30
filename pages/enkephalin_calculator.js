@@ -233,6 +233,9 @@ let enkephalin_calculator_page = null;
 		},
 		
 		updateChargeEfficiency() {
+			const weeklyEnkeEfficiency = Calculator.calculateWeeklyEnkeEfficiency();
+			const weeklyEnkePerLunacy = weeklyEnkeEfficiency.enkePerLunacy;
+			
 			for (let i = 1; i <= 10; i++) {
 				const result = Calculator.calculateChargeEfficiency(i);
 				const row = document.querySelector(`.enkephalin_calculator_page-charge_row[data-charge="${i}"]`);
@@ -244,6 +247,27 @@ let enkephalin_calculator_page = null;
 					if (lunacyCell) lunacyCell.textContent = result.lunacyConsumption.toLocaleString();
 					if (enkeCell) enkeCell.textContent = result.enkeSupply.toLocaleString();
 					if (efficiencyCell) efficiencyCell.textContent = result.enkePerLunacy.toFixed(2);
+					
+					// 비활성화 효과 (소모량, 수급량이 0인 경우)
+					const isDisabled = result.lunacyConsumption === 0 && result.enkeSupply === 0;
+					row.setModifierClass('disabled', isDisabled);
+					
+					// 긍정/부정 효과 (주간 엔케팔린 패키지 효율과 비교)
+					if (!isDisabled && result.enkePerLunacy > 0) {
+						if (result.enkePerLunacy > weeklyEnkePerLunacy) {
+							row.setModifierClass('positive', true);
+							row.setModifierClass('negative', false);
+						} else if (result.enkePerLunacy < weeklyEnkePerLunacy) {
+							row.setModifierClass('positive', false);
+							row.setModifierClass('negative', true);
+						} else {
+							row.setModifierClass('positive', false);
+							row.setModifierClass('negative', false);
+						}
+					} else {
+						row.setModifierClass('positive', false);
+						row.setModifierClass('negative', false);
+					}
 				}
 			}
 		},

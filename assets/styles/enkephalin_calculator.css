@@ -118,7 +118,7 @@
 }
 
 .enkephalin_calculator_page-table_row:nth-child(even),
-.enkephalin_calculator_page-charge_row:nth-child(even),
+.enkephalin_calculator_page-charge_row:nth-child(even):not(.enkephalin_calculator_page-charge_row--disabled):not(.enkephalin_calculator_page-charge_row--positive):not(.enkephalin_calculator_page-charge_row--negative),
 .enkephalin_calculator_page-exp_row:nth-child(even) {
     background: #23272f;
 }
@@ -150,6 +150,56 @@
 .enkephalin_calculator_page-charge_efficiency .enkephalin_calculator_page-table_header,
 .enkephalin_calculator_page-charge_efficiency .enkephalin_calculator_page-charge_row {
     grid-template-columns: 1fr 1.5fr 1.5fr 1.5fr;
+}
+
+/* 충전 효율 행 효과 */
+.enkephalin_calculator_page-charge_row--disabled {
+    opacity: 0.4;
+    background: #1a1d24 !important;
+    color: #666 !important;
+    position: relative;
+}
+
+.enkephalin_calculator_page-charge_row--disabled::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(0, 0, 0, 0.1) 10px,
+        rgba(0, 0, 0, 0.1) 20px
+    );
+    pointer-events: none;
+}
+
+.enkephalin_calculator_page-charge_row--disabled .enkephalin_calculator_page-table_cell {
+    color: #666 !important;
+}
+
+.enkephalin_calculator_page-charge_row--positive {
+    background: rgba(76, 175, 80, 0.15) !important;
+    border-left: 3px solid #4CAF50;
+    position: relative;
+}
+
+.enkephalin_calculator_page-charge_row--positive .enkephalin_calculator_page-table_cell {
+    color: #81C784 !important;
+    font-weight: 500;
+}
+
+.enkephalin_calculator_page-charge_row--negative {
+    background: rgba(244, 67, 54, 0.15) !important;
+    border-left: 3px solid #F44336;
+    position: relative;
+}
+
+.enkephalin_calculator_page-charge_row--negative .enkephalin_calculator_page-table_cell {
+    color: #E57373 !important;
 }
 
 /* 경험치 효율 테이블 */
