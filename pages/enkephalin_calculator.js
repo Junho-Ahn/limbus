@@ -311,76 +311,116 @@ let enkephalin_calculator_page = null;
 					inputs: Structure.write({
 						classList: ["enkephalin_calculator_page-settings_inputs"],
 						children: {
-							max_enke_label: Structure.write({
-								classList: ["enkephalin_calculator_page-settings_label"],
-								content: "엔케팔린 최대치"
-							}),
-							max_enke_input: Structure.write({
-								tagName: "input",
-								classList: ["enkephalin_calculator_page-settings_input"],
-								properties: { type: "number", value: String(State.maxEnke) },
-								events: {
-									input: EventHandlers.onMaxEnkeChange
+							max_enke_group: Structure.write({
+								classList: ["enkephalin_calculator_page-settings_group"],
+								children: {
+									label: Structure.write({
+										tagName: "label",
+										classList: ["enkephalin_calculator_page-settings_label"],
+										properties: { for: "max_enke_input" },
+										content: "엔케팔린 최대치"
+									}),
+									input: Structure.write({
+										tagName: "input",
+										classList: ["enkephalin_calculator_page-settings_input"],
+										properties: { 
+											type: "number", 
+											id: "max_enke_input",
+											value: String(State.maxEnke) 
+										},
+										events: {
+											input: EventHandlers.onMaxEnkeChange
+										}
+									})
 								}
 							}),
-							charge_count_label: Structure.write({
-								classList: ["enkephalin_calculator_page-settings_label"],
-								content: "기준 충전 횟수 (0-10)"
-							}),
-							charge_count_input: Structure.write({
-								tagName: "input",
-								classList: ["enkephalin_calculator_page-settings_input"],
-								properties: { type: "number", min: "0", max: "10", value: String(State.standardChargeCount) },
-								events: {
-									input: EventHandlers.onStandardChargeCountChange
+							charge_count_group: Structure.write({
+								classList: ["enkephalin_calculator_page-settings_group"],
+								children: {
+									label: Structure.write({
+										tagName: "label",
+										classList: ["enkephalin_calculator_page-settings_label"],
+										properties: { for: "charge_count_input" },
+										content: "기준 충전 횟수 (0-10)"
+									}),
+									input: Structure.write({
+										tagName: "input",
+										classList: ["enkephalin_calculator_page-settings_input"],
+										properties: { 
+											type: "number", 
+											id: "charge_count_input",
+											min: "0", 
+											max: "10", 
+											value: String(State.standardChargeCount) 
+										},
+										events: {
+											input: EventHandlers.onStandardChargeCountChange
+										}
+									})
 								}
 							}),
-							lunacy_item_label: Structure.write({
-								classList: ["enkephalin_calculator_page-settings_label"],
-								content: "기준 광기 상품"
-							}),
-							lunacy_item_select: Structure.write({
-								tagName: "select",
-								classList: ["enkephalin_calculator_page-settings_select"],
-								children: Object.fromEntries(
-									REFERENCE_DATA.lunacyItems.map((item, index) => [
-										`option_${index}`,
-										Structure.write({
-											tagName: "option",
-											properties: { 
-												value: item.name,
-												...(item.name === State.standardLunacyItem ? { selected: "selected" } : {})
-											},
-											content: item.name
-										})
-									])
-								),
-								events: {
-									change: EventHandlers.onStandardLunacyItemChange
+							lunacy_item_group: Structure.write({
+								classList: ["enkephalin_calculator_page-settings_group"],
+								children: {
+									label: Structure.write({
+										tagName: "label",
+										classList: ["enkephalin_calculator_page-settings_label"],
+										properties: { for: "lunacy_item_select" },
+										content: "기준 광기 상품"
+									}),
+									select: Structure.write({
+										tagName: "select",
+										classList: ["enkephalin_calculator_page-settings_select"],
+										properties: { id: "lunacy_item_select" },
+										children: Object.fromEntries(
+											REFERENCE_DATA.lunacyItems.map((item, index) => [
+												`option_${index}`,
+												Structure.write({
+													tagName: "option",
+													properties: { 
+														value: item.name,
+														...(item.name === State.standardLunacyItem ? { selected: "selected" } : {})
+													},
+													content: item.name
+												})
+											])
+										),
+										events: {
+											change: EventHandlers.onStandardLunacyItemChange
+										}
+									})
 								}
 							}),
-							exp_dungeon_label: Structure.write({
-								classList: ["enkephalin_calculator_page-settings_label"],
-								content: "기준 경험치 던전"
-							}),
-							exp_dungeon_select: Structure.write({
-								tagName: "select",
-								classList: ["enkephalin_calculator_page-settings_select"],
-								children: Object.fromEntries(
-									REFERENCE_DATA.expDungeons.map((dungeon, index) => [
-										`option_${index}`,
-										Structure.write({
-											tagName: "option",
-											properties: { 
-												value: dungeon.name,
-												...(dungeon.name === State.standardExpDungeon ? { selected: "selected" } : {})
-											},
-											content: dungeon.name
-										})
-									])
-								),
-								events: {
-									change: EventHandlers.onStandardExpDungeonChange
+							exp_dungeon_group: Structure.write({
+								classList: ["enkephalin_calculator_page-settings_group"],
+								children: {
+									label: Structure.write({
+										tagName: "label",
+										classList: ["enkephalin_calculator_page-settings_label"],
+										properties: { for: "exp_dungeon_select" },
+										content: "기준 경험치 던전"
+									}),
+									select: Structure.write({
+										tagName: "select",
+										classList: ["enkephalin_calculator_page-settings_select"],
+										properties: { id: "exp_dungeon_select" },
+										children: Object.fromEntries(
+											REFERENCE_DATA.expDungeons.map((dungeon, index) => [
+												`option_${index}`,
+												Structure.write({
+													tagName: "option",
+													properties: { 
+														value: dungeon.name,
+														...(dungeon.name === State.standardExpDungeon ? { selected: "selected" } : {})
+													},
+													content: dungeon.name
+												})
+											])
+										),
+										events: {
+											change: EventHandlers.onStandardExpDungeonChange
+										}
+									})
 								}
 							})
 						}

@@ -27,11 +27,29 @@
     gap: 1rem;
 }
 
+.enkephalin_calculator_page-settings_group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.8rem;
+    background: #23272f;
+    border-radius: 0.4rem;
+    border: 1px solid #3a4050;
+    transition: border-color 0.2s;
+}
+
+.enkephalin_calculator_page-settings_group:focus-within {
+    border-color: #ffd700;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
+}
+
 .enkephalin_calculator_page-settings_label {
     font-size: 0.95rem;
-    color: #a0a0a0;
-    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #ffd700;
     display: block;
+    cursor: pointer;
+    margin-bottom: 0.3rem;
 }
 
 .enkephalin_calculator_page-settings_input,
@@ -44,12 +62,21 @@
     color: #fff;
     font-size: 1rem;
     box-sizing: border-box;
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.enkephalin_calculator_page-settings_input:hover,
+.enkephalin_calculator_page-settings_select:hover {
+    border-color: #4a5050;
+    background: #1e2128;
 }
 
 .enkephalin_calculator_page-settings_input:focus,
 .enkephalin_calculator_page-settings_select:focus {
     outline: none;
     border-color: #ffd700;
+    background: #1e2128;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.15);
 }
 
 .enkephalin_calculator_page-section_title {
