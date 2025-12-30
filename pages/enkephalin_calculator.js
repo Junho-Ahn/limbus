@@ -171,10 +171,10 @@ let enkephalin_calculator_page = null;
 			const enkeElement = document.querySelector('.enkephalin_calculator_page-weekly_enke_per_lunacy');
 			
 			if (lunacyElement) {
-				lunacyElement.textContent = result.lunacyWorth.toFixed(2);
+				lunacyElement.textContent = result.lunacyWorth.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 			}
 			if (enkeElement) {
-				enkeElement.textContent = result.enkePerLunacy.toFixed(2);
+				enkeElement.textContent = result.enkePerLunacy.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 			}
 		},
 		
@@ -190,9 +190,9 @@ let enkephalin_calculator_page = null;
 					const enkeCell = row.querySelector('.enkephalin_calculator_page-charge_enke');
 					const efficiencyCell = row.querySelector('.enkephalin_calculator_page-charge_efficiency');
 					
-					if (lunacyCell) lunacyCell.textContent = result.lunacyConsumption.toFixed(2);
-					if (enkeCell) enkeCell.textContent = result.enkeSupply.toFixed(2);
-					if (efficiencyCell) efficiencyCell.textContent = result.enkePerLunacy.toFixed(2);
+					if (lunacyCell) lunacyCell.textContent = result.lunacyConsumption.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+					if (enkeCell) enkeCell.textContent = result.enkeSupply.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+					if (efficiencyCell) efficiencyCell.textContent = result.enkePerLunacy.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 					
 					// 비활성화 효과 (소모량, 수급량이 0인 경우)
 					const isDisabled = result.lunacyConsumption === 0 && result.enkeSupply === 0;
@@ -224,6 +224,14 @@ let enkephalin_calculator_page = null;
 			const enkePackageResult = results.find(r => r.method === "엔케 패키지 경던");
 			const standardExpPerLunacy = enkePackageResult ? enkePackageResult.expPerLunacy : 0;
 			
+			// 타이틀의 info 부분 업데이트
+			const titleInfo = document.querySelector('.enkephalin_calculator_page-exp_title_info');
+			if (titleInfo) {
+				const standardDungeon = Calculator.getStandardExpDungeon();
+				const expTotal = Calculator.calculateExpTotal(standardDungeon.tickets);
+				titleInfo.textContent = `경던 1회당 수급량 = ${expTotal.toLocaleString()}`;
+			}
+			
 			results.forEach((result, index) => {
 				const row = document.querySelector(`.enkephalin_calculator_page-exp_row[data-index="${index}"]`);
 				if (row) {
@@ -248,9 +256,9 @@ let enkephalin_calculator_page = null;
 					} else if (methodNote) {
 						methodNote.remove();
 					}
-					if (lunacyCell) lunacyCell.textContent = result.lunacyWorth.toFixed(2);
-					if (expCell) expCell.textContent = result.expSupply.toFixed(2);
-					if (efficiencyCell) efficiencyCell.textContent = result.expPerLunacy.toFixed(2);
+					if (lunacyCell) lunacyCell.textContent = result.lunacyWorth.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+					if (expCell) expCell.textContent = result.expSupply.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+					if (efficiencyCell) efficiencyCell.textContent = result.expPerLunacy.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 					
 					// n충 경던 행에만 비활성화/긍정/부정 효과 적용
 					if (result.method && result.method.includes("충 경던")) {
@@ -589,15 +597,15 @@ let enkephalin_calculator_page = null;
 						}),
 						lunacy: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_lunacy"],
-							content: result.lunacyWorth.toFixed(2)
+							content: result.lunacyWorth.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 						}),
 						exp: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_supply"],
-							content: result.expSupply.toFixed(2)
+							content: result.expSupply.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 						}),
 						efficiency: Structure.write({
 							classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-exp_efficiency"],
-							content: result.expPerLunacy.toFixed(2)
+							content: result.expPerLunacy.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 						})
 					}
 				});
@@ -607,8 +615,17 @@ let enkephalin_calculator_page = null;
 				classList: ["enkephalin_calculator_page-exp_efficiency"],
 				children: {
 					title: Structure.write({
-						classList: ["enkephalin_calculator_page-section_title"],
-						content: "경험치 수급 효율"
+						classList: ["enkephalin_calculator_page-section_title", "enkephalin_calculator_page-exp_title"],
+						children: {
+							text: Structure.write({
+								classList: ["enkephalin_calculator_page-exp_title_text"],
+								content: "경험치 수급 효율"
+							}),
+							info: Structure.write({
+								classList: ["enkephalin_calculator_page-exp_title_info"],
+								content: `경던 1회당 수급량 = ${Calculator.calculateExpTotal(Calculator.getStandardExpDungeon().tickets).toLocaleString()}`
+							})
+						}
 					}),
 					table: Structure.write({
 						classList: ["enkephalin_calculator_page-table"],
@@ -636,10 +653,6 @@ let enkephalin_calculator_page = null;
 							}),
 							...rows
 						}
-					}),
-					note: Structure.write({
-						classList: ["enkephalin_calculator_page-note"],
-						content: `* 경던 1회당 수급량 = ${Calculator.calculateExpTotal(Calculator.getStandardExpDungeon().tickets).toLocaleString()}`
 					})
 				}
 			});

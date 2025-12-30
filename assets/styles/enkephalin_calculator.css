@@ -35,12 +35,6 @@
     background: #23272f;
     border-radius: 0.4rem;
     border: 1px solid #3a4050;
-    transition: border-color 0.2s;
-}
-
-.enkephalin_calculator_page-settings_group:focus-within {
-    border-color: #ffd700;
-    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.1);
 }
 
 .enkephalin_calculator_page-settings_label {
@@ -62,21 +56,6 @@
     color: #fff;
     font-size: 1rem;
     box-sizing: border-box;
-    transition: border-color 0.2s, background 0.2s;
-}
-
-.enkephalin_calculator_page-settings_input:hover,
-.enkephalin_calculator_page-settings_select:hover {
-    border-color: #4a5050;
-    background: #1e2128;
-}
-
-.enkephalin_calculator_page-settings_input:focus,
-.enkephalin_calculator_page-settings_select:focus {
-    outline: none;
-    border-color: #ffd700;
-    background: #1e2128;
-    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.15);
 }
 
 .enkephalin_calculator_page-section_title {
@@ -84,6 +63,28 @@
     font-weight: 600;
     color: #ffd700;
     margin-bottom: 1rem;
+}
+
+/* 경험치 효율 타이틀 스타일 */
+.enkephalin_calculator_page-exp_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.enkephalin_calculator_page-exp_title_text {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+.enkephalin_calculator_page-exp_title_info {
+    color: #ffd700;
+    font-size: 1rem;
+    font-weight: 500;
+    font-style: normal;
 }
 
 .enkephalin_calculator_page-weekly_enke,
@@ -130,6 +131,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 2.5rem;
+    line-height: 1.5;
 }
 
 .enkephalin_calculator_page-note {
@@ -158,6 +161,12 @@
     background: #1a1d24 !important;
     color: #666 !important;
     position: relative;
+    padding: 0.4rem 1rem !important;
+    min-height: auto;
+}
+
+.enkephalin_calculator_page-charge_row--disabled .enkephalin_calculator_page-table_cell {
+    min-height: 1.25rem;
 }
 
 .enkephalin_calculator_page-charge_row--disabled::before {
@@ -184,6 +193,7 @@
 .enkephalin_calculator_page-charge_row--positive {
     background: rgba(76, 175, 80, 0.15) !important;
     border-left: 3px solid #4CAF50;
+    border-bottom: 2px solid rgba(76, 175, 80, 0.3) !important;
     position: relative;
 }
 
@@ -195,6 +205,7 @@
 .enkephalin_calculator_page-charge_row--negative {
     background: rgba(244, 67, 54, 0.15) !important;
     border-left: 3px solid #F44336;
+    border-bottom: 2px solid rgba(244, 67, 54, 0.3) !important;
     position: relative;
 }
 
@@ -231,6 +242,12 @@
     background: #1a1d24 !important;
     color: #666 !important;
     position: relative;
+    padding: 0.4rem 1rem !important;
+    min-height: auto;
+}
+
+.enkephalin_calculator_page-exp_row--disabled .enkephalin_calculator_page-table_cell {
+    min-height: 1.25rem;
 }
 
 .enkephalin_calculator_page-exp_row--disabled::before {
@@ -257,6 +274,7 @@
 .enkephalin_calculator_page-exp_row--positive {
     background: rgba(76, 175, 80, 0.15) !important;
     border-left: 3px solid #4CAF50;
+    border-bottom: 2px solid rgba(76, 175, 80, 0.3) !important;
     position: relative;
 }
 
@@ -268,6 +286,7 @@
 .enkephalin_calculator_page-exp_row--negative {
     background: rgba(244, 67, 54, 0.15) !important;
     border-left: 3px solid #F44336;
+    border-bottom: 2px solid rgba(244, 67, 54, 0.3) !important;
     position: relative;
 }
 
