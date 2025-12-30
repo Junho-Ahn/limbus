@@ -85,7 +85,7 @@ let enkephalin_calculator_page = null;
 			if (!item) return 0.1192941176;
 			
 			// 초회 여부에 따라 amount 선택
-			const amount = item.isMonthly ? item.amount : (State.isFirstTime ? item.firstTimeAmount : item.amount);
+			const amount = State.isFirstTime ? item.firstTimeAmount : item.amount;
 			return amount / item.price;
 		},
 		
@@ -265,17 +265,6 @@ let enkephalin_calculator_page = null;
 					const isDisabled = result.lunacyConsumption === 0 && result.enkeSupply === 0;
 					row.setModifierClass('disabled', isDisabled);
 					
-					// 모바일에서 비활성화 셀은 충전 횟수만 표시하고 나머지 숨기기
-					if (isMobile && isDisabled) {
-						if (lunacyCell) lunacyCell.style.display = 'none';
-						if (enkeCell) enkeCell.style.display = 'none';
-						if (efficiencyCell) efficiencyCell.style.display = 'none';
-					} else {
-						if (lunacyCell) lunacyCell.style.display = '';
-						if (enkeCell) enkeCell.style.display = '';
-						if (efficiencyCell) efficiencyCell.style.display = '';
-					}
-					
 					// 긍정/부정 효과 (주간 엔케팔린 패키지 효율과 비교)
 					if (!isDisabled && result.enkePerLunacy > 0) {
 						if (result.enkePerLunacy > weeklyEnkePerLunacy) {
@@ -345,17 +334,6 @@ let enkephalin_calculator_page = null;
 						const isDisabled = result.lunacyWorth === 0;
 						row.setModifierClass('disabled', isDisabled);
 						
-						// 모바일에서 비활성화 셀은 n충 경던만 표시하고 나머지 숨기기
-						if (isMobile && isDisabled) {
-							if (lunacyCell) lunacyCell.style.display = 'none';
-							if (expCell) expCell.style.display = 'none';
-							if (efficiencyCell) efficiencyCell.style.display = 'none';
-						} else {
-							if (lunacyCell) lunacyCell.style.display = '';
-							if (expCell) expCell.style.display = '';
-							if (efficiencyCell) efficiencyCell.style.display = '';
-						}
-						
 						// 긍정/부정 효과 (엔케 패키지 경던 효율과 비교)
 						if (!isDisabled && result.expPerLunacy > 0) {
 							if (result.expPerLunacy > standardExpPerLunacy) {
@@ -406,37 +384,13 @@ let enkephalin_calculator_page = null;
 		},
 		
 		onFirstTimeChange(event) {
-			const selectedItem = REFERENCE_DATA.lunacyItems.find(item => item.name === State.standardLunacyItemName);
-			if (selectedItem && selectedItem.isMonthly) {
-				// 월정액은 초회 체크박스 비활성화 및 해제
-				event.target.checked = false;
-				State.isFirstTime = false;
-			} else {
-				State.isFirstTime = event.target.checked;
-			}
+			State.isFirstTime = event.target.checked;
 			Storage.save();
 			UIManager.updateAll();
 		},
 		
 		onStandardLunacyItemChange(event) {
-			const selectedItem = REFERENCE_DATA.lunacyItems.find(item => item.name === event.target.value);
 			State.standardLunacyItemName = event.target.value;
-			
-			// 월정액 선택 시 초회 체크박스 비활성화 및 해제
-			if (selectedItem && selectedItem.isMonthly) {
-				State.isFirstTime = false;
-				const checkbox = document.getElementById('lunacy_first_time_checkbox');
-				if (checkbox) {
-					checkbox.checked = false;
-					checkbox.disabled = true;
-				}
-			} else {
-				const checkbox = document.getElementById('lunacy_first_time_checkbox');
-				if (checkbox) {
-					checkbox.disabled = false;
-				}
-			}
-			
 			Storage.save();
 			UIManager.updateAll();
 		},
@@ -945,10 +899,6 @@ let enkephalin_calculator_page = null;
 					toggle.textContent = isMobile ? '▼' : '▲';
 				});
 				
-				// 경험치 타이틀 info 초기 상태
-				document.querySelectorAll('.enkephalin_calculator_page-exp_title_info').forEach(info => {
-					info.style.display = isMobile ? 'none' : 'block';
-				});
 				
 				const titles = document.querySelectorAll('.enkephalin_calculator_page-collapsible_title');
 				titles.forEach(title => {
@@ -973,14 +923,6 @@ let enkephalin_calculator_page = null;
 								toggle.textContent = !isExpanded ? '▲' : '▼';
 							}
 							
-							// 경험치 타이틀 info 표시/숨김
-							if (info) {
-								if (!isExpanded) {
-									info.style.display = 'block';
-								} else {
-									info.style.display = 'none';
-								}
-							}
 						}
 					});
 				});
@@ -1008,10 +950,6 @@ let enkephalin_calculator_page = null;
 						toggle.textContent = isMobile ? '▼' : '▲';
 					});
 					
-					// 경험치 타이틀 info 표시/숨김
-					document.querySelectorAll('.enkephalin_calculator_page-exp_title_info').forEach(info => {
-						info.style.display = isMobile ? 'none' : 'block';
-					});
 					
 					// 모바일/데스크톱 전환 시 비활성화 셀 표시/숨김 업데이트
 					UIManager.updateAll();
@@ -1026,16 +964,6 @@ let enkephalin_calculator_page = null;
 		const checkAndUpdate = () => {
 			const settings = document.querySelector('.enkephalin_calculator_page-settings');
 			if (settings) {
-				// 월정액 선택 시 체크박스 비활성화
-				const selectedItem = REFERENCE_DATA.lunacyItems.find(item => item.name === State.standardLunacyItemName);
-				if (selectedItem && selectedItem.isMonthly) {
-					const checkbox = document.getElementById('lunacy_first_time_checkbox');
-					if (checkbox) {
-						checkbox.checked = false;
-						checkbox.disabled = true;
-					}
-				}
-				
 				UIManager.updateAll();
 				CollapsibleManager.init();
 			} else {

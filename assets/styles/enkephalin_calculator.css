@@ -138,6 +138,7 @@
     font-size: 1rem;
     font-weight: 500;
     font-style: normal;
+    display: block;
 }
 
 .enkephalin_calculator_page-weekly_enke,
@@ -430,6 +431,20 @@
     }
     
     .enkephalin_calculator_page-exp_title_info {
+        display: none;
+    }
+    
+    /* 모바일에서 확장되었을 때 info 표시 */
+    .enkephalin_calculator_page-exp_efficiency:has(.enkephalin_calculator_page-collapsible_content--expanded) .enkephalin_calculator_page-exp_title_info {
+        display: block;
+    }
+    
+    /* 모바일에서 비활성화된 행의 첫 번째 셀(충전 횟수/n충 경던)을 제외한 나머지 셀 숨기기 */
+    .enkephalin_calculator_page-charge_row--disabled .enkephalin_calculator_page-table_cell:not(:first-child) {
+        display: none;
+    }
+    
+    .enkephalin_calculator_page-exp_row--disabled .enkephalin_calculator_page-table_cell:not(:first-child) {
         display: none;
     }
     .enkephalin_calculator_page {
