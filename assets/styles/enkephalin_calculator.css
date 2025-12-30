@@ -1,0 +1,164 @@
+.enkephalin_calculator_page {
+    padding: 2rem;
+    flex-grow: 1;
+    box-sizing: border-box;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.enkephalin_calculator_page-settings {
+    background: #2c313a;
+    border: 2px solid #ff9500;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.enkephalin_calculator_page-settings_title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffd700;
+    margin-bottom: 1rem;
+}
+
+.enkephalin_calculator_page-settings_inputs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.enkephalin_calculator_page-settings_label {
+    font-size: 0.95rem;
+    color: #a0a0a0;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.enkephalin_calculator_page-settings_input,
+.enkephalin_calculator_page-settings_select {
+    width: 100%;
+    padding: 0.6rem;
+    background: #181a20;
+    border: 1px solid #3a4050;
+    border-radius: 0.3rem;
+    color: #fff;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.enkephalin_calculator_page-settings_input:focus,
+.enkephalin_calculator_page-settings_select:focus {
+    outline: none;
+    border-color: #ffd700;
+}
+
+.enkephalin_calculator_page-section_title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #ffd700;
+    margin-bottom: 1rem;
+}
+
+.enkephalin_calculator_page-weekly_enke,
+.enkephalin_calculator_page-charge_efficiency,
+.enkephalin_calculator_page-exp_efficiency {
+    margin-bottom: 2rem;
+}
+
+.enkephalin_calculator_page-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #2c313a;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.enkephalin_calculator_page-table_header {
+    background: #181a20;
+    color: #ffd700;
+    font-weight: 600;
+}
+
+.enkephalin_calculator_page-table_header,
+.enkephalin_calculator_page-table_row,
+.enkephalin_calculator_page-charge_row,
+.enkephalin_calculator_page-exp_row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid #3a4050;
+}
+
+.enkephalin_calculator_page-table_row:nth-child(even),
+.enkephalin_calculator_page-charge_row:nth-child(even),
+.enkephalin_calculator_page-exp_row:nth-child(even) {
+    background: #23272f;
+}
+
+.enkephalin_calculator_page-table_cell {
+    color: #fff;
+    font-size: 0.95rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.enkephalin_calculator_page-note {
+    padding: 0.8rem 1rem;
+    color: #a0a0a0;
+    font-size: 0.9rem;
+    font-style: italic;
+    background: #181a20;
+}
+
+/* 주간 엔케팔린 패키지 테이블 */
+.enkephalin_calculator_page-weekly_enke .enkephalin_calculator_page-table_header,
+.enkephalin_calculator_page-weekly_enke .enkephalin_calculator_page-table_row {
+    grid-template-columns: 1fr 1fr;
+}
+
+/* 충전 효율 테이블 */
+.enkephalin_calculator_page-charge_efficiency .enkephalin_calculator_page-table_header,
+.enkephalin_calculator_page-charge_efficiency .enkephalin_calculator_page-charge_row {
+    grid-template-columns: 1fr 1.5fr 1.5fr 1.5fr;
+}
+
+/* 경험치 효율 테이블 */
+.enkephalin_calculator_page-exp_efficiency .enkephalin_calculator_page-table_header,
+.enkephalin_calculator_page-exp_efficiency .enkephalin_calculator_page-exp_row {
+    grid-template-columns: 1.5fr 1.5fr 1.5fr 1.5fr 1fr;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .enkephalin_calculator_page {
+        padding: 1rem;
+    }
+    
+    .enkephalin_calculator_page-settings_inputs {
+        grid-template-columns: 1fr;
+    }
+    
+    .enkephalin_calculator_page-table_header,
+    .enkephalin_calculator_page-table_row,
+    .enkephalin_calculator_page-charge_row,
+    .enkephalin_calculator_page-exp_row {
+        grid-template-columns: 1fr;
+        gap: 0.3rem;
+    }
+    
+    .enkephalin_calculator_page-table_cell {
+        padding: 0.4rem 0;
+        border-bottom: 1px solid #3a4050;
+    }
+    
+    .enkephalin_calculator_page-table_cell:before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #ffd700;
+        margin-right: 0.5rem;
+    }
+}
+
