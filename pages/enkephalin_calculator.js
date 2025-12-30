@@ -194,8 +194,7 @@ let enkephalin_calculator_page = null;
 			});
 			
 			// 충전 경던 (1-10충)
-			// 기준 수급/엔케 = 기준 경던 수급량 / 기준 엔케 소모량
-			const expPerEnke = standardExpPerRun / standardEnkePerRun;
+			// 기준 수급/엔케 = 기준 경던 수급량 / 기준 엔케 소모량 (이미 위에서 계산됨)
 			// 1충당 횟수 = 엔케팔린 최대치 / 기준 엔케 소모량
 			const runsPerCharge = State.maxEnke / standardEnkePerRun;
 			
