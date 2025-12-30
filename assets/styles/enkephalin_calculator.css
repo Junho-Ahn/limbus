@@ -307,58 +307,58 @@
 /* 반응형 */
 @media (max-width: 768px) {
     .enkephalin_calculator_page {
-        padding: 1rem;
+        padding: 0.8rem;
         max-width: 100%;
     }
     
     .enkephalin_calculator_page-settings {
-        padding: 1rem;
-        margin-bottom: 1.5rem;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
     }
     
     .enkephalin_calculator_page-settings_title {
-        font-size: 1rem;
-        margin-bottom: 0.8rem;
+        font-size: 0.95rem;
+        margin-bottom: 0.6rem;
     }
     
     .enkephalin_calculator_page-settings_inputs {
         grid-template-columns: 1fr;
-        gap: 0.8rem;
+        gap: 0.6rem;
     }
     
     .enkephalin_calculator_page-settings_group {
-        padding: 0.6rem;
+        padding: 0.5rem;
     }
     
     .enkephalin_calculator_page-settings_label {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
     
     .enkephalin_calculator_page-settings_input,
     .enkephalin_calculator_page-settings_select {
-        font-size: 0.95rem;
-        padding: 0.5rem;
+        font-size: 0.9rem;
+        padding: 0.4rem;
     }
     
     .enkephalin_calculator_page-section_title {
-        font-size: 1.1rem;
-        margin-bottom: 0.8rem;
+        font-size: 1rem;
+        margin-bottom: 0.6rem;
     }
     
     .enkephalin_calculator_page-exp_title {
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.5rem;
+        gap: 0.4rem;
     }
     
     .enkephalin_calculator_page-exp_title_info {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
     
     .enkephalin_calculator_page-weekly_enke,
     .enkephalin_calculator_page-charge_efficiency,
     .enkephalin_calculator_page-exp_efficiency {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1rem;
     }
     
     /* 모바일에서 로우 간격 제거 */
@@ -387,8 +387,8 @@
     .enkephalin_calculator_page-charge_row,
     .enkephalin_calculator_page-exp_row {
         grid-template-columns: 1fr !important;
-        gap: 0.3rem;
-        padding: 0.6rem 0.8rem;
+        gap: 0.2rem;
+        padding: 0.5rem 0.6rem;
         min-width: 100%;
         display: grid;
     }
@@ -412,16 +412,16 @@
     }
     
     .enkephalin_calculator_page-table_cell {
-        padding: 0.5rem 0;
+        padding: 0.4rem 0;
         border-bottom: 1px solid #3a4050;
         text-align: left;
         justify-content: flex-start;
         align-items: center;
         min-height: auto;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         display: flex;
         flex-wrap: nowrap;
-        gap: 0.5rem;
+        gap: 0.4rem;
     }
     
     .enkephalin_calculator_page-table_cell:last-child {
@@ -432,32 +432,33 @@
         content: attr(data-label);
         font-weight: 600;
         color: #ffd700;
-        min-width: 100px;
-        max-width: 100px;
+        min-width: 90px;
+        max-width: 90px;
         display: inline-block;
         flex-shrink: 0;
         text-align: left;
+        font-size: 0.85rem;
     }
     
     /* 경험치 수급 효율 표 셀 정렬 개선 */
     .enkephalin_calculator_page-exp_efficiency .enkephalin_calculator_page-table_cell {
         align-items: flex-start;
-        padding-top: 0.6rem;
-        padding-bottom: 0.6rem;
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
     }
     
     .enkephalin_calculator_page-exp_efficiency .enkephalin_calculator_page-table_cell:before {
-        min-width: 110px;
-        max-width: 110px;
-        padding-top: 0.1rem;
+        min-width: 100px;
+        max-width: 100px;
+        padding-top: 0.05rem;
     }
     
     .enkephalin_calculator_page-exp_method {
         flex-direction: column;
         align-items: flex-start;
-        gap: 0.2rem;
-        padding-top: 0.6rem;
-        padding-bottom: 0.6rem;
+        gap: 0.15rem;
+        padding-top: 0.4rem;
+        padding-bottom: 0.4rem;
     }
     
     .enkephalin_calculator_page-exp_method_name {
@@ -478,42 +479,98 @@
     }
     
     .enkephalin_calculator_page-note {
-        padding: 0.6rem 0.8rem;
-        font-size: 0.85rem;
+        padding: 0.5rem 0.6rem;
+        font-size: 0.8rem;
         border-radius: 0 0 0.5rem 0.5rem;
         margin-top: 0;
+    }
+    
+    .enkephalin_calculator_page-exp_method_note {
+        font-size: 0.75rem;
     }
 }
 
 /* 작은 모바일 (480px 이하) */
 @media (max-width: 480px) {
     .enkephalin_calculator_page {
-        padding: 0.8rem;
+        padding: 0.6rem;
     }
     
     .enkephalin_calculator_page-settings {
-        padding: 0.8rem;
+        padding: 0.6rem;
+        margin-bottom: 0.8rem;
     }
     
     .enkephalin_calculator_page-settings_title {
-        font-size: 0.95rem;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .enkephalin_calculator_page-settings_inputs {
+        gap: 0.5rem;
+    }
+    
+    .enkephalin_calculator_page-settings_group {
+        padding: 0.4rem;
+    }
+    
+    .enkephalin_calculator_page-settings_label {
+        font-size: 0.8rem;
+    }
+    
+    .enkephalin_calculator_page-settings_input,
+    .enkephalin_calculator_page-settings_select {
+        font-size: 0.85rem;
+        padding: 0.35rem;
     }
     
     .enkephalin_calculator_page-section_title {
-        font-size: 1rem;
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
     }
     
     .enkephalin_calculator_page-exp_title_info {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+    }
+    
+    .enkephalin_calculator_page-weekly_enke,
+    .enkephalin_calculator_page-charge_efficiency,
+    .enkephalin_calculator_page-exp_efficiency {
+        margin-bottom: 0.8rem;
+    }
+    
+    .enkephalin_calculator_page-table_header,
+    .enkephalin_calculator_page-table_row,
+    .enkephalin_calculator_page-charge_row,
+    .enkephalin_calculator_page-exp_row {
+        padding: 0.4rem 0.5rem;
+        gap: 0.15rem;
     }
     
     .enkephalin_calculator_page-table_cell {
-        font-size: 0.85rem;
+        font-size: 0.8rem;
+        padding: 0.35rem 0;
+        gap: 0.3rem;
+    }
+    
+    .enkephalin_calculator_page-table_cell:before {
+        min-width: 85px;
+        max-width: 85px;
+        font-size: 0.8rem;
+    }
+    
+    .enkephalin_calculator_page-exp_efficiency .enkephalin_calculator_page-table_cell:before {
+        min-width: 95px;
+        max-width: 95px;
     }
     
     .enkephalin_calculator_page-note {
-        font-size: 0.8rem;
-        padding: 0.5rem 0.6rem;
+        font-size: 0.75rem;
+        padding: 0.4rem 0.5rem;
+    }
+    
+    .enkephalin_calculator_page-exp_method_note {
+        font-size: 0.7rem;
     }
 }
 
