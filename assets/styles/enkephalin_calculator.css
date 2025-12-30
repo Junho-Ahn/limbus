@@ -584,7 +584,8 @@
     }
     
     .enkephalin_calculator_page-table_cell:last-child {
-        border-bottom: none;
+        border-bottom: none !important;
+        margin-bottom: 0 !important;
     }
     
     .enkephalin_calculator_page-table_cell:before {
