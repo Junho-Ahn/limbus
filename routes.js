@@ -23,6 +23,11 @@ let routes = [
     path: '/enkephalin-calculator',
     render: () => enkephalin_calculator_page,
     layout: BasicLayout
+  },
+  {
+    path: '/lunacy-calculator',
+    render: () => lunacy_calculator_page,
+    layout: BasicLayout
   }
   // 추가 라우트는 여기에 객체로 계속 추가
 ]; 
