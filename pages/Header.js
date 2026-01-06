@@ -67,7 +67,7 @@ let Header = null;
 			nav: Structure.write({
 				classList: ['header-nav'],
 				children: {
-					calc: Structure.write({
+					enkephalin_calc: Structure.write({
 						classList: ['header-nav_item'],
 						children: {
 							link: Structure.write({
@@ -75,6 +75,17 @@ let Header = null;
 								properties: { href: '/enkephalin-calculator' },
 								dataset: { routerLink: '' },
 								content: '엔케팔린 계산기'
+							})
+						}
+					}),
+					lunacy_calc: Structure.write({
+						classList: ['header-nav_item'],
+						children: {
+							link: Structure.write({
+								tagName: 'a',
+								properties: { href: '/lunacy-calculator' },
+								dataset: { routerLink: '' },
+								content: '광기 계산기'
 							})
 						}
 					})
