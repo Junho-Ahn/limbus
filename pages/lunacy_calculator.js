@@ -16,7 +16,8 @@ let lunacy_calculator_page = null;
 					weeklyMirror: State.weeklyMirror,
 					monthlySmall: State.monthlySmall,
 					monthlyLarge: State.monthlyLarge,
-					additionalLunacy: State.additionalLunacy,
+					additionalFreeLunacy: State.additionalFreeLunacy,
+					additionalPaidLunacy: State.additionalPaidLunacy,
 					chargeCount: State.chargeCount,
 					paidGachaCount: State.paidGachaCount,
 					additionalConsumption: State.additionalConsumption
@@ -44,8 +45,11 @@ let lunacy_calculator_page = null;
 					if (typeof data.monthlyLarge === 'boolean') {
 						State.monthlyLarge = data.monthlyLarge;
 					}
-					if (typeof data.additionalLunacy === 'number' && data.additionalLunacy >= 0) {
-						State.additionalLunacy = data.additionalLunacy;
+					if (typeof data.additionalFreeLunacy === 'number' && data.additionalFreeLunacy >= 0) {
+						State.additionalFreeLunacy = data.additionalFreeLunacy;
+					}
+					if (typeof data.additionalPaidLunacy === 'number' && data.additionalPaidLunacy >= 0) {
+						State.additionalPaidLunacy = data.additionalPaidLunacy;
 					}
 					if (typeof data.chargeCount === 'number' && data.chargeCount >= 0 && data.chargeCount <= 10) {
 						State.chargeCount = data.chargeCount;
@@ -66,11 +70,12 @@ let lunacy_calculator_page = null;
 	// 상태 관리
 	const State = {
 		// 수급
-		weeklyInspection: false,  // 점검-300
-		weeklyMirror: false,      // 거울 던전-750
-		monthlySmall: false,      // 월정액(소)-273
-		monthlyLarge: false,      // 월정액(대)-455
-		additionalLunacy: 0,      // 추가 광기
+		weeklyInspection: false,  // 점검-300 (무료)
+		weeklyMirror: false,      // 거울 던전-750 (무료)
+		monthlySmall: false,      // 월정액(소)-273 (유료)
+		monthlyLarge: false,      // 월정액(대)-455 (유료)
+		additionalFreeLunacy: 0,  // 추가 광기 (무료)
+		additionalPaidLunacy: 0,  // 추가 광기 (유료)
 		// 소비
 		chargeCount: 0,           // 광기 충전 횟수 (0-10)
 		paidGachaCount: 0,        // 유료 단챠 횟수 (0-3)
@@ -92,6 +97,7 @@ let lunacy_calculator_page = null;
 			let supply = 0;
 			if (State.monthlySmall) supply += 273;
 			if (State.monthlyLarge) supply += 455;
+			supply += State.additionalPaidLunacy;
 			return supply;
 		},
 		
@@ -100,7 +106,7 @@ let lunacy_calculator_page = null;
 			let supply = 0;
 			if (State.weeklyInspection) supply += 300;
 			if (State.weeklyMirror) supply += 750;
-			supply += State.additionalLunacy;
+			supply += State.additionalFreeLunacy;
 			return supply;
 		},
 		
@@ -168,8 +174,14 @@ let lunacy_calculator_page = null;
 			UIManager.updateAll();
 		},
 		
-		onAdditionalLunacyChange(event) {
-			State.additionalLunacy = parseInt(event.target.value) || 0;
+		onAdditionalFreeLunacyChange(event) {
+			State.additionalFreeLunacy = parseInt(event.target.value) || 0;
+			Storage.save();
+			UIManager.updateAll();
+		},
+		
+		onAdditionalPaidLunacyChange(event) {
+			State.additionalPaidLunacy = parseInt(event.target.value) || 0;
 			Storage.save();
 			UIManager.updateAll();
 		},
@@ -393,26 +405,50 @@ let lunacy_calculator_page = null;
 									})
 								}
 							}),
-							additional_group: Structure.write({
+							additional_free_group: Structure.write({
 								classList: ["lunacy_calculator_page-settings_group"],
 								children: {
 									label: Structure.write({
 										tagName: "label",
 										classList: ["lunacy_calculator_page-settings_label"],
-										properties: { for: "additional_lunacy_input" },
-										content: "추가 광기"
+										properties: { for: "additional_free_lunacy_input" },
+										content: "추가 광기 (무료)"
 									}),
 									input: Structure.write({
 										tagName: "input",
 										classList: ["lunacy_calculator_page-settings_input"],
 										properties: {
 											type: "number",
-											id: "additional_lunacy_input",
+											id: "additional_free_lunacy_input",
 											min: "0",
-											value: String(State.additionalLunacy)
+											value: String(State.additionalFreeLunacy)
 										},
 										events: {
-											input: EventHandlers.onAdditionalLunacyChange
+											input: EventHandlers.onAdditionalFreeLunacyChange
+										}
+									})
+								}
+							}),
+							additional_paid_group: Structure.write({
+								classList: ["lunacy_calculator_page-settings_group"],
+								children: {
+									label: Structure.write({
+										tagName: "label",
+										classList: ["lunacy_calculator_page-settings_label"],
+										properties: { for: "additional_paid_lunacy_input" },
+										content: "추가 광기 (유료)"
+									}),
+									input: Structure.write({
+										tagName: "input",
+										classList: ["lunacy_calculator_page-settings_input"],
+										properties: {
+											type: "number",
+											id: "additional_paid_lunacy_input",
+											min: "0",
+											value: String(State.additionalPaidLunacy)
+										},
+										events: {
+											input: EventHandlers.onAdditionalPaidLunacyChange
 										}
 									})
 								}
@@ -531,78 +567,78 @@ let lunacy_calculator_page = null;
 										classList: ["lunacy_calculator_page-table_cell"],
 										content: "구분"
 									}),
-									supply: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell"],
-										content: "수급"
-									}),
-									consumption: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell"],
-										content: "소모"
-									}),
-									balance: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell"],
-										content: "계"
-									})
-								}
-							}),
-							paid_row: Structure.write({
-								classList: ["lunacy_calculator_page-table_row"],
-								children: {
-									label: Structure.write({
+									paid: Structure.write({
 										classList: ["lunacy_calculator_page-table_cell"],
 										content: "유료"
 									}),
-									supply: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-paid_supply"],
-										content: "0"
-									}),
-									consumption: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-paid_consumption"],
-										content: "0"
-									}),
-									balance: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-paid_balance"],
-										content: "0"
-									})
-								}
-							}),
-							free_row: Structure.write({
-								classList: ["lunacy_calculator_page-table_row"],
-								children: {
-									label: Structure.write({
+									free: Structure.write({
 										classList: ["lunacy_calculator_page-table_cell"],
 										content: "무료"
 									}),
-									supply: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-free_supply"],
-										content: "0"
-									}),
-									consumption: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-free_consumption"],
-										content: "0"
-									}),
-									balance: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-free_balance"],
-										content: "0"
+									total: Structure.write({
+										classList: ["lunacy_calculator_page-table_cell"],
+										content: "통합"
 									})
 								}
 							}),
-							total_row: Structure.write({
+							supply_row: Structure.write({
 								classList: ["lunacy_calculator_page-table_row"],
 								children: {
 									label: Structure.write({
 										classList: ["lunacy_calculator_page-table_cell"],
-										content: "통합"
+										content: "수급"
 									}),
-									supply: Structure.write({
+									paid: Structure.write({
+										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-paid_supply"],
+										content: "0"
+									}),
+									free: Structure.write({
+										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-free_supply"],
+										content: "0"
+									}),
+									total: Structure.write({
 										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-total_supply"],
 										content: "0"
+									})
+								}
+							}),
+							consumption_row: Structure.write({
+								classList: ["lunacy_calculator_page-table_row"],
+								children: {
+									label: Structure.write({
+										classList: ["lunacy_calculator_page-table_cell"],
+										content: "소모"
 									}),
-									consumption: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-total_consumption"],
+									paid: Structure.write({
+										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-paid_consumption"],
 										content: "0"
 									}),
-									balance: Structure.write({
+									free: Structure.write({
+										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-free_consumption"],
+										content: "0"
+									}),
+									total: Structure.write({
+										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-total_consumption"],
+										content: "0"
+									})
+								}
+							}),
+							balance_row: Structure.write({
+								classList: ["lunacy_calculator_page-table_row"],
+								children: {
+									label: Structure.write({
+										classList: ["lunacy_calculator_page-table_cell"],
+										content: "계"
+									}),
+									paid: Structure.write({
+										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-paid_balance"],
+										content: "0"
+									}),
+									free: Structure.write({
+										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-free_balance"],
+										content: "0"
+									}),
+									total: Structure.write({
 										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-total_balance"],
 										content: "0"
 									})
