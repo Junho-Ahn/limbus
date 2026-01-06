@@ -21,6 +21,21 @@
     margin-bottom: 1rem;
 }
 
+.lunacy_calculator_page-settings_section {
+    margin-bottom: 1.5rem;
+}
+
+.lunacy_calculator_page-settings_section:last-child {
+    margin-bottom: 0;
+}
+
+.lunacy_calculator_page-settings_section_title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #ffd700;
+    margin-bottom: 0.8rem;
+}
+
 .lunacy_calculator_page-settings_inputs {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -64,6 +79,23 @@
     border-color: #ff9500;
 }
 
+.lunacy_calculator_page-settings_checkbox {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+    accent-color: #ffd700;
+}
+
+.lunacy_calculator_page-settings_checkbox_label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+}
+
 .lunacy_calculator_page-section_title {
     font-size: 1.2rem;
     font-weight: 600;
@@ -84,14 +116,14 @@
 
 .lunacy_calculator_page-table_header {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     background: #23272f;
     border-bottom: 2px solid #ff9500;
 }
 
 .lunacy_calculator_page-table_row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     border-bottom: 1px solid #3a4050;
 }
 
