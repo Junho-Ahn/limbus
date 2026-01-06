@@ -609,8 +609,7 @@ let lunacy_calculator_page = null;
 								}
 							}),
 							note: Structure.write({
-								classList: ["lunacy_calculator_page-note"],
-								content: ""
+								classList: ["lunacy_calculator_page-note"]
 							})
 						}
 					})
