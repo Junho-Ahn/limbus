@@ -25,3 +25,16 @@ img {
 	-o-user-drag: none;
 	user-drag: none;
 }
+
+/* 모바일에서 스크롤 제한 해제 */
+@media (max-width: 768px) {
+	html, body {
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+	
+	#root {
+		max-height: none;
+		min-height: 100vh;
+	}
+}
