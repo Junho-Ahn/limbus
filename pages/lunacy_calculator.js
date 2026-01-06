@@ -796,7 +796,10 @@ let lunacy_calculator_page = null;
 			classList: ["lunacy_calculator_page"],
 			children: {
 				settings: ComponentFactory.createSettingsSection(),
-				results: ComponentFactory.createResultsSection()
+				results: ComponentFactory.createResultsSection(),
+				bottom_spacer: Structure.write({
+					classList: ["lunacy_calculator_page-bottom_spacer"]
+				})
 			}
 		});
 	};

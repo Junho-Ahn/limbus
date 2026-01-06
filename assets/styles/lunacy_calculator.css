@@ -1,10 +1,14 @@
 .lunacy_calculator_page {
-    padding: 2rem;
+    padding: 2rem 2rem 0 2rem;
     flex-grow: 1;
     box-sizing: border-box;
     max-width: 1000px;
     margin: 0 auto;
     width: 100%;
+}
+
+.lunacy_calculator_page-bottom_spacer {
+    height: 0.5rem;
 }
 
 .lunacy_calculator_page-settings {
@@ -316,6 +320,10 @@
     .lunacy_calculator_page-table_cell {
         padding: 0.5rem;
         font-size: 0.8rem;
+    }
+    
+    .lunacy_calculator_page-bottom_spacer {
+        height: 2rem;
     }
 }
 

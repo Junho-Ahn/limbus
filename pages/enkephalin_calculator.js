@@ -931,7 +931,10 @@ let enkephalin_calculator_page = null;
 				settings: ComponentFactory.createSettingsSection(),
 				weekly_enke: ComponentFactory.createWeeklyEnkeSection(),
 				charge_efficiency: ComponentFactory.createChargeEfficiencySection(),
-				exp_efficiency: ComponentFactory.createExpEfficiencySection()
+				exp_efficiency: ComponentFactory.createExpEfficiencySection(),
+				bottom_spacer: Structure.write({
+					classList: ["enkephalin_calculator_page-bottom_spacer"]
+				})
 			}
 		});
 	};
