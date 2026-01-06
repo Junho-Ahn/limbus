@@ -948,17 +948,26 @@ let enkephalin_calculator_page = null;
 			const setupCollapsible = () => {
 				const isMobile = window.innerWidth <= 768;
 				
-				// 초기 상태 설정
+				// 초기 상태 설정 (이미 펼쳐진 상태는 유지)
 				document.querySelectorAll('.enkephalin_calculator_page-collapsible_content').forEach(content => {
 					if (isMobile) {
-						content.classList.remove('enkephalin_calculator_page-collapsible_content--expanded');
+						// 이미 펼쳐진 상태가 아니면 접힌 상태로 설정
+						if (!content.classList.contains('enkephalin_calculator_page-collapsible_content--expanded')) {
+							content.classList.remove('enkephalin_calculator_page-collapsible_content--expanded');
+						}
 					} else {
 						content.classList.add('enkephalin_calculator_page-collapsible_content--expanded');
 					}
 				});
 				
 				document.querySelectorAll('.enkephalin_calculator_page-collapsible_toggle').forEach(toggle => {
-					toggle.textContent = isMobile ? '▼' : '▲';
+					const content = document.querySelector(`.enkephalin_calculator_page-collapsible_content[data-target="${toggle.closest('.enkephalin_calculator_page-collapsible_title')?.dataset.target}"]`);
+					if (content) {
+						const isExpanded = content.classList.contains('enkephalin_calculator_page-collapsible_content--expanded');
+						toggle.textContent = isExpanded ? '▲' : (isMobile ? '▼' : '▲');
+					} else {
+						toggle.textContent = isMobile ? '▼' : '▲';
+					}
 				});
 				
 				
