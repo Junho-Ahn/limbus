@@ -12,6 +12,7 @@ let lunacy_calculator_page = null;
 		save() {
 			try {
 				const data = {
+					periodType: State.periodType,
 					weeklyInspection: State.weeklyInspection,
 					weeklyMirror: State.weeklyMirror,
 					monthlySmall: State.monthlySmall,
@@ -33,6 +34,9 @@ let lunacy_calculator_page = null;
 				const saved = localStorage.getItem(STORAGE_KEY);
 				if (saved) {
 					const data = JSON.parse(saved);
+					if (data.periodType === 'weekly' || data.periodType === 'monthly') {
+						State.periodType = data.periodType;
+					}
 					if (typeof data.weeklyInspection === 'boolean') {
 						State.weeklyInspection = data.weeklyInspection;
 					}
@@ -69,6 +73,7 @@ let lunacy_calculator_page = null;
 	
 	// 상태 관리
 	const State = {
+		periodType: 'weekly',     // 'weekly' 또는 'monthly'
 		// 수급
 		weeklyInspection: false,  // 점검-300 (무료)
 		weeklyMirror: false,      // 거울 던전-750 (무료)
@@ -87,22 +92,33 @@ let lunacy_calculator_page = null;
 	
 	// 계산 함수들
 	const Calculator = {
+		// 주/월 배율 계산 (수급용)
+		getPeriodMultiplier() {
+			return State.periodType === 'monthly' ? 4 : 1;
+		},
+		
+		// 일일 소비 배율 계산 (소비용)
+		getDailyConsumptionMultiplier() {
+			return State.periodType === 'monthly' ? 28 : 7;
+		},
+		
 		// 광기 충전 횟수별 광기 절대 소모량
 		getAbsoluteLunacyConsumption(chargeCount) {
 			return (REFERENCE_DATA.chargeIncrement / 2) * chargeCount * (chargeCount + 1);
 		},
 		
-		// 유료 수급 계산
-		getPaidSupply() {
+		// 유료 수급 계산 (주 단위 기준)
+		getPaidSupplyWeekly() {
 			let supply = 0;
-			if (State.monthlySmall) supply += 273;
-			if (State.monthlyLarge) supply += 455;
+			// 월정액은 월 단위이므로 주 단위로 환산 (1/4)
+			if (State.monthlySmall) supply += 273 / 4;
+			if (State.monthlyLarge) supply += 455 / 4;
 			supply += State.additionalPaidLunacy;
 			return supply;
 		},
 		
-		// 무료 수급 계산
-		getFreeSupply() {
+		// 무료 수급 계산 (주 단위 기준)
+		getFreeSupplyWeekly() {
 			let supply = 0;
 			if (State.weeklyInspection) supply += 300;
 			if (State.weeklyMirror) supply += 750;
@@ -110,21 +126,41 @@ let lunacy_calculator_page = null;
 			return supply;
 		},
 		
+		// 유료 수급 계산 (표시용, 주/개월 배율 적용)
+		getPaidSupply() {
+			return this.getPaidSupplyWeekly() * this.getPeriodMultiplier();
+		},
+		
+		// 무료 수급 계산 (표시용, 주/개월 배율 적용)
+		getFreeSupply() {
+			return this.getFreeSupplyWeekly() * this.getPeriodMultiplier();
+		},
+		
 		// 통합 수급 계산
 		getTotalSupply() {
 			return this.getPaidSupply() + this.getFreeSupply();
 		},
 		
-		// 유료 소모 계산
-		getPaidConsumption() {
-			// 유료 단챠 1회당 유료 광기 13 소모
+		// 유료 소모 계산 (일일 기준)
+		getPaidConsumptionDaily() {
+			// 유료 단챠 1회당 유료 광기 13 소모 (일일 기준)
 			return State.paidGachaCount * 13;
 		},
 		
-		// 무료 소모 계산
-		getFreeConsumption() {
+		// 무료 소모 계산 (일일 기준)
+		getFreeConsumptionDaily() {
 			const chargeConsumption = this.getAbsoluteLunacyConsumption(State.chargeCount);
 			return chargeConsumption + State.additionalConsumption;
+		},
+		
+		// 유료 소모 계산 (표시용, 일일 × 배율)
+		getPaidConsumption() {
+			return this.getPaidConsumptionDaily() * this.getDailyConsumptionMultiplier();
+		},
+		
+		// 무료 소모 계산 (표시용, 일일 × 배율)
+		getFreeConsumption() {
+			return this.getFreeConsumptionDaily() * this.getDailyConsumptionMultiplier();
 		},
 		
 		// 통합 소모 계산
@@ -150,6 +186,12 @@ let lunacy_calculator_page = null;
 	
 	// 이벤트 핸들러
 	const EventHandlers = {
+		onPeriodTypeChange(event) {
+			State.periodType = event.target.value;
+			Storage.save();
+			UIManager.updateAll();
+		},
+		
 		onWeeklyInspectionChange(event) {
 			State.weeklyInspection = event.target.checked;
 			Storage.save();
@@ -293,6 +335,69 @@ let lunacy_calculator_page = null;
 							title: Structure.write({
 								classList: ["lunacy_calculator_page-settings_section_title"],
 								content: "수급"
+							}),
+							period_group: Structure.write({
+								classList: ["lunacy_calculator_page-settings_group"],
+								children: {
+									label: Structure.write({
+										tagName: "label",
+										classList: ["lunacy_calculator_page-settings_label"],
+										content: "기간"
+									}),
+									radio_group: Structure.write({
+										classList: ["lunacy_calculator_page-settings_radio_group"],
+										children: {
+											weekly_label: Structure.write({
+												tagName: "label",
+												classList: ["lunacy_calculator_page-settings_radio_label"],
+												children: {
+													radio: Structure.write({
+														tagName: "input",
+														classList: ["lunacy_calculator_page-settings_radio"],
+														properties: {
+															type: "radio",
+															name: "period_type",
+															id: "period_weekly",
+															value: "weekly",
+															...(State.periodType === 'weekly' ? { checked: "checked" } : {})
+														},
+														events: {
+															change: EventHandlers.onPeriodTypeChange
+														}
+													}),
+													text: Structure.write({
+														tagName: "span",
+														content: "주"
+													})
+												}
+											}),
+											monthly_label: Structure.write({
+												tagName: "label",
+												classList: ["lunacy_calculator_page-settings_radio_label"],
+												children: {
+													radio: Structure.write({
+														tagName: "input",
+														classList: ["lunacy_calculator_page-settings_radio"],
+														properties: {
+															type: "radio",
+															name: "period_type",
+															id: "period_monthly",
+															value: "monthly",
+															...(State.periodType === 'monthly' ? { checked: "checked" } : {})
+														},
+														events: {
+															change: EventHandlers.onPeriodTypeChange
+														}
+													}),
+													text: Structure.write({
+														tagName: "span",
+														content: "개월"
+													})
+												}
+											})
+										}
+									}),
+								}
 							}),
 							inputs: Structure.write({
 								classList: ["lunacy_calculator_page-settings_inputs"],

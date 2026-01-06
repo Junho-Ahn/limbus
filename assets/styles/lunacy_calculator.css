@@ -96,6 +96,35 @@
     user-select: none;
 }
 
+.lunacy_calculator_page-settings_radio_group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.lunacy_calculator_page-settings_radio_label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+}
+
+.lunacy_calculator_page-settings_radio {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+    accent-color: #ffd700;
+}
+
+.lunacy_calculator_page-settings_note {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-top: 0.3rem;
+}
+
 .lunacy_calculator_page-section_title {
     font-size: 1.2rem;
     font-weight: 600;
