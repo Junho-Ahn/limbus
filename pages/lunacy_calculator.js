@@ -339,10 +339,20 @@ let lunacy_calculator_page = null;
 							period_group: Structure.write({
 								classList: ["lunacy_calculator_page-settings_group"],
 								children: {
-									label: Structure.write({
-										tagName: "label",
-										classList: ["lunacy_calculator_page-settings_label"],
-										content: "단위"
+									label_wrapper: Structure.write({
+										classList: ["lunacy_calculator_page-settings_label_wrapper"],
+										children: {
+											label: Structure.write({
+												tagName: "label",
+												classList: ["lunacy_calculator_page-settings_label"],
+												content: "단위"
+											}),
+											subtext: Structure.write({
+												tagName: "span",
+												classList: ["lunacy_calculator_page-settings_label_subtext"],
+												content: "* 편의상 1개월=4주로 계산"
+											})
+										}
 									}),
 									radio_group: Structure.write({
 										classList: ["lunacy_calculator_page-settings_radio_group"],
@@ -402,7 +412,10 @@ let lunacy_calculator_page = null;
 							inputs: Structure.write({
 								classList: ["lunacy_calculator_page-settings_inputs"],
 								children: {
-									inspection_group: Structure.write({
+									checkbox_group: Structure.write({
+										classList: ["lunacy_calculator_page-settings_checkbox_container"],
+										children: {
+											inspection_group: Structure.write({
 								classList: ["lunacy_calculator_page-settings_group"],
 								children: {
 									label: Structure.write({
@@ -509,8 +522,13 @@ let lunacy_calculator_page = null;
 										}
 									})
 								}
-							}),
-							additional_free_group: Structure.write({
+							})
+										}
+									}),
+									additional_group: Structure.write({
+										classList: ["lunacy_calculator_page-settings_additional_container"],
+										children: {
+											additional_free_group: Structure.write({
 								classList: ["lunacy_calculator_page-settings_group"],
 								children: {
 									label: Structure.write({
@@ -554,6 +572,8 @@ let lunacy_calculator_page = null;
 										},
 										events: {
 											input: EventHandlers.onAdditionalPaidLunacyChange
+										}
+									})
 										}
 									})
 								}

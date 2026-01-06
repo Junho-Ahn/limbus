@@ -2,8 +2,9 @@
     padding: 2rem;
     flex-grow: 1;
     box-sizing: border-box;
-    max-width: 1400px;
+    max-width: 1000px;
     margin: 0 auto;
+    width: 100%;
 }
 
 .lunacy_calculator_page-settings {
@@ -37,9 +38,31 @@
 }
 
 .lunacy_calculator_page-settings_inputs {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
+}
+
+.lunacy_calculator_page-settings_checkbox_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.lunacy_calculator_page-settings_checkbox_container > .lunacy_calculator_page-settings_group {
+    flex: 1;
+    min-width: 150px;
+}
+
+.lunacy_calculator_page-settings_additional_container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.lunacy_calculator_page-settings_additional_container > .lunacy_calculator_page-settings_group {
+    flex: 1;
+    min-width: 200px;
 }
 
 .lunacy_calculator_page-settings_group {
@@ -52,13 +75,26 @@
     border: 1px solid #3a4050;
 }
 
+.lunacy_calculator_page-settings_label_wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.3rem;
+    flex-wrap: wrap;
+}
+
 .lunacy_calculator_page-settings_label {
     font-size: 0.95rem;
     font-weight: 600;
     color: #ffd700;
     display: block;
     cursor: pointer;
-    margin-bottom: 0.3rem;
+}
+
+.lunacy_calculator_page-settings_label_subtext {
+    font-size: 0.75rem;
+    color: #aaa;
+    font-weight: normal;
 }
 
 .lunacy_calculator_page-settings_input,
@@ -157,8 +193,18 @@
     }
     
     .lunacy_calculator_page-settings_inputs {
-        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+    
+    .lunacy_calculator_page-settings_checkbox_container,
+    .lunacy_calculator_page-settings_additional_container {
         gap: 0.6rem;
+    }
+    
+    .lunacy_calculator_page-settings_checkbox_container > .lunacy_calculator_page-settings_group,
+    .lunacy_calculator_page-settings_additional_container > .lunacy_calculator_page-settings_group {
+        min-width: 0;
+        flex: 1 1 calc(50% - 0.3rem);
     }
     
     .lunacy_calculator_page-settings_group {
