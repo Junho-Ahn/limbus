@@ -1001,10 +1001,38 @@ let enkephalin_calculator_page = null;
 	
 	// 페이지가 로드되면 초기화
 	if (typeof window !== 'undefined') {
+		// 초기 로드 시 초기화
 		if (document.readyState === 'loading') {
 			document.addEventListener('DOMContentLoaded', initializePage);
 		} else {
 			initializePage();
+		}
+		
+		// 라우터가 페이지를 렌더링할 때마다 초기화
+		// MutationObserver를 사용하여 root 요소의 변경을 감지
+		const root = document.getElementById('root');
+		if (root) {
+			const observer = new MutationObserver((mutations) => {
+				// root의 자식이 변경되었을 때 (페이지 렌더링)
+				for (const mutation of mutations) {
+					if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+						// 엔케팔린 계산기 페이지인지 확인
+						const enkephalinPage = document.querySelector('.enkephalin_calculator_page');
+						if (enkephalinPage) {
+							// 약간의 지연을 두고 초기화 (DOM이 완전히 렌더링된 후)
+							setTimeout(() => {
+								initializePage();
+							}, 10);
+							break;
+						}
+					}
+				}
+			});
+			
+			observer.observe(root, {
+				childList: true,
+				subtree: false
+			});
 		}
 	}
 })();
