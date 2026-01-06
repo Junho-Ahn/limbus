@@ -342,7 +342,7 @@ let lunacy_calculator_page = null;
 									label: Structure.write({
 										tagName: "label",
 										classList: ["lunacy_calculator_page-settings_label"],
-										content: "기간"
+										content: "단위"
 									}),
 									radio_group: Structure.write({
 										classList: ["lunacy_calculator_page-settings_radio_group"],
@@ -423,7 +423,7 @@ let lunacy_calculator_page = null;
 											}),
 											text: Structure.write({
 												tagName: "span",
-												content: "점검-300"
+												content: "점검"
 											})
 										}
 									})
@@ -450,7 +450,7 @@ let lunacy_calculator_page = null;
 											}),
 											text: Structure.write({
 												tagName: "span",
-												content: "거울 던전-750"
+												content: "거울 던전"
 											})
 										}
 									})
@@ -477,7 +477,7 @@ let lunacy_calculator_page = null;
 											}),
 											text: Structure.write({
 												tagName: "span",
-												content: "월정액(소)-273"
+												content: "월정액(소)"
 											})
 										}
 									})
@@ -504,7 +504,7 @@ let lunacy_calculator_page = null;
 											}),
 											text: Structure.write({
 												tagName: "span",
-												content: "월정액(대)-455"
+												content: "월정액(대)"
 											})
 										}
 									})
@@ -517,7 +517,7 @@ let lunacy_calculator_page = null;
 										tagName: "label",
 										classList: ["lunacy_calculator_page-settings_label"],
 										properties: { for: "additional_free_lunacy_input" },
-										content: "추가 광기 (무료)"
+										content: "추가 수급 광기 (무료)"
 									}),
 									input: Structure.write({
 										tagName: "input",
@@ -541,7 +541,7 @@ let lunacy_calculator_page = null;
 										tagName: "label",
 										classList: ["lunacy_calculator_page-settings_label"],
 										properties: { for: "additional_paid_lunacy_input" },
-										content: "추가 광기 (유료)"
+										content: "추가 수급 광기 (유료)"
 									}),
 									input: Structure.write({
 										tagName: "input",
@@ -567,7 +567,7 @@ let lunacy_calculator_page = null;
 						children: {
 							title: Structure.write({
 								classList: ["lunacy_calculator_page-settings_section_title"],
-								content: "소비"
+								content: "일일 소비"
 							}),
 							inputs: Structure.write({
 								classList: ["lunacy_calculator_page-settings_inputs"],
