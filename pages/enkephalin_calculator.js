@@ -150,12 +150,29 @@ let enkephalin_calculator_page = null;
 		// 기준 경험치 던전 데이터
 		getStandardExpDungeon() {
 			const dungeonData = REFERENCE_DATA.expDungeons[State.expDungeonNumber];
-			if (!dungeonData) return REFERENCE_DATA.expDungeons[8].manual;
+			if (!dungeonData) {
+				const fallback = REFERENCE_DATA.expDungeons[8].manual;
+				if (State.isSkip) {
+					return {
+						tickets: fallback.tickets.map(t => Math.round(t * 1.5)),
+						enke: fallback.enke * 2
+					};
+				}
+				return fallback;
+			}
 			
-			const mode = State.isSkip ? dungeonData.skip : dungeonData.manual;
+			const manual = dungeonData.manual;
+			if (State.isSkip) {
+				// 스킵 모드: 티켓은 1.5배 후 반올림, 엔케는 두배
+				return {
+					tickets: manual.tickets.map(t => Math.round(t * 1.5)),
+					enke: manual.enke * 2
+				};
+			}
+			
 			return {
-				tickets: mode.tickets,
-				enke: mode.enke
+				tickets: manual.tickets,
+				enke: manual.enke
 			};
 		},
 		

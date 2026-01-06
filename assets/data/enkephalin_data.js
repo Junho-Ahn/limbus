@@ -11,39 +11,34 @@ let enkephalinData = null;
             { name: "모음 110,000원", firstTimeAmount: 16672, amount: 9685, price: 110000 }
         ],
         
-        // 경험치 던전 데이터 (번호별로 그룹화)
+        // 경험치 던전 데이터 (번호별로 그룹화, 스킵 데이터는 매뉴얼 기반으로 자동 생성)
         expDungeons: {
             1: {
-                manual: { tickets: [6, 7, 0, 0], enke: 40 },
-                skip: { tickets: [9, 11, 0, 0], enke: 80 }
+                manual: { tickets: [6, 7, 0, 0], enke: 40 }
             },
             2: {
-                manual: { tickets: [0, 3, 3, 0], enke: 40 },
-                skip: { tickets: [0, 5, 5, 0], enke: 80 }
+                manual: { tickets: [0, 3, 3, 0], enke: 40 }
             },
             3: {
-                manual: { tickets: [0, 4, 4, 0], enke: 40 },
-                skip: { tickets: [0, 6, 6, 0], enke: 80 }
+                manual: { tickets: [0, 4, 4, 0], enke: 40 }
             },
             4: {
-                manual: { tickets: [0, 0, 3, 2], enke: 60 },
-                skip: { tickets: [0, 0, 5, 3], enke: 120 }
+                manual: { tickets: [0, 0, 3, 2], enke: 60 }
             },
             5: {
-                manual: { tickets: [0, 4, 4, 2], enke: 60 },
-                skip: { tickets: [0, 6, 6, 3], enke: 120 }
+                manual: { tickets: [0, 4, 4, 2], enke: 60 }
             },
             6: {
-                manual: { tickets: [0, 2, 2, 4], enke: 60 },
-                skip: { tickets: [0, 3, 3, 6], enke: 120 }
+                manual: { tickets: [0, 2, 2, 4], enke: 60 }
             },
             7: {
-                manual: { tickets: [0, 4, 4, 4], enke: 60 },
-                skip: { tickets: [0, 6, 6, 6], enke: 120 }
+                manual: { tickets: [0, 4, 4, 4], enke: 60 }
             },
             8: {
-                manual: { tickets: [0, 4, 2, 6], enke: 60 },
-                skip: { tickets: [0, 6, 3, 9], enke: 120 }
+                manual: { tickets: [0, 4, 2, 6], enke: 60 }
+            },
+            9: {
+                manual: { tickets: [0, 6, 6, 6], enke: 60 }
             }
         },
         
@@ -55,10 +50,10 @@ let enkephalinData = null;
         
         // 현금 경험치 패키지
         cashExpPackages: [
-            { name: "주간", ticket3: 25, ticket4: 35, price: 9900 },
-            { name: "월간1", ticket3: 70, ticket4: 80, price: 28000 },
-            { name: "월간2", ticket3: 95, ticket4: 160, price: 46000 },
-            { name: "월간3", ticket3: 165, ticket4: 325, price: 90000 }
+            { name: "주간", ticket3: 20, ticket4: 50, price: 9900 },
+            { name: "월간1", ticket3: 80, ticket4: 100, price: 28000 },
+            { name: "월간2", ticket3: 72, ticket4: 210, price: 46000 },
+            { name: "월간3", ticket3: 192, ticket4: 400, price: 90000 }
         ],
         
         // 주간 엔케팔린 패키지
