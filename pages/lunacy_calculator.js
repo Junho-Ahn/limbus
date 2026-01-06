@@ -251,7 +251,18 @@ let lunacy_calculator_page = null;
 	
 	// UI 업데이트 함수
 	const UIManager = {
+		updateAdditionalConsumptionLabel() {
+			const label = document.querySelector('.lunacy_calculator_page-additional_consumption_label');
+			if (label) {
+				const periodText = State.periodType === 'monthly' ? '1개월' : '1주';
+				label.textContent = `추가 소비 광기(${periodText})`;
+			}
+		},
+		
 		updateAll() {
+			// 추가 소비 광기 라벨 업데이트
+			this.updateAdditionalConsumptionLabel();
+			
 			// 유료 행 업데이트
 			const paidSupply = Calculator.getPaidSupply();
 			const paidConsumption = Calculator.getPaidConsumption();
@@ -377,7 +388,7 @@ let lunacy_calculator_page = null;
 													}),
 													text: Structure.write({
 														tagName: "span",
-														content: "주"
+														content: "1주"
 													})
 												}
 											}),
@@ -401,7 +412,7 @@ let lunacy_calculator_page = null;
 													}),
 													text: Structure.write({
 														tagName: "span",
-														content: "개월"
+														content: "1개월"
 													})
 												}
 											})
@@ -647,9 +658,9 @@ let lunacy_calculator_page = null;
 										children: {
 											label: Structure.write({
 												tagName: "label",
-												classList: ["lunacy_calculator_page-settings_label"],
+												classList: ["lunacy_calculator_page-settings_label", "lunacy_calculator_page-additional_consumption_label"],
 												properties: { for: "additional_consumption_input" },
-												content: "추가 소비 광기"
+												content: `추가 소비 광기(${State.periodType === 'monthly' ? '1개월' : '1주'})`
 											}),
 											input: Structure.write({
 												tagName: "input",
