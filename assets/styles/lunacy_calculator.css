@@ -84,6 +84,7 @@
     background: #23272f;
     border-radius: 0.4rem;
     border: 1px solid #3a4050;
+    flex-grow: 1;
 }
 
 .lunacy_calculator_page-settings_label_wrapper {

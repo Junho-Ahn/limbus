@@ -81,10 +81,10 @@ let lunacy_calculator_page = null;
 		monthlyLarge: false,      // 월정액(대)-455 (유료)
 		additionalFreeLunacy: 0,  // 추가 광기 (무료)
 		additionalPaidLunacy: 0,  // 추가 광기 (유료)
-		// 소비
+		// 소모
 		chargeCount: 0,           // 광기 충전 횟수 (0-10)
-		paidGachaCount: 0,        // 유료 단챠 횟수 (0-3)
-		additionalConsumption: 0  // 추가 소비 광기
+		paidGachaCount: 0,        // 유료 단챠 횟수 (0-6)
+		additionalConsumption: 0  // 추가 소모 광기
 	};
 	
 	// 초기화 시 저장된 값 불러오기
@@ -97,7 +97,7 @@ let lunacy_calculator_page = null;
 			return State.periodType === 'monthly' ? 4 : 1;
 		},
 		
-		// 일일 소비 배율 계산 (소비용)
+		// 일일 소모 배율 계산 (소모용)
 		getDailyConsumptionMultiplier() {
 			return State.periodType === 'monthly' ? 28 : 7;
 		},
@@ -255,12 +255,12 @@ let lunacy_calculator_page = null;
 			const label = document.querySelector('.lunacy_calculator_page-additional_consumption_label');
 			if (label) {
 				const periodText = State.periodType === 'monthly' ? '1개월' : '1주';
-				label.textContent = `추가 소비 광기(${periodText})`;
+				label.textContent = `추가 소모 광기(${periodText})`;
 			}
 		},
 		
 		updateAll() {
-			// 추가 소비 광기 라벨 업데이트
+			// 추가 소모 광기 라벨 업데이트
 			this.updateAdditionalConsumptionLabel();
 			
 			// 유료 행 업데이트
@@ -598,7 +598,7 @@ let lunacy_calculator_page = null;
 						children: {
 							title: Structure.write({
 								classList: ["lunacy_calculator_page-settings_section_title"],
-								content: "소비"
+								content: "소모"
 							}),
 							inputs: Structure.write({
 								classList: ["lunacy_calculator_page-settings_inputs", "lunacy_calculator_page-settings_inputs--consumption"],
@@ -660,7 +660,7 @@ let lunacy_calculator_page = null;
 												tagName: "label",
 												classList: ["lunacy_calculator_page-settings_label", "lunacy_calculator_page-additional_consumption_label"],
 												properties: { for: "additional_consumption_input" },
-												content: `추가 소비 광기(${State.periodType === 'monthly' ? '1개월' : '1주'})`
+												content: `추가 소모 광기(${State.periodType === 'monthly' ? '1개월' : '1주'})`
 											}),
 											input: Structure.write({
 												tagName: "input",

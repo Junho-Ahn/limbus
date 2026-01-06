@@ -287,14 +287,29 @@ let enkephalin_calculator_page = null;
 					const isDisabled = result.lunacyConsumption === 0 && result.enkeSupply === 0;
 					row.setModifierClass('disabled', isDisabled);
 					
+					// 셀에 모디파이어 클래스 추가
+					const cells = row.querySelectorAll('.enkephalin_calculator_page-table_cell');
+					cells.forEach(cell => {
+						cell.classList.remove('enkephalin_calculator_page-table_cell--disabled', 'enkephalin_calculator_page-table_cell--positive', 'enkephalin_calculator_page-table_cell--negative');
+						if (isDisabled) {
+							cell.classList.add('enkephalin_calculator_page-table_cell--disabled');
+						}
+					});
+					
 					// 긍정/부정 효과 (주간 엔케팔린 패키지 효율과 비교)
 					if (!isDisabled && result.enkePerLunacy > 0) {
 						if (result.enkePerLunacy > weeklyEnkePerLunacy) {
 							row.setModifierClass('positive', true);
 							row.setModifierClass('negative', false);
+							cells.forEach(cell => {
+								cell.classList.add('enkephalin_calculator_page-table_cell--positive');
+							});
 						} else if (result.enkePerLunacy < weeklyEnkePerLunacy) {
 							row.setModifierClass('positive', false);
 							row.setModifierClass('negative', true);
+							cells.forEach(cell => {
+								cell.classList.add('enkephalin_calculator_page-table_cell--negative');
+							});
 						} else {
 							row.setModifierClass('positive', false);
 							row.setModifierClass('negative', false);
@@ -351,19 +366,34 @@ let enkephalin_calculator_page = null;
 					if (efficiencyCell) efficiencyCell.textContent = result.expPerLunacy.toLocaleString('ko-KR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 					
 					// n충 경던 행에만 비활성화/긍정/부정 효과 적용
+					const cells = row.querySelectorAll('.enkephalin_calculator_page-table_cell');
 					if (result.method && result.method.includes("충 경던")) {
 						// 비활성화 효과 (상대 광기 소모량이 0인 경우)
 						const isDisabled = result.lunacyWorth === 0;
 						row.setModifierClass('disabled', isDisabled);
+						
+						// 셀에 모디파이어 클래스 추가
+						cells.forEach(cell => {
+							cell.classList.remove('enkephalin_calculator_page-table_cell--disabled', 'enkephalin_calculator_page-table_cell--positive', 'enkephalin_calculator_page-table_cell--negative');
+							if (isDisabled) {
+								cell.classList.add('enkephalin_calculator_page-table_cell--disabled');
+							}
+						});
 						
 						// 긍정/부정 효과 (엔케 패키지 경던 효율과 비교)
 						if (!isDisabled && result.expPerLunacy > 0) {
 							if (result.expPerLunacy > standardExpPerLunacy) {
 								row.setModifierClass('positive', true);
 								row.setModifierClass('negative', false);
+								cells.forEach(cell => {
+									cell.classList.add('enkephalin_calculator_page-table_cell--positive');
+								});
 							} else if (result.expPerLunacy < standardExpPerLunacy) {
 								row.setModifierClass('positive', false);
 								row.setModifierClass('negative', true);
+								cells.forEach(cell => {
+									cell.classList.add('enkephalin_calculator_page-table_cell--negative');
+								});
 							} else {
 								row.setModifierClass('positive', false);
 								row.setModifierClass('negative', false);
@@ -377,6 +407,9 @@ let enkephalin_calculator_page = null;
 						row.setModifierClass('disabled', false);
 						row.setModifierClass('positive', false);
 						row.setModifierClass('negative', false);
+						cells.forEach(cell => {
+							cell.classList.remove('enkephalin_calculator_page-table_cell--disabled', 'enkephalin_calculator_page-table_cell--positive', 'enkephalin_calculator_page-table_cell--negative');
+						});
 					}
 				}
 			});
@@ -524,7 +557,7 @@ let enkephalin_calculator_page = null;
 											}),
 											select: Structure.write({
 												tagName: "select",
-												classList: ["enkephalin_calculator_page-settings_select"],
+												classList: ["enkephalin_calculator_page-settings_select", "enkephalin_calculator_page-settings_select--in-controls"],
 												properties: { id: "lunacy_item_select" },
 												children: Object.fromEntries(
 													REFERENCE_DATA.lunacyItems.map((item, index) => [
@@ -655,17 +688,17 @@ let enkephalin_calculator_page = null;
 						content: "주간 엔케팔린 패키지 효율"
 					}),
 					table: Structure.write({
-						classList: ["enkephalin_calculator_page-table"],
+						classList: ["enkephalin_calculator_page-table", "enkephalin_calculator_page-table--weekly"],
 						children: {
 							header: Structure.write({
 								classList: ["enkephalin_calculator_page-table_header"],
 								children: {
 									col1: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"],
+										classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-table_cell--header"],
 										content: "9,900원어치 광기"
 									}),
 									col2: Structure.write({
-										classList: ["enkephalin_calculator_page-table_cell"],
+										classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-table_cell--header"],
 										content: "광기당 엔케"
 									})
 								}
@@ -748,25 +781,25 @@ let enkephalin_calculator_page = null;
 						dataset: { target: "charge_efficiency" },
 						children: {
 							table: Structure.write({
-								classList: ["enkephalin_calculator_page-table"],
+								classList: ["enkephalin_calculator_page-table", "enkephalin_calculator_page-table--charge"],
 								children: {
 									header: Structure.write({
 										classList: ["enkephalin_calculator_page-table_header"],
 										children: {
 											charge: Structure.write({
-												classList: ["enkephalin_calculator_page-table_cell"],
+												classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-table_cell--header"],
 												content: "충전 횟수"
 											}),
 											lunacy: Structure.write({
-												classList: ["enkephalin_calculator_page-table_cell"],
+												classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-table_cell--header"],
 												content: "광기 소모량"
 											}),
 											enke: Structure.write({
-												classList: ["enkephalin_calculator_page-table_cell"],
+												classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-table_cell--header"],
 												content: "엔케 수급량"
 											}),
 											efficiency: Structure.write({
-												classList: ["enkephalin_calculator_page-table_cell"],
+												classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-table_cell--header"],
 												content: "광기당 엔케"
 											})
 										}
@@ -854,25 +887,25 @@ let enkephalin_calculator_page = null;
 						dataset: { target: "exp_efficiency" },
 						children: {
 							table: Structure.write({
-								classList: ["enkephalin_calculator_page-table"],
+								classList: ["enkephalin_calculator_page-table", "enkephalin_calculator_page-table--exp"],
 								children: {
 									header: Structure.write({
 										classList: ["enkephalin_calculator_page-table_header"],
 										children: {
 											method: Structure.write({
-												classList: ["enkephalin_calculator_page-table_cell"],
+												classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-table_cell--header"],
 												content: "방식"
 											}),
 											lunacy: Structure.write({
-												classList: ["enkephalin_calculator_page-table_cell"],
+												classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-table_cell--header"],
 												content: "[현금/엔케 → 광기] 환산"
 											}),
 											exp: Structure.write({
-												classList: ["enkephalin_calculator_page-table_cell"],
+												classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-table_cell--header"],
 												content: "경험치 수급량"
 											}),
 											efficiency: Structure.write({
-												classList: ["enkephalin_calculator_page-table_cell"],
+												classList: ["enkephalin_calculator_page-table_cell", "enkephalin_calculator_page-table_cell--header"],
 												content: "광기당 경험치"
 											})
 										}
@@ -944,6 +977,18 @@ let enkephalin_calculator_page = null;
 						if (content) {
 							const isExpanded = content.classList.contains('enkephalin_calculator_page-collapsible_content--expanded');
 							content.classList.toggle('enkephalin_calculator_page-collapsible_content--expanded');
+							
+							// exp_efficiency 섹션에 클래스 추가
+							if (target === 'exp_efficiency') {
+								const expSection = document.querySelector('.enkephalin_calculator_page-exp_efficiency');
+								if (expSection) {
+									if (!isExpanded) {
+										expSection.classList.add('enkephalin_calculator_page-exp_efficiency--expanded');
+									} else {
+										expSection.classList.remove('enkephalin_calculator_page-exp_efficiency--expanded');
+									}
+								}
+							}
 							
 							if (toggle) {
 								toggle.textContent = !isExpanded ? '▲' : '▼';
