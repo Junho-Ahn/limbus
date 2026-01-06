@@ -11,8 +11,9 @@
 
   .header-left {
     display: flex;
-    align-items: center;
-    gap: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
   }
 
   .header-logo_wrapper {
@@ -35,7 +36,6 @@
   .header-contact {
     display: flex;
     align-items: center;
-    margin-left: 1rem;
     cursor: pointer;
   }
   
@@ -73,7 +73,7 @@
     }
 
     .header-left {
-      gap: 1rem;
+      gap: 0.25rem;
     }
 
     .header-logo_image {
@@ -126,7 +126,7 @@
     }
 
     .header-contact {
-      margin-left: 0.5rem;
+      margin-left: 0;
     }
 
     .header-contact_email {

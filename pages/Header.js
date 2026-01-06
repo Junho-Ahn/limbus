@@ -21,44 +21,44 @@ let Header = null;
 							logo: Structure.write({
 								classList: ['header-logo'],
 								content: '메피'
-							}),
-							contact: Structure.write({
-								classList: ['header-contact'],
-								children: {
-									email: Structure.write({
-										classList: ['header-contact_email'],
-										content: '건의 및 제보 : mephy.contact@gmail.com',
-										events: {
-											click: async (event) => {
-												try {
-													await navigator.clipboard.writeText(contactEmail);
-													// 복사 성공 시 시각적 피드백
-													const emailElement = event.target;
-													if (emailElement) {
-														const originalText = emailElement.textContent;
-														emailElement.textContent = '복사되었습니다!';
-														emailElement.style.color = '#4CAF50';
-														emailCopyTimer = setTimeout(() => {
-															emailElement.textContent = originalText;
-															emailElement.style.color = '';
-															emailCopyTimer = null;
-														}, 1500);
-													}
-												} catch (err) {
-													console.error('클립보드 복사 실패:', err);
-													// 폴백: 구식 방식으로 복사
-													const textArea = document.createElement('textarea');
-													textArea.value = contactEmail;
-													document.body.appendChild(textArea);
-													textArea.select();
-													document.execCommand('copy');
-													document.body.removeChild(textArea);
+							})
+						}
+					}),
+					contact: Structure.write({
+						classList: ['header-contact'],
+						children: {
+							email: Structure.write({
+								classList: ['header-contact_email'],
+								content: '건의 및 제보 : mephy.contact@gmail.com',
+								events: {
+									click: async (event) => {
+										try {
+											await navigator.clipboard.writeText(contactEmail);
+											// 복사 성공 시 시각적 피드백
+											const emailElement = event.target;
+											if (emailElement) {
+												const originalText = emailElement.textContent;
+												emailElement.textContent = '복사되었습니다!';
+												emailElement.style.color = '#4CAF50';
+												emailCopyTimer = setTimeout(() => {
+													emailElement.textContent = originalText;
+													emailElement.style.color = '';
 													emailCopyTimer = null;
-												}
+												}, 1500);
 											}
-										},
-									})
-								}
+										} catch (err) {
+											console.error('클립보드 복사 실패:', err);
+											// 폴백: 구식 방식으로 복사
+											const textArea = document.createElement('textarea');
+											textArea.value = contactEmail;
+											document.body.appendChild(textArea);
+											textArea.select();
+											document.execCommand('copy');
+											document.body.removeChild(textArea);
+											emailCopyTimer = null;
+										}
+									}
+								},
 							})
 						}
 					})
