@@ -348,7 +348,7 @@ let lunacy_calculator_page = null;
 								content: "수급"
 							}),
 							period_group: Structure.write({
-								classList: ["lunacy_calculator_page-settings_group"],
+								classList: ["lunacy_calculator_page-settings_group", "lunacy_calculator_page-settings_group--period"],
 								children: {
 									label_wrapper: Structure.write({
 										classList: ["lunacy_calculator_page-settings_label_wrapper"],
@@ -427,7 +427,7 @@ let lunacy_calculator_page = null;
 										classList: ["lunacy_calculator_page-settings_checkbox_container"],
 										children: {
 											inspection_group: Structure.write({
-								classList: ["lunacy_calculator_page-settings_group"],
+								classList: ["lunacy_calculator_page-settings_group", "lunacy_calculator_page-settings_group--checkbox"],
 								children: {
 									label: Structure.write({
 										tagName: "label",
@@ -454,7 +454,7 @@ let lunacy_calculator_page = null;
 								}
 							}),
 							mirror_group: Structure.write({
-								classList: ["lunacy_calculator_page-settings_group"],
+								classList: ["lunacy_calculator_page-settings_group", "lunacy_calculator_page-settings_group--checkbox"],
 								children: {
 									label: Structure.write({
 										tagName: "label",
@@ -481,7 +481,7 @@ let lunacy_calculator_page = null;
 								}
 							}),
 							monthly_small_group: Structure.write({
-								classList: ["lunacy_calculator_page-settings_group"],
+								classList: ["lunacy_calculator_page-settings_group", "lunacy_calculator_page-settings_group--checkbox"],
 								children: {
 									label: Structure.write({
 										tagName: "label",
@@ -508,7 +508,7 @@ let lunacy_calculator_page = null;
 								}
 							}),
 							monthly_large_group: Structure.write({
-								classList: ["lunacy_calculator_page-settings_group"],
+								classList: ["lunacy_calculator_page-settings_group", "lunacy_calculator_page-settings_group--checkbox"],
 								children: {
 									label: Structure.write({
 										tagName: "label",
@@ -540,7 +540,7 @@ let lunacy_calculator_page = null;
 										classList: ["lunacy_calculator_page-settings_additional_container"],
 										children: {
 											additional_free_group: Structure.write({
-								classList: ["lunacy_calculator_page-settings_group"],
+								classList: ["lunacy_calculator_page-settings_group", "lunacy_calculator_page-settings_group--additional"],
 								children: {
 									label: Structure.write({
 										tagName: "label",
@@ -564,7 +564,7 @@ let lunacy_calculator_page = null;
 								}
 							}),
 							additional_paid_group: Structure.write({
-								classList: ["lunacy_calculator_page-settings_group"],
+								classList: ["lunacy_calculator_page-settings_group", "lunacy_calculator_page-settings_group--additional"],
 								children: {
 									label: Structure.write({
 										tagName: "label",
@@ -598,19 +598,19 @@ let lunacy_calculator_page = null;
 						children: {
 							title: Structure.write({
 								classList: ["lunacy_calculator_page-settings_section_title"],
-								content: "일일 소비"
+								content: "소비"
 							}),
 							inputs: Structure.write({
 								classList: ["lunacy_calculator_page-settings_inputs", "lunacy_calculator_page-settings_inputs--consumption"],
 								children: {
 									charge_count_group: Structure.write({
-										classList: ["lunacy_calculator_page-settings_group"],
+										classList: ["lunacy_calculator_page-settings_group", "lunacy_calculator_page-settings_group--consumption"],
 										children: {
 											label: Structure.write({
 												tagName: "label",
 												classList: ["lunacy_calculator_page-settings_label"],
 												properties: { for: "charge_count_input" },
-												content: "광기 충전 횟수 (0-10)"
+												content: "광기 충전 횟수(일일)"
 											}),
 											input: Structure.write({
 												tagName: "input",
@@ -629,13 +629,13 @@ let lunacy_calculator_page = null;
 										}
 									}),
 									paid_gacha_group: Structure.write({
-										classList: ["lunacy_calculator_page-settings_group"],
+										classList: ["lunacy_calculator_page-settings_group", "lunacy_calculator_page-settings_group--consumption"],
 										children: {
 											label: Structure.write({
 												tagName: "label",
 												classList: ["lunacy_calculator_page-settings_label"],
 												properties: { for: "paid_gacha_count_input" },
-												content: "유료 단챠 횟수 (0-3)"
+												content: "유료 단챠 횟수(일일)"
 											}),
 											input: Structure.write({
 												tagName: "input",
@@ -654,7 +654,7 @@ let lunacy_calculator_page = null;
 										}
 									}),
 									additional_consumption_group: Structure.write({
-										classList: ["lunacy_calculator_page-settings_group"],
+										classList: ["lunacy_calculator_page-settings_group", "lunacy_calculator_page-settings_group--consumption"],
 										children: {
 											label: Structure.write({
 												tagName: "label",
@@ -700,19 +700,19 @@ let lunacy_calculator_page = null;
 								classList: ["lunacy_calculator_page-table_header"],
 								children: {
 									label: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell"],
+										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-table_cell--header"],
 										content: "구분"
 									}),
 									paid: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell"],
+										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-table_cell--header"],
 										content: "유료"
 									}),
 									free: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell"],
+										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-table_cell--header"],
 										content: "무료"
 									}),
 									total: Structure.write({
-										classList: ["lunacy_calculator_page-table_cell"],
+										classList: ["lunacy_calculator_page-table_cell", "lunacy_calculator_page-table_cell--header"],
 										content: "통합"
 									})
 								}

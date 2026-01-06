@@ -49,20 +49,10 @@
     gap: 1rem;
 }
 
-.lunacy_calculator_page-settings_checkbox_container > .lunacy_calculator_page-settings_group {
-    flex: 1;
-    min-width: 150px;
-}
-
 .lunacy_calculator_page-settings_additional_container {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-}
-
-.lunacy_calculator_page-settings_additional_container > .lunacy_calculator_page-settings_group {
-    flex: 1;
-    min-width: 200px;
 }
 
 /* 일일 소비 섹션의 inputs는 PC에서 가로 한 줄 */
@@ -71,8 +61,18 @@
     flex-wrap: wrap;
 }
 
-.lunacy_calculator_page-settings_inputs--consumption > .lunacy_calculator_page-settings_group {
+/* 체크박스/추가/소비 그룹 스타일 */
+.lunacy_calculator_page-settings_group--checkbox,
+.lunacy_calculator_page-settings_group--additional {
     flex: 1;
+}
+
+.lunacy_calculator_page-settings_group--checkbox {
+    min-width: 150px;
+}
+
+.lunacy_calculator_page-settings_group--additional,
+.lunacy_calculator_page-settings_group--consumption {
     min-width: 200px;
 }
 
@@ -173,7 +173,7 @@
 }
 
 /* 기간(단위) 그룹 아래 간격 추가 */
-.lunacy_calculator_page-settings_group:has(.lunacy_calculator_page-settings_radio_group) {
+.lunacy_calculator_page-settings_group--period {
     margin-bottom: 1rem;
 }
 
@@ -212,8 +212,8 @@
         gap: 0.6rem;
     }
     
-    .lunacy_calculator_page-settings_checkbox_container > .lunacy_calculator_page-settings_group,
-    .lunacy_calculator_page-settings_additional_container > .lunacy_calculator_page-settings_group {
+    .lunacy_calculator_page-settings_group--checkbox,
+    .lunacy_calculator_page-settings_group--additional {
         min-width: 0;
         flex: 1 1 calc(50% - 0.3rem);
     }
@@ -363,7 +363,7 @@
     justify-content: center;
 }
 
-.lunacy_calculator_page-table_header .lunacy_calculator_page-table_cell {
+.lunacy_calculator_page-table_cell--header {
     font-weight: 600;
     color: #ffd700;
 }
