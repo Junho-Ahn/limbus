@@ -46,8 +46,11 @@ let enkephalin_calculator_page = null;
 					if (typeof data.isFirstTime === 'boolean') {
 						State.isFirstTime = data.isFirstTime;
 					}
-					if (typeof data.expDungeonNumber === 'number' && data.expDungeonNumber >= 1 && data.expDungeonNumber <= 8) {
-						State.expDungeonNumber = data.expDungeonNumber;
+					if (typeof data.expDungeonNumber === 'number') {
+						const maxDungeonNumber = Math.max(...Object.keys(REFERENCE_DATA.expDungeons).map(Number));
+						if (data.expDungeonNumber >= 1 && data.expDungeonNumber <= maxDungeonNumber) {
+							State.expDungeonNumber = data.expDungeonNumber;
+						}
 					}
 					if (typeof data.isSkip === 'boolean') {
 						State.isSkip = data.isSkip;
@@ -151,7 +154,9 @@ let enkephalin_calculator_page = null;
 		getStandardExpDungeon() {
 			const dungeonData = REFERENCE_DATA.expDungeons[State.expDungeonNumber];
 			if (!dungeonData) {
-				const fallback = REFERENCE_DATA.expDungeons[8].manual;
+				// 데이터에 없는 경우 최대 번호 던전을 fallback으로 사용
+				const maxDungeonNumber = Math.max(...Object.keys(REFERENCE_DATA.expDungeons).map(Number));
+				const fallback = REFERENCE_DATA.expDungeons[maxDungeonNumber].manual;
 				if (State.isSkip) {
 					return {
 						tickets: fallback.tickets.map(t => Math.round(t * 1.5)),
@@ -413,7 +418,8 @@ let enkephalin_calculator_page = null;
 		},
 		
 		onExpDungeonNumberChange(event) {
-			State.expDungeonNumber = parseInt(event.target.value) || 8;
+			const maxDungeonNumber = Math.max(...Object.keys(REFERENCE_DATA.expDungeons).map(Number));
+			State.expDungeonNumber = parseInt(event.target.value) || maxDungeonNumber;
 			Storage.save();
 			UIManager.updateAll();
 		},
@@ -611,17 +617,20 @@ let enkephalin_calculator_page = null;
 												classList: ["enkephalin_calculator_page-settings_select"],
 												properties: { id: "exp_dungeon_number_select" },
 												children: Object.fromEntries(
-													[1, 2, 3, 4, 5, 6, 7, 8].map(num => [
-														`option_${num}`,
-														Structure.write({
-															tagName: "option",
-															properties: { 
-																value: String(num),
-																...(num === State.expDungeonNumber ? { selected: "selected" } : {})
-															},
-															content: `${num}번`
-														})
-													])
+													Object.keys(REFERENCE_DATA.expDungeons)
+														.map(Number)
+														.sort((a, b) => a - b)
+														.map(num => [
+															`option_${num}`,
+															Structure.write({
+																tagName: "option",
+																properties: { 
+																	value: String(num),
+																	...(num === State.expDungeonNumber ? { selected: "selected" } : {})
+																},
+																content: `${num}번`
+															})
+														])
 												),
 												events: {
 													change: EventHandlers.onExpDungeonNumberChange
