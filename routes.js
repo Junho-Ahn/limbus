@@ -1,27 +1,12 @@
 let routes = [
   {
     path: '/lunacy-calculator',
-    render: () => {
-      console.log('[Route] Rendering lunacy-calculator, page:', lunacy_calculator_page);
-      if (!lunacy_calculator_page) {
-        console.error('[Route] lunacy_calculator_page is not defined');
-        if (typeof NotFoundPage !== 'undefined' && NotFoundPage) {
-          return NotFoundPage;
-        }
-        return null;
-      }
-      return lunacy_calculator_page;
-    },
+    render: () => lunacy_calculator_page,
     layout: BasicLayout
   },
   {
     path: '/enkephalin-calculator',
     render: () => enkephalin_calculator_page,
-    layout: BasicLayout
-  },
-  {
-    path: '/deck-code-generator',
-    render: () => deck_code_generator_page,
     layout: BasicLayout
   },
   {
