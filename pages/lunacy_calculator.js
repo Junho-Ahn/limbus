@@ -237,7 +237,7 @@ let lunacy_calculator_page = null;
 		
 		onPaidGachaCountChange(event) {
 			const value = parseInt(event.target.value) || 0;
-			State.paidGachaCount = Math.max(0, Math.min(3, value));
+			State.paidGachaCount = Math.max(0, Math.min(6, value));
 			Storage.save();
 			UIManager.updateAll();
 		},
@@ -644,7 +644,7 @@ let lunacy_calculator_page = null;
 													type: "number",
 													id: "paid_gacha_count_input",
 													min: "0",
-													max: "3",
+													max: "6",
 													value: String(State.paidGachaCount)
 												},
 												events: {
