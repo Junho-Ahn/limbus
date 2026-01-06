@@ -51,8 +51,10 @@ class PageRouter {
 	#render(path) {
 		const { route, params } = this.#matchRoute(path);
 		const query = this.#parseQuery(path);
+		console.log('[Router] Rendering path:', path, 'Matched route:', route ? route.path : 'none');
 		if (route) {
 			const structure = route.renderFn({ params, query });
+			console.log('[Router] Structure:', structure);
 			let toRender = structure;
 			if (route.layout) {
 				// layout 함수에 mainContent(Structure) 전달 → Structure list 반환
@@ -106,9 +108,11 @@ class PageRouter {
 	 */
 	#matchRoute(path) {
 		const [pathname] = path.split('?');
+		console.log('[Router] Matching path:', pathname, 'Available routes:', this.routes.map(r => r.path));
 		for (const route of this.routes) {
 			const { regex, keys } = this.#pathToRegex(route.path);
 			const match = pathname.match(regex);
+			console.log('[Router] Testing route:', route.path, 'Regex:', regex, 'Match:', match);
 			if (match) {
 				const params = {};
 				keys.forEach((k, i) => params[k] = match[i + 1]);

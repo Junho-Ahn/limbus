@@ -2,9 +2,13 @@ let routes = [
   {
     path: '/lunacy-calculator',
     render: () => {
+      console.log('[Route] Rendering lunacy-calculator, page:', lunacy_calculator_page);
       if (!lunacy_calculator_page) {
-        console.error('lunacy_calculator_page is not defined');
-        return NotFoundPage || null;
+        console.error('[Route] lunacy_calculator_page is not defined');
+        if (typeof NotFoundPage !== 'undefined' && NotFoundPage) {
+          return NotFoundPage;
+        }
+        return null;
       }
       return lunacy_calculator_page;
     },
