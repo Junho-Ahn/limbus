@@ -65,6 +65,17 @@
     min-width: 200px;
 }
 
+/* 일일 소비 섹션의 inputs는 PC에서 가로 한 줄 */
+.lunacy_calculator_page-settings_inputs--consumption {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.lunacy_calculator_page-settings_inputs--consumption > .lunacy_calculator_page-settings_group {
+    flex: 1;
+    min-width: 200px;
+}
+
 .lunacy_calculator_page-settings_group {
     display: flex;
     flex-direction: column;

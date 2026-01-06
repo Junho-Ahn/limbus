@@ -590,7 +590,7 @@ let lunacy_calculator_page = null;
 								content: "일일 소비"
 							}),
 							inputs: Structure.write({
-								classList: ["lunacy_calculator_page-settings_inputs"],
+								classList: ["lunacy_calculator_page-settings_inputs", "lunacy_calculator_page-settings_inputs--consumption"],
 								children: {
 									charge_count_group: Structure.write({
 										classList: ["lunacy_calculator_page-settings_group"],
