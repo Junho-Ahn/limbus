@@ -448,42 +448,73 @@ let lunacy_calculator_page = null;
 			
 			// 수급 항목들
 			const supplyItems = [
-				{ label: '점검', getValue: () => Calculator.getInspectionSupply(), isFree: true, isPaid: false },
-				{ label: '거울 던전', getValue: () => Calculator.getMirrorSupply(), isFree: true, isPaid: false },
-				{ label: '월정액(소) - 무료', getValue: () => Calculator.getMonthlySmallFreeSupply(), isFree: true, isPaid: false },
-				{ label: '월정액(소) - 유료', getValue: () => Calculator.getMonthlySmallPaidSupply(), isFree: false, isPaid: true },
-				{ label: '월정액(대) - 무료', getValue: () => Calculator.getMonthlyLargeFreeSupply(), isFree: true, isPaid: false },
-				{ label: '월정액(대) - 유료', getValue: () => Calculator.getMonthlyLargePaidSupply(), isFree: false, isPaid: true },
-				{ label: '추가 수급 광기 (무료)', getValue: () => Calculator.getAdditionalFreeSupply(), isFree: true, isPaid: false },
-				{ label: '추가 수급 광기 (유료)', getValue: () => Calculator.getAdditionalPaidSupply(), isFree: false, isPaid: true }
+				{ label: '점검', getPaid: () => 0, getFree: () => Calculator.getInspectionSupply(), getTotal: () => Calculator.getInspectionSupply() },
+				{ label: '거울 던전', getPaid: () => 0, getFree: () => Calculator.getMirrorSupply(), getTotal: () => Calculator.getMirrorSupply() },
+				{ label: '월정액(소)', getPaid: () => Calculator.getMonthlySmallPaidSupply(), getFree: () => Calculator.getMonthlySmallFreeSupply(), getTotal: () => Calculator.getMonthlySmallPaidSupply() + Calculator.getMonthlySmallFreeSupply() },
+				{ label: '월정액(대)', getPaid: () => Calculator.getMonthlyLargePaidSupply(), getFree: () => Calculator.getMonthlyLargeFreeSupply(), getTotal: () => Calculator.getMonthlyLargePaidSupply() + Calculator.getMonthlyLargeFreeSupply() },
+				{ label: '추가 수급 광기 (무료)', getPaid: () => 0, getFree: () => Calculator.getAdditionalFreeSupply(), getTotal: () => Calculator.getAdditionalFreeSupply() },
+				{ label: '추가 수급 광기 (유료)', getPaid: () => Calculator.getAdditionalPaidSupply(), getFree: () => 0, getTotal: () => Calculator.getAdditionalPaidSupply() }
 			];
 			
 			// 소모 항목들 (마이너스로 표기)
 			const consumptionItems = [
-				{ label: '광기 충전', getValue: () => Calculator.getChargeConsumption(), isFree: true, isPaid: false },
-				{ label: '유료 단챠', getValue: () => Calculator.getPaidGachaConsumption(), isFree: false, isPaid: true },
-				{ label: '추가 소모 광기', getValue: () => Calculator.getAdditionalConsumptionValue(), isFree: true, isPaid: false }
+				{ label: '광기 충전', getPaid: () => 0, getFree: () => Calculator.getChargeConsumption(), getTotal: () => Calculator.getChargeConsumption() },
+				{ label: '유료 단챠', getPaid: () => Calculator.getPaidGachaConsumption(), getFree: () => 0, getTotal: () => Calculator.getPaidGachaConsumption() },
+				{ label: '추가 소모 광기', getPaid: () => 0, getFree: () => Calculator.getAdditionalConsumptionValue(), getTotal: () => Calculator.getAdditionalConsumptionValue() }
 			];
 			
 			// 수급 행들 추가
+			let lastRow = null;
+			let supplyPaidTotal = 0;
+			let supplyFreeTotal = 0;
+			let supplyTotal = 0;
+			
 			supplyItems.forEach(item => {
-				const value = item.getValue();
-				if (value === 0) return; // 0인 항목은 표시하지 않음
+				const paidValue = item.getPaid();
+				const freeValue = item.getFree();
+				const totalValue = item.getTotal();
 				
-				const row = this.createDetailRow(item.label, value, item.isFree, item.isPaid);
+				// 월정액은 유료/무료 합이 0이 아니면 표시
+				if (totalValue === 0) return;
+				
+				supplyPaidTotal += paidValue;
+				supplyFreeTotal += freeValue;
+				supplyTotal += totalValue;
+				
+				const row = this.createDetailRow(item.label, paidValue, freeValue, totalValue);
 				const header = table.querySelector('.lunacy_calculator_page-table_header');
-				if (header) {
+				if (header && !lastRow) {
 					header.insertAdjacentElement('afterend', row);
+				} else if (lastRow) {
+					lastRow.insertAdjacentElement('afterend', row);
 				}
+				lastRow = row;
 			});
 			
+			// 수급 소계 추가
+			if (lastRow) {
+				const supplySubtotalRow = this.createSubtotalRow('수급 소계', supplyPaidTotal, supplyFreeTotal, supplyTotal);
+				lastRow.insertAdjacentElement('afterend', supplySubtotalRow);
+				lastRow = supplySubtotalRow;
+			}
+			
 			// 소모 행들 추가
+			let consumptionPaidTotal = 0;
+			let consumptionFreeTotal = 0;
+			let consumptionTotal = 0;
+			
 			consumptionItems.forEach(item => {
-				const value = item.getValue();
-				if (value === 0) return; // 0인 항목은 표시하지 않음
+				const paidValue = item.getPaid();
+				const freeValue = item.getFree();
+				const totalValue = item.getTotal();
 				
-				const row = this.createDetailRow(item.label, value, item.isFree, item.isPaid);
-				const lastRow = table.querySelector('.lunacy_calculator_page-detail_row:last-of-type');
+				if (totalValue === 0) return;
+				
+				consumptionPaidTotal += paidValue;
+				consumptionFreeTotal += freeValue;
+				consumptionTotal += totalValue;
+				
+				const row = this.createDetailRow(item.label, paidValue, freeValue, totalValue);
 				if (lastRow) {
 					lastRow.insertAdjacentElement('afterend', row);
 				} else {
@@ -492,7 +523,15 @@ let lunacy_calculator_page = null;
 						header.insertAdjacentElement('afterend', row);
 					}
 				}
+				lastRow = row;
 			});
+			
+			// 소모 소계 추가
+			if (lastRow) {
+				const consumptionSubtotalRow = this.createSubtotalRow('소모 소계', consumptionPaidTotal, consumptionFreeTotal, consumptionTotal);
+				lastRow.insertAdjacentElement('afterend', consumptionSubtotalRow);
+				lastRow = consumptionSubtotalRow;
+			}
 			
 			// 계 행 추가
 			const paidBalance = Calculator.getPaidBalance();
@@ -508,9 +547,8 @@ let lunacy_calculator_page = null;
 				<div class="lunacy_calculator_page-table_cell" style="color: ${totalBalance >= 0 ? '#4CAF50' : '#f44336'}">${totalBalance.toLocaleString()}</div>
 			`;
 			
-			const lastDetailRow = table.querySelector('.lunacy_calculator_page-detail_row:last-of-type');
-			if (lastDetailRow) {
-				lastDetailRow.insertAdjacentElement('afterend', balanceRow);
+			if (lastRow) {
+				lastRow.insertAdjacentElement('afterend', balanceRow);
 			} else {
 				const header = table.querySelector('.lunacy_calculator_page-table_header');
 				if (header) {
@@ -519,19 +557,29 @@ let lunacy_calculator_page = null;
 			}
 		},
 		
-		createDetailRow(label, value, isFree, isPaid) {
+		createDetailRow(label, paidValue, freeValue, totalValue) {
 			const row = document.createElement('div');
 			row.className = 'lunacy_calculator_page-table_row lunacy_calculator_page-detail_row';
 			
-			const paidValue = isPaid ? value : 0;
-			const freeValue = isFree ? value : 0;
-			const totalValue = value;
-			
 			row.innerHTML = `
 				<div class="lunacy_calculator_page-table_cell">${label}</div>
-				<div class="lunacy_calculator_page-table_cell" style="color: ${paidValue >= 0 ? '#fff' : '#f44336'}">${paidValue.toLocaleString()}</div>
-				<div class="lunacy_calculator_page-table_cell" style="color: ${freeValue >= 0 ? '#fff' : '#f44336'}">${freeValue.toLocaleString()}</div>
-				<div class="lunacy_calculator_page-table_cell" style="color: ${totalValue >= 0 ? '#fff' : '#f44336'}">${totalValue.toLocaleString()}</div>
+				<div class="lunacy_calculator_page-table_cell">${paidValue.toLocaleString()}</div>
+				<div class="lunacy_calculator_page-table_cell">${freeValue.toLocaleString()}</div>
+				<div class="lunacy_calculator_page-table_cell">${totalValue.toLocaleString()}</div>
+			`;
+			
+			return row;
+		},
+		
+		createSubtotalRow(label, paidValue, freeValue, totalValue) {
+			const row = document.createElement('div');
+			row.className = 'lunacy_calculator_page-table_row lunacy_calculator_page-detail_row lunacy_calculator_page-subtotal_row';
+			
+			row.innerHTML = `
+				<div class="lunacy_calculator_page-table_cell" style="font-weight: 600; color: #ffd700;">${label}</div>
+				<div class="lunacy_calculator_page-table_cell" style="font-weight: 600;">${paidValue.toLocaleString()}</div>
+				<div class="lunacy_calculator_page-table_cell" style="font-weight: 600;">${freeValue.toLocaleString()}</div>
+				<div class="lunacy_calculator_page-table_cell" style="font-weight: 600;">${totalValue.toLocaleString()}</div>
 			`;
 			
 			return row;
