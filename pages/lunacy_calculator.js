@@ -129,12 +129,16 @@ let lunacy_calculator_page = null;
 		
 		// 유료 수급 계산 (표시용, 주/개월 배율 적용)
 		getPaidSupply() {
-			return this.getPaidSupplyWeekly() * this.getPeriodMultiplier();
+			// 추가 수급 광기는 주 단위로 입력받으므로 배율 적용하지 않음
+			const weeklyBase = this.getPaidSupplyWeekly() - State.additionalPaidLunacy;
+			return weeklyBase * this.getPeriodMultiplier() + State.additionalPaidLunacy;
 		},
 		
 		// 무료 수급 계산 (표시용, 주/개월 배율 적용)
 		getFreeSupply() {
-			return this.getFreeSupplyWeekly() * this.getPeriodMultiplier();
+			// 추가 수급 광기는 주 단위로 입력받으므로 배율 적용하지 않음
+			const weeklyBase = this.getFreeSupplyWeekly() - State.additionalFreeLunacy;
+			return weeklyBase * this.getPeriodMultiplier() + State.additionalFreeLunacy;
 		},
 		
 		// 통합 수급 계산
