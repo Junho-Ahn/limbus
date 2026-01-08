@@ -3,6 +3,7 @@ let lunacy_calculator_page = null;
 (() => {
 	// 참조 데이터
 	const REFERENCE_DATA = enkephalinData;
+	const LUNACY_DATA = lunacyData;
 	
 	// 로컬스토리지 키
 	const STORAGE_KEY = 'lunacy_calculator_settings';
@@ -75,10 +76,10 @@ let lunacy_calculator_page = null;
 	const State = {
 		periodType: 'weekly',     // 'weekly' 또는 'monthly'
 		// 수급
-		weeklyInspection: false,  // 점검-300 (무료)
-		weeklyMirror: false,      // 거울 던전-750 (무료)
-		monthlySmall: false,      // 월정액(소)-273 (유료)
-		monthlyLarge: false,      // 월정액(대)-455 (유료)
+		weeklyInspection: false,  // 점검 (무료)
+		weeklyMirror: false,      // 거울 던전 (무료)
+		monthlySmall: false,      // 월정액(소) (무료)
+		monthlyLarge: false,      // 월정액(대) (무료)
 		additionalFreeLunacy: 0,  // 추가 광기 (무료)
 		additionalPaidLunacy: 0,  // 추가 광기 (유료)
 		// 소모
@@ -110,9 +111,6 @@ let lunacy_calculator_page = null;
 		// 유료 수급 계산 (주 단위 기준)
 		getPaidSupplyWeekly() {
 			let supply = 0;
-			// 월정액은 월 단위이므로 주 단위로 환산 (1/4)
-			if (State.monthlySmall) supply += 273 / 4;
-			if (State.monthlyLarge) supply += 455 / 4;
 			supply += State.additionalPaidLunacy;
 			return supply;
 		},
@@ -120,8 +118,11 @@ let lunacy_calculator_page = null;
 		// 무료 수급 계산 (주 단위 기준)
 		getFreeSupplyWeekly() {
 			let supply = 0;
-			if (State.weeklyInspection) supply += 300;
-			if (State.weeklyMirror) supply += 750;
+			if (State.weeklyInspection) supply += LUNACY_DATA.supply.weeklyInspection;
+			if (State.weeklyMirror) supply += LUNACY_DATA.supply.weeklyMirror;
+			// 월정액은 일일 기준 → 주 단위로 환산 (일일 * 7)
+			if (State.monthlySmall) supply += LUNACY_DATA.supply.monthlySmallDaily * 7;
+			if (State.monthlyLarge) supply += LUNACY_DATA.supply.monthlyLargeDaily * 7;
 			supply += State.additionalFreeLunacy;
 			return supply;
 		},
@@ -143,8 +144,7 @@ let lunacy_calculator_page = null;
 		
 		// 유료 소모 계산 (일일 기준)
 		getPaidConsumptionDaily() {
-			// 유료 단챠 1회당 유료 광기 13 소모 (일일 기준)
-			return State.paidGachaCount * 13;
+			return State.paidGachaCount * LUNACY_DATA.consumption.paidGachaPerDay;
 		},
 		
 		// 무료 소모 계산 (일일 기준)
