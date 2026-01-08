@@ -111,6 +111,9 @@ let lunacy_calculator_page = null;
 		// 유료 수급 계산 (주 단위 기준)
 		getPaidSupplyWeekly() {
 			let supply = 0;
+			// 월정액 유료 광기 수급 (주 단위 기준)
+			if (State.monthlySmall) supply += LUNACY_DATA.supply.monthlySmallPaidWeekly;
+			if (State.monthlyLarge) supply += LUNACY_DATA.supply.monthlyLargePaidWeekly;
 			supply += State.additionalPaidLunacy;
 			return supply;
 		},
