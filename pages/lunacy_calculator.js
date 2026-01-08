@@ -85,7 +85,7 @@ let lunacy_calculator_page = null;
 		// 소모
 		chargeCount: 0,           // 광기 충전 횟수 (0-10)
 		paidGachaCount: 0,        // 유료 단챠 횟수 (0-6)
-		additionalConsumption: 0  // 추가 소모 광기
+		additionalConsumption: 0  // 추가 소모 광기 (주/개월 단위)
 	};
 	
 	// 초기화 시 저장된 값 불러오기
@@ -150,7 +150,9 @@ let lunacy_calculator_page = null;
 		// 무료 소모 계산 (일일 기준)
 		getFreeConsumptionDaily() {
 			const chargeConsumption = this.getAbsoluteLunacyConsumption(State.chargeCount);
-			return chargeConsumption + State.additionalConsumption;
+			// 추가 소모 광기는 주/개월 단위로 입력받으므로 일일 단위로 변환
+			const additionalConsumptionDaily = State.additionalConsumption / this.getDailyConsumptionMultiplier();
+			return chargeConsumption + additionalConsumptionDaily;
 		},
 		
 		// 유료 소모 계산 (표시용, 일일 × 배율)
