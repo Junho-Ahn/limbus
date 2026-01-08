@@ -327,11 +327,40 @@
     }
 }
 
+.lunacy_calculator_page-results_title_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
 .lunacy_calculator_page-section_title {
     font-size: 1.2rem;
     font-weight: 600;
     color: #ffd700;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+}
+
+.lunacy_calculator_page-detail_checkbox_group {
+    display: flex;
+    align-items: center;
+}
+
+.lunacy_calculator_page-detail_checkbox_label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    color: #fff;
+    font-size: 0.9rem;
+    user-select: none;
+}
+
+.lunacy_calculator_page-detail_checkbox {
+    width: 1.2rem;
+    height: 1.2rem;
+    cursor: pointer;
+    accent-color: #ff9500;
 }
 
 .lunacy_calculator_page-results {
